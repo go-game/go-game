@@ -16,6 +16,7 @@ func init() {
 
 // Game holds a GameState, whose callbacks will be called
 type Game struct {
+	Fullscreen bool
 	*GameState
 }
 
@@ -27,8 +28,11 @@ func (g *Game) Run() {
 	}
 	width := 1920
 	height := 1080
-	title := "Testing"
-	var monitor = glfw.GetPrimaryMonitor()
+	title := "Heart"
+	var monitor *glfw.Monitor = nil
+	if g.Fullscreen {
+		monitor = glfw.GetPrimaryMonitor()
+	}
 	// modes := monitor.GetVideoModes()
 	// for _, mode := range modes {
 	// 	fmt.Printf("%dx%d\n", mode.Width, mode.Height)

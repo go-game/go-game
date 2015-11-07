@@ -19,7 +19,8 @@ func main() {
 	}
 
 	game := &base.Game{
-		GameState: gameState,
+		GameState:  gameState,
+		Fullscreen: true,
 	}
 	game.Run()
 }
