@@ -14,28 +14,9 @@ func init() {
 	runtime.LockOSThread()
 }
 
-// RenderFunc renders the game
-type RenderFunc func()
-
-// UpdateFunc updated all entities
-type UpdateFunc func(elapsed time.Duration)
-
-// InitFunc is where all game objects are initialized
-type InitFunc func()
-
-// CleanupFunc is where all cleanup takes place before the game is finished
-type CleanupFunc func()
-
-// KeyHandler is where key inputs are handled
-type KeyHandler func(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey)
-
-// Game is used as a scaffold to generate a new game
+// Game holds a GameState, whose callbacks will be called
 type Game struct {
-	InitFunc
-	RenderFunc
-	UpdateFunc
-	CleanupFunc
-	KeyHandler
+	*GameState
 }
 
 // Run starts the game
@@ -68,25 +49,25 @@ func (g *Game) Run() {
 
 	g.initGL(width, height)
 
-	g.InitFunc()
+	g.GameState.InitFunc()
 
 	last := time.Now()
 	for !window.ShouldClose() {
 		elapsed := time.Since(last)
 		last = time.Now()
-		g.UpdateFunc(elapsed)
-		g.RenderFunc()
+		g.GameState.UpdateFunc(elapsed)
+		g.GameState.RenderFunc()
 		glfw.SwapInterval(1)
 		window.SwapBuffers()
 		glfw.PollEvents()
 	}
 
-	g.CleanupFunc()
+	g.GameState.CleanupFunc()
 	glfw.Terminate()
 }
 
 func (g *Game) onKey(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
-	g.KeyHandler(w, key, scancode, action, mods)
+	g.GameState.KeyHandler(w, key, scancode, action, mods)
 }
 
 func (g *Game) initGL(width, height int) {

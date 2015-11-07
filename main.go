@@ -10,12 +10,16 @@ import (
 )
 
 func main() {
-	game := &base.Game{
+	gameState := &base.GameState{
 		InitFunc:    initGame,
 		RenderFunc:  render,
 		UpdateFunc:  logic,
 		CleanupFunc: cleanupGame,
 		KeyHandler:  onKey,
+	}
+
+	game := &base.Game{
+		GameState: gameState,
 	}
 	game.Run()
 }
