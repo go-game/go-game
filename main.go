@@ -3,10 +3,10 @@ package main
 import (
 	"time"
 
+	"git.mbuechmann.com/go-game/base"
+	"git.mbuechmann.com/go-game/sprites"
 	"github.com/go-gl/gl/v2.1/gl"
 	"github.com/go-gl/glfw/v3.1/glfw"
-	"github.com/mbuechmann/go-game/base"
-	"github.com/mbuechmann/go-game/sprites"
 )
 
 func main() {

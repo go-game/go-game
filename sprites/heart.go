@@ -1,6 +1,6 @@
 package sprites
 
-import "github.com/mbuechmann/go-game/gfx"
+import "git.mbuechmann.com/go-game/gfx"
 
 // Heart is a tiny 16x16 heart
 type Heart struct {
