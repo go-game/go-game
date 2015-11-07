@@ -28,21 +28,17 @@ func render() {
 	gl.LoadIdentity()
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
-	heart2.Render()
 	heart.Render()
 }
 
 var heart *sprites.Heart
-var heart2 *sprites.Heart
 
 func initGame() {
 	heart = sprites.NewHeart()
-	heart2 = sprites.NewHeart()
 }
 
 func cleanupGame() {
 	heart.Delete()
-	heart2.Delete()
 }
 
 var vX float32

@@ -37,6 +37,6 @@ func (h *Heart) SetDirection(x, y float32) {
 
 // NewHeart returns a pointer to a new Heart
 func NewHeart() *Heart {
-	t := gfx.NewTexture("heart.png")
+	t := gfx.NewTexture("assets/heart.png")
 	return &Heart{posX: 100, posY: 100, speed: 100, texture: t}
 }
