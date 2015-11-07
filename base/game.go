@@ -16,7 +16,11 @@ func init() {
 
 // Game holds a GameState, whose callbacks will be called
 type Game struct {
-	Fullscreen bool
+	Fullscreen   bool
+	WindowWidth  int
+	WindowHeihgt int
+	PixelSize    int
+	Title        string
 	*GameState
 }
 
@@ -26,18 +30,24 @@ func (g *Game) Run() {
 	if err != nil {
 		panic(err)
 	}
-	width := 1920
-	height := 1080
-	title := "Heart"
+
+	if g.WindowWidth == 0 {
+		g.WindowWidth = 1280
+	}
+
+	if g.WindowHeihgt == 0 {
+		g.WindowHeihgt = 800
+	}
+
+	if g.PixelSize == 0 {
+		g.PixelSize = 1
+	}
+
 	var monitor *glfw.Monitor = nil
 	if g.Fullscreen {
 		monitor = glfw.GetPrimaryMonitor()
 	}
-	// modes := monitor.GetVideoModes()
-	// for _, mode := range modes {
-	// 	fmt.Printf("%dx%d\n", mode.Width, mode.Height)
-	// }
-	window, err := glfw.CreateWindow(width, height, title, monitor, nil)
+	window, err := glfw.CreateWindow(g.WindowWidth, g.WindowHeihgt, g.Title, monitor, nil)
 	if err != nil {
 		panic(err)
 	}
@@ -51,7 +61,7 @@ func (g *Game) Run() {
 		panic(err)
 	}
 
-	g.initGL(width, height)
+	g.initGL(g.WindowWidth, g.WindowHeihgt)
 
 	g.GameState.InitFunc()
 
@@ -83,7 +93,7 @@ func (g *Game) initGL(width, height int) {
 
 	gl.MatrixMode(gl.PROJECTION)
 	gl.LoadIdentity()
-	gl.Ortho(0, float64(width/4), 0, float64(height/4), -1, 1)
+	gl.Ortho(0, float64(width/g.PixelSize), 0, float64(height/g.PixelSize), -1, 1)
 	gl.Viewport(0, 0, int32(width), int32(height))
 
 	gl.MatrixMode(gl.MODELVIEW)
