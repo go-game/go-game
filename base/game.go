@@ -14,7 +14,7 @@ func init() {
 	runtime.LockOSThread()
 }
 
-// Game holds a GameState, whose callbacks will be called
+// Game holds some configuration and a GameState, whose callbacks will be called
 type Game struct {
 	Fullscreen   bool
 	WindowWidth  int

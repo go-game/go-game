@@ -18,10 +18,6 @@ func main() {
 		KeyHandler:  onKey,
 	}
 
-	// modes := monitor.GetVideoModes()
-	// for _, mode := range modes {
-	// 	fmt.Printf("%dx%d\n", mode.Width, mode.Height)
-	// }
 	game := &base.Game{
 		GameState:    gameState,
 		Fullscreen:   true,
