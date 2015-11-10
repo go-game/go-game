@@ -19,12 +19,12 @@ func main() {
 	}
 
 	game := &base.Game{
-		GameState:    gameState,
-		Fullscreen:   true,
-		WindowWidth:  1920,
-		WindowHeihgt: 1080,
-		PixelSize:    4,
-		Title:        "Heart",
+		GameState: gameState,
+		//Fullscreen: true,
+		//WindowWidth:  1920,
+		//WindowHeihgt: 1080,
+		PixelSize: 4,
+		Title:     "Heart",
 	}
 	game.Run()
 }
