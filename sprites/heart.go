@@ -23,8 +23,8 @@ func (h *Heart) Delete() {
 }
 
 // Update upates the hearts position
-func (h *Heart) Update(elapsed float64) {
-	var seconds = float32(elapsed / 1000000000)
+func (h *Heart) Update(delta float64) {
+	var seconds = float32(delta / 1000000000)
 	h.posX += h.vX * seconds
 	h.posY += h.vY * seconds
 }
