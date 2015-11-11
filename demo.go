@@ -20,7 +20,7 @@ func main() {
 
 	game := &base.Game{
 		GameState: gameState,
-		//Fullscreen: true,
+		//Fullscreen:   true,
 		//WindowWidth:  1920,
 		//WindowHeihgt: 1080,
 		PixelSize: 4,
