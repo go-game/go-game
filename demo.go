@@ -22,7 +22,7 @@ func main() {
 		GameState: gameState,
 		//Fullscreen:   true,
 		//WindowWidth:  1920,
-		//WindowHeihgt: 1080,
+		//WindowHeight: 1080,
 		PixelSize: 4,
 		Title:     "Heart",
 	}

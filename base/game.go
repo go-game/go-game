@@ -18,7 +18,7 @@ func init() {
 type Game struct {
 	Fullscreen   bool
 	WindowWidth  int
-	WindowHeihgt int
+	WindowHeight int
 	PixelSize    int
 	Title        string
 	*GameState
@@ -35,8 +35,8 @@ func (g *Game) Run() {
 		g.WindowWidth = 1280
 	}
 
-	if g.WindowHeihgt == 0 {
-		g.WindowHeihgt = 800
+	if g.WindowHeight == 0 {
+		g.WindowHeight = 800
 	}
 
 	if g.PixelSize == 0 {
@@ -47,7 +47,7 @@ func (g *Game) Run() {
 	if g.Fullscreen {
 		monitor = glfw.GetPrimaryMonitor()
 	}
-	window, err := glfw.CreateWindow(g.WindowWidth, g.WindowHeihgt, g.Title, monitor, nil)
+	window, err := glfw.CreateWindow(g.WindowWidth, g.WindowHeight, g.Title, monitor, nil)
 	if err != nil {
 		panic(err)
 	}
@@ -61,7 +61,7 @@ func (g *Game) Run() {
 		panic(err)
 	}
 
-	g.initGL(g.WindowWidth, g.WindowHeihgt)
+	g.initGL(g.WindowWidth, g.WindowHeight)
 
 	g.GameState.InitFunc()
 
