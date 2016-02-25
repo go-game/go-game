@@ -61,7 +61,7 @@ func (g *Game) Run() {
 		panic(err)
 	}
 
-	g.initGL(g.WindowWidth, g.WindowHeight)
+	g.initGL()
 
 	g.GameState.InitFunc()
 
@@ -84,7 +84,7 @@ func (g *Game) onKey(w *glfw.Window, key glfw.Key, scancode int, action glfw.Act
 	g.GameState.KeyHandler(w, key, scancode, action, mods)
 }
 
-func (g *Game) initGL(width, height int) {
+func (g *Game) initGL() {
 	gl.Enable(gl.TEXTURE_2D)
 	gl.Enable(gl.BLEND)
 	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
@@ -93,8 +93,8 @@ func (g *Game) initGL(width, height int) {
 
 	gl.MatrixMode(gl.PROJECTION)
 	gl.LoadIdentity()
-	gl.Ortho(0, float64(width/g.PixelSize), 0, float64(height/g.PixelSize), -1, 1)
-	gl.Viewport(0, 0, int32(width), int32(height))
+	gl.Ortho(0, float64(g.WindowWidth/g.PixelSize), 0, float64(g.WindowHeight/g.PixelSize), -1, 1)
+	gl.Viewport(0, 0, int32(g.WindowWidth), int32(g.WindowHeight))
 
 	gl.MatrixMode(gl.MODELVIEW)
 }
