@@ -9,6 +9,10 @@ import (
 	"github.com/go-gl/glfw/v3.1/glfw"
 )
 
+var heart *sprites.Heart
+var vX float32
+var vY float32
+
 func main() {
 	gameState := &base.GameState{
 		InitFunc:    initGame,
@@ -40,8 +44,6 @@ func render() {
 	heart.Render()
 }
 
-var heart *sprites.Heart
-
 func initGame() {
 	heart = sprites.NewHeart()
 }
@@ -49,9 +51,6 @@ func initGame() {
 func cleanupGame() {
 	heart.Delete()
 }
-
-var vX float32
-var vY float32
 
 func onKey(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
 	if key == glfw.KeyEscape && action == glfw.Press {
