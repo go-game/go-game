@@ -26,7 +26,7 @@ func main() {
 		GameState:  gameState,
 		Fullscreen: true,
 		PixelSize:  2,
-		Title:      "Heart",
+		Title:      "Keyboard-Movement",
 		// WindowWidth:  1920,
 		// WindowHeight: 1080,
 	}
