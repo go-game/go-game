@@ -5,7 +5,6 @@ import (
 
 	"git.mbuechmann.com/go-game/base"
 	"git.mbuechmann.com/go-game/gfx"
-	"github.com/go-gl/gl/v2.1/gl"
 )
 
 var tile1 *gfx.Texture
@@ -33,8 +32,9 @@ func initGame() {
 }
 
 func render() {
-	gl.LoadIdentity()
-	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+	gfx.Clear()
+	// gl.LoadIdentity()
+	// gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
 	for x := -64; x <= 1280; x += 64 {
 		for y := 0; y <= 96; y += 32 {

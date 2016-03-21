@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"git.mbuechmann.com/go-game/base"
+	"git.mbuechmann.com/go-game/gfx"
 	"git.mbuechmann.com/go-game/sprites"
-	"github.com/go-gl/gl/v2.1/gl"
 	"github.com/go-gl/glfw/v3.1/glfw"
 )
 
@@ -38,8 +38,7 @@ func logic(elapsed time.Duration) {
 }
 
 func render() {
-	gl.LoadIdentity()
-	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+	gfx.Clear()
 
 	heart.Render()
 }
