@@ -27,7 +27,7 @@ func main() {
 		Fullscreen: true,
 		PixelSize:  2,
 		Title:      "Keyboard-Movement",
-		// WindowWidth:  1920,
+		// WindowWidth: 1920,
 		// WindowHeight: 1080,
 	}
 	game.Run()
