@@ -70,7 +70,7 @@ func (g *Game) initWindow() {
 		g.PixelSize = 1
 	}
 
-	var monitor *glfw.Monitor = nil
+	var monitor *glfw.Monitor
 	if g.Fullscreen {
 		monitor = glfw.GetPrimaryMonitor()
 		var mode = monitor.GetVideoMode()
