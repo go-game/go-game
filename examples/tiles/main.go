@@ -33,8 +33,6 @@ func initGame() {
 
 func render() {
 	gfx.Clear()
-	// gl.LoadIdentity()
-	// gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
 	for x := -64; x <= 1280; x += 64 {
 		for y := 0; y <= 96; y += 32 {
