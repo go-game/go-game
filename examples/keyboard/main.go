@@ -7,7 +7,7 @@ import (
 	"git.mbuechmann.com/go-game/gfx"
 	"github.com/go-gl/glfw/v3.1/glfw"
 
-	"./sprites/"
+	"git.mbuechmann.com/go-game/examples/keyboard/sprites"
 )
 
 var heart *sprites.Heart
@@ -24,10 +24,9 @@ func main() {
 	}
 
 	game := &base.Game{
-		GameState:  gameState,
-		// Fullscreen: true,
-		PixelSize:  2,
-		Title:      "Keyboard-Movement",
+		GameState: gameState,
+		PixelSize: 2,
+		Title:     "Keyboard-Movement",
 	}
 	game.Run()
 }
