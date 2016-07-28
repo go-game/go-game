@@ -6,7 +6,7 @@ import (
   "git.mbuechmann.com/go-game/game"
 )
 
-var keyMap map[string]glfw.Key = map[string]glfw.Key{
+var keyMap = map[string]glfw.Key{
   " ": glfw.KeySpace,
   "space": glfw.KeySpace,
   "up": glfw.KeyUp,
@@ -22,7 +22,7 @@ func Up(k string) bool {
   return game.Window.GetKey(keyMap[k]) != glfw.Press
 }
 
-// Up return whether the given key is pressed
+// Down return whether the given key is pressed
 func Down(k string) bool {
   return game.Window.GetKey(keyMap[k]) == glfw.Press
 }

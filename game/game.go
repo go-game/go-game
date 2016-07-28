@@ -8,6 +8,7 @@ import (
 	"github.com/go-gl/glfw/v3.1/glfw"
 )
 
+// Window is the current glfw window
 var Window *glfw.Window
 
 func init() {
@@ -55,6 +56,7 @@ func (g *Game) Run() {
 	glfw.Terminate()
 }
 
+// Close closes the window and exits the game
 func(g *Game) Close() {
 	Window.SetShouldClose(true)
 }
