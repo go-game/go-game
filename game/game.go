@@ -1,4 +1,4 @@
-package base
+package game
 
 import (
 	"runtime"
@@ -16,14 +16,14 @@ func init() {
 	runtime.LockOSThread()
 }
 
-// Game holds some configuration and a GameState, whose callbacks will be called
+// Game holds some configuration and a State, whose callbacks will be called
 type Game struct {
 	Fullscreen   bool
 	WindowWidth  int
 	WindowHeight int
 	PixelSize    int
 	Title        string
-	*GameState
+	*State
 	Window *glfw.Window
 }
 
@@ -38,20 +38,20 @@ func (g *Game) Run() {
 
 	g.initGL()
 
-	g.GameState.InitFunc()
+	g.State.InitFunc()
 
 	last := time.Now()
 	for !g.Window.ShouldClose() {
 		elapsed := time.Since(last)
 		last = time.Now()
-		g.GameState.UpdateFunc(elapsed)
-		g.GameState.RenderFunc()
+		g.State.UpdateFunc(elapsed)
+		g.State.RenderFunc()
 		glfw.SwapInterval(1)
 		g.Window.SwapBuffers()
 		glfw.PollEvents()
 	}
 
-	g.GameState.CleanupFunc()
+	g.State.CleanupFunc()
 	glfw.Terminate()
 }
 

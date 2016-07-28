@@ -3,7 +3,7 @@ package main
 import (
 	"time"
 
-	"git.mbuechmann.com/go-game/base"
+	"git.mbuechmann.com/go-game/game"
 	"git.mbuechmann.com/go-game/gfx"
 	"git.mbuechmann.com/go-game/examples/keyboard/sprites"
 	"git.mbuechmann.com/go-game/keys"
@@ -12,27 +12,27 @@ import (
 var heart *sprites.Heart
 var vX float32
 var vY float32
-var game *base.Game
+var demo *game.Game
 
 func main() {
-	gameState := &base.GameState{
+	gameState := &game.State{
 		InitFunc:    initGame,
 		RenderFunc:  render,
 		UpdateFunc:  logic,
 		CleanupFunc: cleanupGame,
 	}
 
-	game = &base.Game{
-		GameState: gameState,
+	demo = &game.Game{
+		State: gameState,
 		PixelSize: 2,
 		Title:     "Keyboard-Movement",
 	}
-	game.Run()
+	demo.Run()
 }
 
 func logic(elapsed time.Duration) {
 	if keys.Down("esc") {
-		game.Close()
+		demo.Close()
 	}
 
 	vY = 0

@@ -3,27 +3,29 @@ package main
 import (
 	"time"
 
-	"git.mbuechmann.com/go-game/base"
+	"git.mbuechmann.com/go-game/game"
+	"git.mbuechmann.com/go-game/keys"
 	"git.mbuechmann.com/go-game/gfx"
 )
 
 var tile1 *gfx.Texture
 var tile2 *gfx.Texture
+var demo *game.Game
 
 func main() {
-	gameState := &base.GameState{
+	gameState := &game.State{
 		InitFunc:    initGame,
 		RenderFunc:  render,
 		UpdateFunc:  logic,
 		CleanupFunc: cleanupGame,
 	}
 
-	game := &base.Game{
-		GameState: gameState,
+	demo = &game.Game{
+		State: gameState,
 		PixelSize: 2,
 		Title:     "Tiles",
 	}
-	game.Run()
+	demo.Run()
 }
 
 func initGame() {
@@ -43,6 +45,9 @@ func render() {
 }
 
 func logic(elapsed time.Duration) {
+	if keys.Down("esc") {
+		demo.Close()
+	}
 }
 
 func cleanupGame() {

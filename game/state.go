@@ -1,11 +1,11 @@
-package base
+package game
 
 import (
 	"time"
 )
 
-// GameState is used as a scaffold to generate a new game
-type GameState struct {
+// State is used as a scaffold to generate a new game
+type State struct {
 	InitFunc    func()
 	RenderFunc  func()
 	UpdateFunc  func(elapsed time.Duration)
