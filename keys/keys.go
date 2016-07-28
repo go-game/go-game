@@ -17,10 +17,12 @@ var keyMap map[string]glfw.Key = map[string]glfw.Key{
   "esc": glfw.KeyEscape,
 }
 
+// Up return whether the given key is not pressed
 func Up(k string) bool {
   return game.Window.GetKey(keyMap[k]) != glfw.Press
 }
 
+// Up return whether the given key is pressed
 func Down(k string) bool {
   return game.Window.GetKey(keyMap[k]) == glfw.Press
 }
