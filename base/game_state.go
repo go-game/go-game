@@ -1,7 +1,6 @@
 package base
 
 import (
-	"github.com/go-gl/glfw/v3.1/glfw"
 	"time"
 )
 
@@ -11,5 +10,4 @@ type GameState struct {
 	RenderFunc  func()
 	UpdateFunc  func(elapsed time.Duration)
 	CleanupFunc func()
-	KeyHandler  func(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey)
 }

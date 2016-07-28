@@ -8,6 +8,8 @@ import (
 	"github.com/go-gl/glfw/v3.1/glfw"
 )
 
+var Window *glfw.Window
+
 func init() {
 	// This is needed to arrange that main() runs on main thread.
 	// See documentation for functions that are only allowed to be called from the main thread.
@@ -53,8 +55,8 @@ func (g *Game) Run() {
 	glfw.Terminate()
 }
 
-func (g *Game) onKey(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
-	g.GameState.KeyHandler(w, key, scancode, action, mods)
+func(g *Game) Close() {
+	Window.SetShouldClose(true)
 }
 
 func (g *Game) initWindow() {
@@ -82,10 +84,8 @@ func (g *Game) initWindow() {
 		panic(err)
 	}
 	g.Window = window
+	Window = window
 	window.MakeContextCurrent()
-	if g.KeyHandler != nil {
-		window.SetKeyCallback(g.onKey)
-	}
 	window.SetInputMode(glfw.CursorMode, glfw.CursorHidden)
 }
 
