@@ -5,13 +5,14 @@ import (
 
 	"git.mbuechmann.com/go-game/game"
 	"git.mbuechmann.com/go-game/gfx"
-	"git.mbuechmann.com/go-game/examples/keyboard/sprites"
 	"git.mbuechmann.com/go-game/keys"
 )
 
-var heart *sprites.Heart
-var vX float32
-var vY float32
+var texture *gfx.Texture
+var vX, vY float32 = 0, 0
+var posX, posY float32 = 100, 100
+var speed float32 = 100
+
 var demo *game.Game
 
 func main() {
@@ -30,7 +31,7 @@ func main() {
 	demo.Run()
 }
 
-func logic(elapsed time.Duration) {
+func logic(delta time.Duration) {
 	if keys.Down("esc") {
 		demo.Close()
 	}
@@ -38,32 +39,32 @@ func logic(elapsed time.Duration) {
 	vY = 0
 	vX = 0
 	if keys.Down("up") {
-		vY++
+		vY += speed
 	}
 	if keys.Down("down") {
-		vY--
+		vY -= speed
 	}
 	if keys.Down("right") {
-		vX++
+		vX += speed
 	}
 	if keys.Down("left") {
-		vX--
+		vX -= speed
 	}
-	heart.SetDirection(vX, vY)
 
-	heart.Update(float64(elapsed))
+	var seconds = float32(float64(delta) / 1000000000)
+	posX += vX * seconds
+	posY += vY * seconds
 }
 
 func render() {
 	gfx.Clear()
-
-	heart.Render()
+	texture.Render(posX, posY)
 }
 
 func initGame() {
-	heart = sprites.NewHeart()
+	texture = gfx.NewTexture("assets/heart.png")
 }
 
 func cleanupGame() {
-	heart.Delete()
+	texture.Delete()
 }
