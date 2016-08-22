@@ -66,11 +66,6 @@ func (w *Window) Run() {
   w.exit()
 }
 
-// Stop stops the main game loop
-func (w *Window) Stop() {
-
-}
-
 // Exit closes the window and resets the screen
 func (w *Window) exit() {
   glfw.Terminate()
