@@ -1,9 +1,14 @@
 package desktop
 
 import (
+  "time"
   "github.com/go-gl/glfw/v3.1/glfw"
+  "github.com/go-gl/gl/v2.1/gl"
   "git.mbuechmann.com/go-game/game"
 )
+
+// CurrentWindow is the current window
+var CurrentWindow *Window
 
 // Mode represents the resolution of a window
 type Mode struct {
@@ -15,8 +20,8 @@ type Mode struct {
 // Window is the os application frame where all the stuff will  happen
 type Window struct {
   mode *Mode
-  game *game.Game
-  glfwWindow *glfw.Window
+  state *game.State
+  GlfwWindow *glfw.Window
 }
 
 // FullscreenModes returns an array of all available fullscreen modes
@@ -33,40 +38,89 @@ func FullscreenModes() []*Mode {
 }
 
 // OpenWindow creates a new window on the main monitor
-func OpenWindow(m *Mode, g *game.Game) *Window {
+func OpenWindow(m *Mode, s *game.State) *Window {
   err := glfw.Init()
   if err != nil {
     panic(err)
   }
 
-  w := &Window{mode: m, game: g}
+  CurrentWindow = &Window{mode: m, state: s}
 
-  var monitor *glfw.Monitor
-
-  if m.Fullscreen {
-    monitor = glfw.GetPrimaryMonitor()
-  }
-
-  w.glfwWindow, err = glfw.CreateWindow(m.Width, m.Height, g.Title, monitor, nil)
+  err = CurrentWindow.initGlfwWindow()
   if err != nil {
     panic(err)
   }
 
-  w.glfwWindow.MakeContextCurrent()
-  w.glfwWindow.SetInputMode(glfw.CursorMode, glfw.CursorHidden)
+  err = CurrentWindow.initGL()
+  if err != nil {
+    panic(err)
+  }
 
-  return w
+  return CurrentWindow
 }
 
 // Run starts the main game loop
 func (w *Window) Run() {
-  for !w.glfwWindow.ShouldClose() {
+  w.state.InitFunc()
+  last := time.Now()
+  for !w.GlfwWindow.ShouldClose() {
+    if w.state != nil {
+      elapsed := time.Since(last)
+      last = time.Now()
+      w.state.UpdateFunc(elapsed)
+      w.state.RenderFunc()
+    }
+    glfw.SwapInterval(1)
+    w.GlfwWindow.SwapBuffers()
     glfw.PollEvents()
   }
-  w.exit()
+  Exit()
 }
 
-// Exit closes the window and resets the screen
-func (w *Window) exit() {
+// Exit closes the game and cleans up
+func Exit() {
+  CurrentWindow.state.CleanupFunc()
+  CurrentWindow.GlfwWindow.SetShouldClose(true)
   glfw.Terminate()
+}
+
+func (w *Window) initGlfwWindow() (err error) {
+  var monitor *glfw.Monitor
+
+  if w.mode.Fullscreen {
+    monitor = glfw.GetPrimaryMonitor()
+  }
+
+  CurrentWindow.GlfwWindow, err = glfw.CreateWindow(w.mode.Width, w.mode.Height, "", monitor, nil)
+  if err != nil {
+    return
+  }
+
+  w.GlfwWindow.MakeContextCurrent()
+  w.GlfwWindow.SetInputMode(glfw.CursorMode, glfw.CursorHidden)
+
+  return
+}
+
+func (w *Window) initGL() (err error) {
+	if err = gl.Init(); err != nil {
+		return
+	}
+
+	gl.Enable(gl.TEXTURE_2D)
+	gl.Enable(gl.BLEND)
+	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
+
+	gl.ClearColor(0.1, 0.1, 0.1, 0.0)
+	gl.MatrixMode(gl.PROJECTION)
+	gl.LoadIdentity()
+  PixelSize := 1
+	gl.Ortho(0, float64(w.mode.Width/PixelSize), 0, float64(w.mode.Height/PixelSize), -1, 1)
+	var width, height = w.GlfwWindow.GetFramebufferSize()
+	fX, fY := int32(width/w.mode.Width), int32(height/w.mode.Height)
+	gl.Viewport(0, 0, fX*int32(w.mode.Width), fY*int32(w.mode.Height))
+
+	gl.MatrixMode(gl.MODELVIEW)
+
+  return
 }

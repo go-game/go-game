@@ -3,6 +3,7 @@ package main
 import (
 	"time"
 
+	"git.mbuechmann.com/go-game/desktop"
 	"git.mbuechmann.com/go-game/game"
 	"git.mbuechmann.com/go-game/gfx"
 	"git.mbuechmann.com/go-game/keys"
@@ -13,8 +14,6 @@ var vX, vY float32 = 0, 0
 var posX, posY float32 = 100, 100
 var speed float32 = 100
 
-var demo *game.Game
-
 func main() {
 	gameState := &game.State{
 		InitFunc:    initGame,
@@ -23,17 +22,15 @@ func main() {
 		CleanupFunc: cleanupGame,
 	}
 
-	demo = &game.Game{
-		State: gameState,
-		PixelSize: 2,
-		Title:     "Keyboard-Movement",
-	}
-	demo.Run()
+	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
+	w := desktop.OpenWindow(mode, gameState)
+
+	w.Run()
 }
 
 func logic(delta time.Duration) {
 	if keys.Down("esc") {
-		demo.Close()
+		desktop.Exit()
 	}
 
 	vY = 0

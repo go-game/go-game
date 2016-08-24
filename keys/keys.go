@@ -3,7 +3,7 @@ package keys
 import (
   "github.com/go-gl/glfw/v3.1/glfw"
 
-  "git.mbuechmann.com/go-game/game"
+  "git.mbuechmann.com/go-game/desktop"
 )
 
 var keyMap = map[string]glfw.Key{
@@ -19,10 +19,10 @@ var keyMap = map[string]glfw.Key{
 
 // Up return whether the given key is not pressed
 func Up(k string) bool {
-  return game.Window.GetKey(keyMap[k]) != glfw.Press
+  return desktop.CurrentWindow.GlfwWindow.GetKey(keyMap[k]) != glfw.Press
 }
 
 // Down return whether the given key is pressed
 func Down(k string) bool {
-  return game.Window.GetKey(keyMap[k]) == glfw.Press
+  return desktop.CurrentWindow.GlfwWindow.GetKey(keyMap[k]) == glfw.Press
 }
