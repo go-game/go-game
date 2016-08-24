@@ -61,7 +61,9 @@ func OpenWindow(m *Mode, s *game.State) *Window {
 
 // Run starts the main game loop
 func (w *Window) Run() {
-	w.state.InitFunc()
+	if w.state != nil {
+		w.state.InitFunc()
+	}
 	last := time.Now()
 	for !w.GlfwWindow.ShouldClose() {
 		if w.state != nil {
@@ -74,7 +76,9 @@ func (w *Window) Run() {
 		w.GlfwWindow.SwapBuffers()
 		glfw.PollEvents()
 	}
-	CurrentWindow.state.CleanupFunc()
+	if w.state != nil {
+		CurrentWindow.state.CleanupFunc()
+	}
 	glfw.Terminate()
 }
 
