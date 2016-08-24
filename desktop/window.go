@@ -2,7 +2,7 @@ package desktop
 
 import (
 	"git.mbuechmann.com/go-game/game"
-	"github.com/go-gl/gl/v2.1/gl"
+	"git.mbuechmann.com/go-game/gfx"
 	"github.com/go-gl/glfw/v3.1/glfw"
 	"time"
 )
@@ -51,10 +51,7 @@ func OpenWindow(m *Mode, s *game.State) *Window {
 		panic(err)
 	}
 
-	err = CurrentWindow.initGL()
-	if err != nil {
-		panic(err)
-	}
+	gfx.SetArea(m.Width, m.Height)
 
 	return CurrentWindow
 }
@@ -101,29 +98,6 @@ func (w *Window) initGlfwWindow() (err error) {
 
 	w.GlfwWindow.MakeContextCurrent()
 	w.GlfwWindow.SetInputMode(glfw.CursorMode, glfw.CursorHidden)
-
-	return
-}
-
-func (w *Window) initGL() (err error) {
-	if err = gl.Init(); err != nil {
-		return
-	}
-
-	gl.Enable(gl.TEXTURE_2D)
-	gl.Enable(gl.BLEND)
-	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
-
-	gl.ClearColor(0.1, 0.1, 0.1, 0.0)
-	gl.MatrixMode(gl.PROJECTION)
-	gl.LoadIdentity()
-	PixelSize := 1
-	gl.Ortho(0, float64(w.mode.Width/PixelSize), 0, float64(w.mode.Height/PixelSize), -1, 1)
-	var width, height = w.GlfwWindow.GetFramebufferSize()
-	fX, fY := int32(width/w.mode.Width), int32(height/w.mode.Height)
-	gl.Viewport(0, 0, fX*int32(w.mode.Width), fY*int32(w.mode.Height))
-
-	gl.MatrixMode(gl.MODELVIEW)
 
 	return
 }
