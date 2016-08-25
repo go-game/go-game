@@ -17,20 +17,20 @@ func init() {
 	}
 }
 
-// Mode represents the resolution of a window and whether it is fullscreen
+// Mode represents the resolution of a window and whether it is fullscreen.
 type Mode struct {
 	Width      int
 	Height     int
 	Fullscreen bool
 }
 
-// Window is the os application frame where all the stuff will  happen
+// Window is the os application frame where all the stuff will  happen.
 type Window struct {
 	mode       *Mode
 	GlfwWindow *glfw.Window
 }
 
-// FullscreenModes returns an array of all available fullscreen modes
+// FullscreenModes returns an array of all available fullscreen modes.
 func FullscreenModes() []*Mode {
 	monitor := glfw.GetPrimaryMonitor()
 	videoModes := monitor.GetVideoModes()
@@ -44,7 +44,7 @@ func FullscreenModes() []*Mode {
 	return modes
 }
 
-// OpenWindow creates a new window on the main monitor
+// OpenWindow creates a new window on the main monitor.
 func OpenWindow(m *Mode) *Window {
 	window = &Window{mode: m}
 
@@ -59,7 +59,7 @@ func OpenWindow(m *Mode) *Window {
 	return window
 }
 
-// Run starts the main game loop
+// Run starts the main game loop for the given game state.
 func Run(state *game.State) {
 	if window == nil {
 		panic("No open window for game state. Call OpenWindow() first")
@@ -88,7 +88,7 @@ func Run(state *game.State) {
 	glfw.Terminate()
 }
 
-// Exit closes the game and cleans up
+// Exit closes the game and cleans up.
 func Exit() {
 	window.GlfwWindow.SetShouldClose(true)
 }

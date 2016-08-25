@@ -4,7 +4,7 @@ import "github.com/go-gl/glfw/v3.1/glfw"
 
 var glfwWindow *glfw.Window
 
-// SetGlfwWindow sets the window used for polling the keyboard
+// SetGlfwWindow sets the window used for polling the keyboard.
 func SetGlfwWindow(w *glfw.Window) {
 	glfwWindow = w
 }
@@ -46,12 +46,12 @@ var keyMap = map[string]glfw.Key{
 	"z":      glfw.KeyZ,
 }
 
-// Up return whether the given key is not pressed
+// Up return whether the given key is not pressed.
 func Up(k string) bool {
 	return glfwWindow.GetKey(keyMap[k]) != glfw.Press
 }
 
-// Down return whether the given key is pressed
+// Down return whether the given key is pressed.
 func Down(k string) bool {
 	return glfwWindow.GetKey(keyMap[k]) == glfw.Press
 }

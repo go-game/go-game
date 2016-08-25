@@ -7,12 +7,13 @@ var pixelsize = 1
 var width, height int
 var fX, fY = 1, 1
 
+// SetPixelSize scales all graphics by the given factor.
 func SetPixelSize(size int) {
 	pixelsize = size
 	setGLViewPort()
 }
 
-// SetArea defines the area to be drawn
+// SetArea defines the area on the screen to be drawn to.
 func SetArea(w, h int) {
 	width = w
 	height = h

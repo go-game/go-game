@@ -17,12 +17,12 @@ type Texture struct {
 	height int
 }
 
-// Delete removes the texture from memory
+// Delete removes the texture from memory.
 func (t *Texture) Delete() {
 	gl.DeleteTextures(1, &t.id)
 }
 
-// Render renders the texture on the screen at x, y
+// Render renders the texture on the screen at x, y.
 func (t *Texture) Render(x, y float32) {
 	gl.BindTexture(gl.TEXTURE_2D, t.id)
 	gl.Begin(gl.QUADS)

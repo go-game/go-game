@@ -8,7 +8,7 @@ func init() {
 	}
 }
 
-// Clear clears the whole drawing area
+// Clear clears the whole drawing area.
 func Clear() {
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 }
