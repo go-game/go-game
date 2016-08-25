@@ -2,7 +2,7 @@ package gfx
 
 import "github.com/go-gl/gl/v2.1/gl"
 
-func init()  {
+func init() {
 	if err := gl.Init(); err != nil {
 		panic(err)
 	}

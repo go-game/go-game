@@ -5,8 +5,8 @@ import (
 
 	"git.mbuechmann.com/go-game/desktop"
 	"git.mbuechmann.com/go-game/game"
-	"git.mbuechmann.com/go-game/keys"
 	"git.mbuechmann.com/go-game/gfx"
+	"git.mbuechmann.com/go-game/keys"
 )
 
 var tile1 *gfx.Texture

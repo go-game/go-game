@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-  mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-  desktop.OpenWindow(mode)
+	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
+	desktop.OpenWindow(mode)
 
-  desktop.Run(&game.State{})
+	desktop.Run(&game.State{})
 }

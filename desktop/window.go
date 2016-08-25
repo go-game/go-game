@@ -10,7 +10,7 @@ import (
 
 var window *Window
 
-func init()  {
+func init() {
 	err := glfw.Init()
 	if err != nil {
 		panic(err)
@@ -35,7 +35,7 @@ func FullscreenModes() []*Mode {
 	monitor := glfw.GetPrimaryMonitor()
 	videoModes := monitor.GetVideoModes()
 
-	var modes  = make([]*Mode, len(videoModes))
+	var modes = make([]*Mode, len(videoModes))
 	for i, m := range videoModes {
 		// modes = append(modes, &Mode{Width: m.Width, Height: m.Height, Fullscreen: true})
 		modes[i] = &Mode{Width: m.Width, Height: m.Height, Fullscreen: true}
