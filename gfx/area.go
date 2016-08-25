@@ -2,17 +2,24 @@ package gfx
 
 import "github.com/go-gl/gl/v2.1/gl"
 
-var x int32 = 0
-var y int32 = 0
+var x, y int32 = 0, 0
 var pixelsize = 1
 var width, height int
 var fX, fY = 1, 1
+
+func SetPixelSize(size int)  {
+	pixelsize = size
+	setGLViewPort()
+}
 
 // SetArea defines the area to be drawn
 func SetArea(w, h int) {
 	width = w
 	height = h
+	setGLViewPort()
+}
 
+func setGLViewPort()  {
 	gl.Enable(gl.BLEND)
 	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
 

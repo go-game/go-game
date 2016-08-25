@@ -24,6 +24,7 @@ func main() {
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
 	w := desktop.OpenWindow(mode, gameState)
+	gfx.SetPixelSize(4)
 
 	w.Run()
 }
