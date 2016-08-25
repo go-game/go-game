@@ -23,10 +23,10 @@ func main() {
 	}
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-	w := desktop.OpenWindow(mode, gameState)
+	desktop.OpenWindow(mode)
 	gfx.SetPixelSize(4)
 
-	w.Run()
+	desktop.Run(gameState)
 }
 
 func logic(delta time.Duration) {

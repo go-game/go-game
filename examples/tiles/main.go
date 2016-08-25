@@ -21,9 +21,9 @@ func main() {
 	}
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-	w := desktop.OpenWindow(mode, gameState)
+	desktop.OpenWindow(mode)
 
-	w.Run()
+	desktop.Run(gameState)
 }
 
 func initGame() {

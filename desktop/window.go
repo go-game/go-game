@@ -27,7 +27,6 @@ type Mode struct {
 // Window is the os application frame where all the stuff will  happen
 type Window struct {
 	mode       *Mode
-	state      *game.State
 	GlfwWindow *glfw.Window
 }
 
@@ -46,8 +45,8 @@ func FullscreenModes() []*Mode {
 }
 
 // OpenWindow creates a new window on the main monitor
-func OpenWindow(m *Mode, s *game.State) *Window {
-	window = &Window{mode: m, state: s}
+func OpenWindow(m *Mode) *Window {
+	window = &Window{mode: m}
 
 	err := window.initGlfwWindow()
 	if err != nil {
@@ -61,24 +60,30 @@ func OpenWindow(m *Mode, s *game.State) *Window {
 }
 
 // Run starts the main game loop
-func (w *Window) Run() {
-	if w.state != nil {
-		w.state.InitFunc()
+func Run(state *game.State) {
+	if window == nil {
+		panic("No open window for game state. Call OpenWindow() first")
+	}
+
+	if state.InitFunc != nil {
+		state.InitFunc()
 	}
 	last := time.Now()
-	for !w.GlfwWindow.ShouldClose() {
-		if w.state != nil {
+	for !window.GlfwWindow.ShouldClose() {
+		if state.UpdateFunc != nil {
 			elapsed := time.Since(last)
 			last = time.Now()
-			w.state.UpdateFunc(elapsed)
-			w.state.RenderFunc()
+			state.UpdateFunc(elapsed)
+		}
+		if state.RenderFunc != nil {
+			state.RenderFunc()
 		}
 		glfw.SwapInterval(1)
-		w.GlfwWindow.SwapBuffers()
+		window.GlfwWindow.SwapBuffers()
 		glfw.PollEvents()
 	}
-	if w.state != nil {
-		window.state.CleanupFunc()
+	if state.CleanupFunc != nil {
+		state.CleanupFunc()
 	}
 	glfw.Terminate()
 }
