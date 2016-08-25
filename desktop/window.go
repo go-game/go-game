@@ -17,7 +17,7 @@ func init()  {
 	}
 }
 
-// Mode represents the resolution of a window
+// Mode represents the resolution of a window and whether it is fullscreen
 type Mode struct {
 	Width      int
 	Height     int
@@ -33,12 +33,13 @@ type Window struct {
 
 // FullscreenModes returns an array of all available fullscreen modes
 func FullscreenModes() []*Mode {
-	modes := []*Mode{}
-
 	monitor := glfw.GetPrimaryMonitor()
 	videoModes := monitor.GetVideoModes()
-	for _, m := range videoModes {
-		modes = append(modes, &Mode{Width: m.Width, Height: m.Height, Fullscreen: true})
+
+	var modes  = make([]*Mode, len(videoModes))
+	for i, m := range videoModes {
+		// modes = append(modes, &Mode{Width: m.Width, Height: m.Height, Fullscreen: true})
+		modes[i] = &Mode{Width: m.Width, Height: m.Height, Fullscreen: true}
 	}
 
 	return modes
