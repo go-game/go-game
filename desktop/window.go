@@ -10,6 +10,13 @@ import (
 
 var window *Window
 
+func init()  {
+	err := glfw.Init()
+	if err != nil {
+		panic(err)
+	}
+}
+
 // Mode represents the resolution of a window
 type Mode struct {
 	Width      int
@@ -39,14 +46,9 @@ func FullscreenModes() []*Mode {
 
 // OpenWindow creates a new window on the main monitor
 func OpenWindow(m *Mode, s *game.State) *Window {
-	err := glfw.Init()
-	if err != nil {
-		panic(err)
-	}
-
 	window = &Window{mode: m, state: s}
 
-	err = window.initGlfwWindow()
+	err := window.initGlfwWindow()
 	if err != nil {
 		panic(err)
 	}
