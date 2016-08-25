@@ -1,10 +1,13 @@
 package keys
 
-import (
-  "github.com/go-gl/glfw/v3.1/glfw"
+import "github.com/go-gl/glfw/v3.1/glfw"
 
-  "git.mbuechmann.com/go-game/desktop"
-)
+var glfwWindow *glfw.Window
+
+// SetGlfwWindow sets the window used for polling the keyboard
+func SetGlfwWindow(w *glfw.Window)  {
+  glfwWindow = w
+}
 
 var keyMap = map[string]glfw.Key{
   " ": glfw.KeySpace,
@@ -45,10 +48,10 @@ var keyMap = map[string]glfw.Key{
 
 // Up return whether the given key is not pressed
 func Up(k string) bool {
-  return desktop.CurrentWindow.GlfwWindow.GetKey(keyMap[k]) != glfw.Press
+  return glfwWindow.GetKey(keyMap[k]) != glfw.Press
 }
 
 // Down return whether the given key is pressed
 func Down(k string) bool {
-  return desktop.CurrentWindow.GlfwWindow.GetKey(keyMap[k]) == glfw.Press
+  return glfwWindow.GetKey(keyMap[k]) == glfw.Press
 }

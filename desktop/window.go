@@ -3,12 +3,12 @@ package desktop
 import (
 	"git.mbuechmann.com/go-game/game"
 	"git.mbuechmann.com/go-game/gfx"
+	"git.mbuechmann.com/go-game/keys"
 	"github.com/go-gl/glfw/v3.1/glfw"
 	"time"
 )
 
-// CurrentWindow is the current window
-var CurrentWindow *Window
+var window *Window
 
 // Mode represents the resolution of a window
 type Mode struct {
@@ -44,16 +44,17 @@ func OpenWindow(m *Mode, s *game.State) *Window {
 		panic(err)
 	}
 
-	CurrentWindow = &Window{mode: m, state: s}
+	window = &Window{mode: m, state: s}
 
-	err = CurrentWindow.initGlfwWindow()
+	err = window.initGlfwWindow()
 	if err != nil {
 		panic(err)
 	}
 
 	gfx.SetArea(m.Width, m.Height)
+	keys.SetGlfwWindow(window.GlfwWindow)
 
-	return CurrentWindow
+	return window
 }
 
 // Run starts the main game loop
@@ -74,14 +75,14 @@ func (w *Window) Run() {
 		glfw.PollEvents()
 	}
 	if w.state != nil {
-		CurrentWindow.state.CleanupFunc()
+		window.state.CleanupFunc()
 	}
 	glfw.Terminate()
 }
 
 // Exit closes the game and cleans up
 func Exit() {
-	CurrentWindow.GlfwWindow.SetShouldClose(true)
+	window.GlfwWindow.SetShouldClose(true)
 }
 
 func (w *Window) initGlfwWindow() (err error) {
@@ -91,7 +92,7 @@ func (w *Window) initGlfwWindow() (err error) {
 		monitor = glfw.GetPrimaryMonitor()
 	}
 
-	CurrentWindow.GlfwWindow, err = glfw.CreateWindow(w.mode.Width, w.mode.Height, "", monitor, nil)
+	window.GlfwWindow, err = glfw.CreateWindow(w.mode.Width, w.mode.Height, "", monitor, nil)
 	if err != nil {
 		return
 	}
