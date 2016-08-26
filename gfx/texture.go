@@ -26,14 +26,14 @@ func (t *Texture) Delete() {
 func (t *Texture) Render(x, y float32) {
 	gl.BindTexture(gl.TEXTURE_2D, t.id)
 	gl.Begin(gl.QUADS)
-	gl.TexCoord2f(0, 1)
-	gl.Vertex3f(x, y, 0)
-	gl.TexCoord2f(1, 1)
-	gl.Vertex3f(x+float32(t.width), y, 0)
-	gl.TexCoord2f(1, 0)
-	gl.Vertex3f(x+float32(t.width), y+float32(t.height), 0)
 	gl.TexCoord2f(0, 0)
-	gl.Vertex3f(x, y+float32(t.height), 0)
+	gl.Vertex3f(x, -y, 0)
+	gl.TexCoord2f(0, 1)
+	gl.Vertex3f(x, -y-float32(t.height), 0)
+	gl.TexCoord2f(1, 1)
+	gl.Vertex3f(x+float32(t.width), -y-float32(t.height), 0)
+	gl.TexCoord2f(1, 0)
+	gl.Vertex3f(x+float32(t.width), -y, 0)
 	gl.End()
 }
 

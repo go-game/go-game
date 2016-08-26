@@ -37,10 +37,10 @@ func logic(delta time.Duration) {
 	vY = 0
 	vX = 0
 	if keys.Down("up") {
-		vY += speed
+		vY -= speed
 	}
 	if keys.Down("down") {
-		vY -= speed
+		vY += speed
 	}
 	if keys.Down("right") {
 		vX += speed

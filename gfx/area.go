@@ -26,7 +26,7 @@ func setGLViewPort() {
 
 	gl.MatrixMode(gl.PROJECTION)
 	gl.LoadIdentity()
-	gl.Ortho(0, float64(width/pixelsize), 0, float64(height/pixelsize), -1, 1)
+	gl.Ortho(0, float64(width/pixelsize), -float64(height/pixelsize), 0, -1, 1)
 	// This is for retina stuff on macs
 	// var width, height = desktop.CurrentWindow.GlfwWindow.GetFramebufferSize()
 	// fX, fY := int32(width/desktop.CurrentWindow.Mode.Width), int32(height/desktop.CurrentWindow.Mode.Height)
