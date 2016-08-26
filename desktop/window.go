@@ -4,6 +4,7 @@ import (
 	"git.mbuechmann.com/go-game/game"
 	"git.mbuechmann.com/go-game/gfx"
 	"git.mbuechmann.com/go-game/keys"
+	"git.mbuechmann.com/go-game/mouse"
 	"github.com/go-gl/glfw/v3.1/glfw"
 	"time"
 )
@@ -55,6 +56,8 @@ func OpenWindow(m *Mode) *Window {
 
 	gfx.SetArea(m.Width, m.Height)
 	keys.SetGlfwWindow(window.GlfwWindow)
+	mouse.SetGlfwWindow(window.GlfwWindow)
+	mouse.Hide()
 
 	return window
 }
@@ -106,7 +109,6 @@ func (w *Window) initGlfwWindow() (err error) {
 	}
 
 	w.GlfwWindow.MakeContextCurrent()
-	w.GlfwWindow.SetInputMode(glfw.CursorMode, glfw.CursorHidden)
 
 	return
 }
