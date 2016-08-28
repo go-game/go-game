@@ -10,4 +10,5 @@ type State struct {
 	RenderFunc  func()
 	UpdateFunc  func(elapsed time.Duration)
 	CleanupFunc func()
+	OnMouseMove func(x, y float64)
 }

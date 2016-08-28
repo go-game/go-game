@@ -1,12 +1,13 @@
 package desktop
 
 import (
+	"time"
+
 	"git.mbuechmann.com/go-game/game"
 	"git.mbuechmann.com/go-game/gfx"
 	"git.mbuechmann.com/go-game/keys"
 	"git.mbuechmann.com/go-game/mouse"
 	"github.com/go-gl/glfw/v3.1/glfw"
-	"time"
 )
 
 var window *Window
@@ -66,6 +67,12 @@ func OpenWindow(m *Mode) *Window {
 func Run(state *game.State) {
 	if window == nil {
 		panic("No open window for game state. Call OpenWindow() first")
+	}
+
+	if state.OnMouseMove != nil {
+		window.GlfwWindow.SetCursorPosCallback(func(w *glfw.Window, xpos float64, ypos float64) {
+			state.OnMouseMove(xpos, ypos)
+		})
 	}
 
 	if state.InitFunc != nil {

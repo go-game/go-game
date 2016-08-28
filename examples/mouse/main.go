@@ -7,7 +7,6 @@ import (
 	"git.mbuechmann.com/go-game/game"
 	"git.mbuechmann.com/go-game/gfx"
 	"git.mbuechmann.com/go-game/keys"
-	"git.mbuechmann.com/go-game/mouse"
 )
 
 var texture *gfx.Texture
@@ -19,6 +18,7 @@ func main() {
 		RenderFunc:  render,
 		UpdateFunc:  logic,
 		CleanupFunc: cleanupGame,
+		OnMouseMove: onMouseMove,
 	}
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -28,14 +28,15 @@ func main() {
 	desktop.Run(gameState)
 }
 
+func onMouseMove(x, y float64) {
+	posX = float32(x)
+	posY = float32(y)
+}
+
 func logic(delta time.Duration) {
 	if keys.Down("esc") {
 		desktop.Exit()
 	}
-
-	posX, posY = mouse.Position()
-	posX/=4
-	posY/=4
 }
 
 func render() {
