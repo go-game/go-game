@@ -75,6 +75,17 @@ func Run(state *game.State) {
 		})
 	}
 
+	if state.OnMouseButtonUp != nil || state.OnMouseButtonDown != nil {
+		window.GlfwWindow.SetMouseButtonCallback(func(w *glfw.Window, button glfw.MouseButton, action glfw.Action, mod glfw.ModifierKey) {
+			if action == glfw.Press {
+				state.OnMouseButtonDown(mouse.Button(button))
+			}
+			if action == glfw.Release {
+				state.OnMouseButtonUp(mouse.Button(button))
+			}
+		})
+	}
+
 	if state.InitFunc != nil {
 		state.InitFunc()
 	}
