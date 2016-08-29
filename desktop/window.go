@@ -83,6 +83,16 @@ func Run(state *game.State) {
 			if state.OnMouseButtonDown != nil && action == glfw.Press {
 				state.OnMouseButtonDown(mouse.Button(button))
 			}
+		})
+	}
+
+	if state.OnKeyUp != nil || state.OnKeyDown != nil {
+		window.GlfwWindow.SetKeyCallback(func(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
+			if state.OnKeyUp != nil && action == glfw.Release {
+				state.OnKeyUp(keys.Key(key))
+			}
+			if state.OnKeyDown != nil && action == glfw.Press {
+				state.OnKeyDown(keys.Key(key))
 			}
 		})
 	}

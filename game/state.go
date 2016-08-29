@@ -3,6 +3,7 @@ package game
 import (
 	"time"
 
+	"git.mbuechmann.com/go-game/keys"
 	"git.mbuechmann.com/go-game/mouse"
 )
 
@@ -15,6 +16,6 @@ type State struct {
 	OnMouseMove       func(x, y float64)
 	OnMouseButtonUp   func(b mouse.Button)
 	OnMouseButtonDown func(b mouse.Button)
-	OnKeyUp           func()
-	OnKeyDown         func()
+	OnKeyUp           func(k keys.Key)
+	OnKeyDown         func(k keys.Key)
 }

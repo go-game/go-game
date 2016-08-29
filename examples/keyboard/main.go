@@ -12,7 +12,8 @@ import (
 var texture *gfx.Texture
 var vX, vY float32 = 0, 0
 var posX, posY float32 = 100, 100
-var speed float32 = 100
+
+const speed float32 = 100
 
 func main() {
 	gameState := &game.State{
@@ -20,6 +21,8 @@ func main() {
 		RenderFunc:  render,
 		UpdateFunc:  logic,
 		CleanupFunc: cleanupGame,
+		OnKeyUp:     onKeyUp,
+		OnKeyDown:   onKeyDown,
 	}
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -29,26 +32,41 @@ func main() {
 	desktop.Run(gameState)
 }
 
-func logic(delta time.Duration) {
-	if keys.IsDown(keys.Esc) {
+func onKeyUp(k keys.Key) {
+	if k == keys.Esc {
 		desktop.Exit()
 	}
 
-	vY = 0
-	vX = 0
-	if keys.IsDown(keys.Up) {
-		vY -= speed
-	}
-	if keys.IsDown(keys.Down) {
+	if k == keys.Up {
 		vY += speed
 	}
-	if keys.IsDown(keys.Right) {
-		vX += speed
+	if k == keys.Down {
+		vY -= speed
 	}
-	if keys.IsDown(keys.Left) {
+	if k == keys.Right {
 		vX -= speed
 	}
+	if k == keys.Left {
+		vX += speed
+	}
+}
 
+func onKeyDown(k keys.Key) {
+	if k == keys.Up {
+		vY -= speed
+	}
+	if k == keys.Down {
+		vY += speed
+	}
+	if k == keys.Right {
+		vX += speed
+	}
+	if k == keys.Left {
+		vX -= speed
+	}
+}
+
+func logic(delta time.Duration) {
 	var seconds = float32(float64(delta) / 1000000000)
 	posX += vX * seconds
 	posY += vY * seconds
