@@ -40,3 +40,14 @@ func Hide() {
 func Show() {
 	glfwWindow.SetInputMode(glfw.CursorMode, glfw.CursorNormal)
 }
+
+// Position returns the x and y coordinate of the mouse cursor.
+func Position() (x, y float32) {
+	a, b := glfwWindow.GetCursorPos()
+	return float32(a), float32(b)
+}
+
+// SetPosition sets the x and y coordinate of the mouse cursor.
+func SetPosition(x, y float32) {
+	glfwWindow.SetCursorPos(float64(x), float64(y))
+}
