@@ -12,6 +12,8 @@ import (
 var texture *gfx.Texture
 var posX, posY float32 = 0, 0
 
+const pixelsize = 4
+
 func main() {
 	gameState := &game.State{
 		InitFunc:    initGame,
@@ -23,14 +25,14 @@ func main() {
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
 	desktop.OpenWindow(mode)
-	gfx.SetPixelSize(4)
+	gfx.SetPixelSize(pixelsize)
 
 	desktop.Run(gameState)
 }
 
 func onMouseMove(x, y float64) {
-	posX = float32(x)
-	posY = float32(y)
+	posX = float32(x) / pixelsize
+	posY = float32(y) / pixelsize
 }
 
 func logic(delta time.Duration) {
