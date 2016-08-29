@@ -30,22 +30,22 @@ func main() {
 }
 
 func logic(delta time.Duration) {
-	if keys.Down("esc") {
+	if keys.IsDown(keys.Esc) {
 		desktop.Exit()
 	}
 
 	vY = 0
 	vX = 0
-	if keys.Down("up") {
+	if keys.IsDown(keys.Up) {
 		vY -= speed
 	}
-	if keys.Down("down") {
+	if keys.IsDown(keys.Down) {
 		vY += speed
 	}
-	if keys.Down("right") {
+	if keys.IsDown(keys.Right) {
 		vX += speed
 	}
-	if keys.Down("left") {
+	if keys.IsDown(keys.Left) {
 		vX -= speed
 	}
 

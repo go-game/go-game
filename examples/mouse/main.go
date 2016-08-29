@@ -34,7 +34,7 @@ func onMouseMove(x, y float64) {
 }
 
 func logic(delta time.Duration) {
-	if keys.Down("esc") {
+	if keys.IsDown(keys.Esc) {
 		desktop.Exit()
 	}
 }

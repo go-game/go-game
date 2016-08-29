@@ -43,7 +43,7 @@ func render() {
 }
 
 func logic(elapsed time.Duration) {
-	if keys.Down("esc") {
+	if keys.IsDown(keys.Esc) {
 		desktop.Exit()
 	}
 }
