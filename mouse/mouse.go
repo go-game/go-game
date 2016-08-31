@@ -33,7 +33,7 @@ func SetGlfwWindow(w *glfw.Window) {
 
 // Hide makes the mouse cursor invisible.
 func Hide() {
-	glfwWindow.SetInputMode(glfw.CursorMode, glfw.CursorHidden)
+	glfwWindow.SetInputMode(glfw.CursorMode, glfw.CursorDisabled)
 }
 
 // Show makes the mouse cursor visible
