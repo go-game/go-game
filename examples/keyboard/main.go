@@ -33,10 +33,6 @@ func main() {
 }
 
 func onKeyUp(k keys.Key) {
-	if k == keys.Esc {
-		desktop.Exit()
-	}
-
 	if k == keys.Up {
 		vY += speed
 	}
@@ -52,6 +48,10 @@ func onKeyUp(k keys.Key) {
 }
 
 func onKeyDown(k keys.Key) {
+	if k == keys.Esc {
+		desktop.Exit()
+	}
+
 	if k == keys.Up {
 		vY -= speed
 	}
