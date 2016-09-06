@@ -10,7 +10,7 @@ import (
 )
 
 var image *gfx.Image
-var posX, posY float64 = 0, 0
+var renderOptions = gfx.NewRenderOptions()
 
 const pixelsize = 4
 
@@ -31,8 +31,8 @@ func main() {
 }
 
 func onMouseMove(x, y float64) {
-	posX = x / pixelsize
-	posY = y / pixelsize
+	renderOptions.X = x / pixelsize
+	renderOptions.Y = y / pixelsize
 }
 
 func logic(delta time.Duration) {
@@ -43,7 +43,7 @@ func logic(delta time.Duration) {
 
 func render() {
 	gfx.Clear()
-	image.Render(posX, posY)
+	image.Render(renderOptions)
 }
 
 func initGame() {

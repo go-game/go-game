@@ -34,10 +34,18 @@ func initGame() {
 func render() {
 	gfx.Clear()
 
+	renderOptions1 := gfx.NewRenderOptions()
+	renderOptions2 := gfx.NewRenderOptions()
+
 	for x := -64.0; x <= 1280; x += 64 {
 		for y := 0.0; y <= 96; y += 32 {
-			tile1.Render(x, y)
-			tile2.Render(x+32, y-16)
+			renderOptions1.X = x
+			renderOptions1.Y = y
+			renderOptions2.X = x + 32
+			renderOptions2.Y = y - 16
+
+			tile1.Render(renderOptions1)
+			tile2.Render(renderOptions2)
 		}
 	}
 }
