@@ -10,7 +10,7 @@ import (
 )
 
 var image *gfx.Image
-var posX, posY float32 = 0, 0
+var posX, posY float64 = 0, 0
 
 const pixelsize = 4
 
@@ -31,8 +31,8 @@ func main() {
 }
 
 func onMouseMove(x, y float64) {
-	posX = float32(x) / pixelsize
-	posY = float32(y) / pixelsize
+	posX = x / pixelsize
+	posY = y / pixelsize
 }
 
 func logic(delta time.Duration) {

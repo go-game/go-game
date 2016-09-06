@@ -10,10 +10,10 @@ import (
 )
 
 var image *gfx.Image
-var vX, vY float32 = 0, 0
-var posX, posY float32 = 100, 100
+var vX, vY float64 = 0, 0
+var posX, posY float64 = 100, 100
 
-const speed float32 = 100
+const speed float64 = 100
 
 func main() {
 	gameState := &game.State{
@@ -67,7 +67,7 @@ func onKeyDown(k keys.Key) {
 }
 
 func logic(delta time.Duration) {
-	var seconds = float32(float64(delta) / 1000000000)
+	var seconds = (float64(delta) / 1000000000)
 	posX += vX * seconds
 	posY += vY * seconds
 }

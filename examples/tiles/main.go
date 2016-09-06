@@ -34,10 +34,10 @@ func initGame() {
 func render() {
 	gfx.Clear()
 
-	for x := -64; x <= 1280; x += 64 {
-		for y := 0; y <= 96; y += 32 {
-			tile1.Render(float32(x), float32(y))
-			tile2.Render(float32(x+32), float32(y-16))
+	for x := -64.0; x <= 1280; x += 64 {
+		for y := 0.0; y <= 96; y += 32 {
+			tile1.Render(x, y)
+			tile2.Render(x+32, y-16)
 		}
 	}
 }

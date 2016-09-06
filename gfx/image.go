@@ -23,17 +23,17 @@ func (t *Image) Delete() {
 }
 
 // Render renders the image on the screen at x, y.
-func (t *Image) Render(x, y float32) {
+func (t *Image) Render(x, y float64) {
 	gl.BindTexture(gl.TEXTURE_2D, t.id)
 	gl.Begin(gl.QUADS)
 	gl.TexCoord2f(0, 0)
-	gl.Vertex3f(x, -y, 0)
+	gl.Vertex3d(x, -y, 0)
 	gl.TexCoord2f(0, 1)
-	gl.Vertex3f(x, -y-float32(t.height), 0)
+	gl.Vertex3d(x, -y-float64(t.height), 0)
 	gl.TexCoord2f(1, 1)
-	gl.Vertex3f(x+float32(t.width), -y-float32(t.height), 0)
+	gl.Vertex3d(x+float64(t.width), -y-float64(t.height), 0)
 	gl.TexCoord2f(1, 0)
-	gl.Vertex3f(x+float32(t.width), -y, 0)
+	gl.Vertex3d(x+float64(t.width), -y, 0)
 	gl.End()
 }
 
