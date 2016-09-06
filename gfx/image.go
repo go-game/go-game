@@ -10,20 +10,20 @@ import (
 	"github.com/go-gl/gl/v2.1/gl"
 )
 
-// Texture represents an image and can be rendered on the screen.
-type Texture struct {
+// Image represents an image and can be rendered on the screen.
+type Image struct {
 	id     uint32
 	width  int
 	height int
 }
 
-// Delete removes the texture from memory.
-func (t *Texture) Delete() {
+// Delete removes the image from memory.
+func (t *Image) Delete() {
 	gl.DeleteTextures(1, &t.id)
 }
 
-// Render renders the texture on the screen at x, y.
-func (t *Texture) Render(x, y float32) {
+// Render renders the image on the screen at x, y.
+func (t *Image) Render(x, y float32) {
 	gl.BindTexture(gl.TEXTURE_2D, t.id)
 	gl.Begin(gl.QUADS)
 	gl.TexCoord2f(0, 0)
@@ -37,8 +37,8 @@ func (t *Texture) Render(x, y float32) {
 	gl.End()
 }
 
-// NewTexture creates a new Texture from the given file name. File must be a png.
-func NewTexture(file string) (t *Texture) {
+// NewImage creates a new Image from the given file name. File must be a png.
+func NewImage(file string) (t *Image) {
 	imgFile, err := os.Open(file)
 	if err != nil {
 		panic(err)
@@ -74,7 +74,7 @@ func NewTexture(file string) (t *Texture) {
 		gl.UNSIGNED_BYTE,
 		gl.Ptr(rgba.Pix))
 
-	t = &Texture{id: id, width: img.Bounds().Max.X, height: img.Bounds().Max.Y}
+	t = &Image{id: id, width: img.Bounds().Max.X, height: img.Bounds().Max.Y}
 
 	return
 }

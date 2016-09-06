@@ -9,7 +9,7 @@ import (
 	"git.mbuechmann.com/go-game/keys"
 )
 
-var texture *gfx.Texture
+var image *gfx.Image
 var posX, posY float32 = 0, 0
 
 const pixelsize = 4
@@ -43,13 +43,13 @@ func logic(delta time.Duration) {
 
 func render() {
 	gfx.Clear()
-	texture.Render(posX, posY)
+	image.Render(posX, posY)
 }
 
 func initGame() {
-	texture = gfx.NewTexture("assets/heart.png")
+	image = gfx.NewImage("assets/heart.png")
 }
 
 func cleanupGame() {
-	texture.Delete()
+	image.Delete()
 }

@@ -9,8 +9,8 @@ import (
 	"git.mbuechmann.com/go-game/keys"
 )
 
-var tile1 *gfx.Texture
-var tile2 *gfx.Texture
+var tile1 *gfx.Image
+var tile2 *gfx.Image
 
 func main() {
 	gameState := &game.State{
@@ -27,8 +27,8 @@ func main() {
 }
 
 func initGame() {
-	tile1 = gfx.NewTexture("assets/tile1.png")
-	tile2 = gfx.NewTexture("assets/tile2.png")
+	tile1 = gfx.NewImage("assets/tile1.png")
+	tile2 = gfx.NewImage("assets/tile2.png")
 }
 
 func render() {
