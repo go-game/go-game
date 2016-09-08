@@ -8,9 +8,20 @@ func init() {
 	}
 }
 
+var clearR, clearG, clearB, clearA float32
+
 // Clear clears the whole drawing area.
 func Clear() {
+	gl.ClearColor(clearR, clearG, clearB, clearA)
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+}
+
+// SetClearColor sets the color with which the screen will be filled when calling Clear().
+func SetClearColor(r, g, b, a float64) {
+	clearR = float32(r)
+	clearG = float32(g)
+	clearB = float32(b)
+	clearA = float32(a)
 }
 
 // NewRenderOptions returns new RenderOptions with sensible default values.

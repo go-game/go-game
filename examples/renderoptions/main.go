@@ -15,6 +15,7 @@ var renderOptions *gfx.RenderOptions
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
 	gfx.SetPixelSize(4)
+	gfx.SetClearColor(0.5, 0.5, 0.5, 1.0)
 	desktop.OpenWindow(mode)
 
 	desktop.Run(&game.State{
