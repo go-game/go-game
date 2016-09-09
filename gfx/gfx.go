@@ -27,19 +27,28 @@ func SetClearColor(r, g, b, a float64) {
 // NewRenderOptions returns new RenderOptions with sensible default values.
 func NewRenderOptions() *RenderOptions {
 	return &RenderOptions{
-		R: 1.0,
-		G: 1.0,
-		B: 1.0,
-		A: 1.0,
+		R:   1.0,
+		G:   1.0,
+		B:   1.0,
+		A:   1.0,
+		Rot: Rotation{},
 	}
 }
 
 // RenderOptions encompasses all transformations that can be done while rendering an Image.
 type RenderOptions struct {
-	X float64
-	Y float64
-	R float64
-	G float64
-	B float64
-	A float64
+	X   float64
+	Y   float64
+	R   float64
+	G   float64
+	B   float64
+	A   float64
+	Rot Rotation
+}
+
+// Rotation describes the clockwise rotation around the center at X, Y.
+type Rotation struct {
+	Angle float64
+	X     float64
+	Y     float64
 }

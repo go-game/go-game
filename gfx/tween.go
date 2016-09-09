@@ -56,4 +56,7 @@ func (t *Tween) Update(elapsed time.Duration) {
 	t.tweened.G = t.start.G*f1 + t.end.G*f2
 	t.tweened.B = t.start.B*f1 + t.end.B*f2
 	t.tweened.A = t.start.A*f1 + t.end.A*f2
+	t.tweened.Rot.Angle = t.start.Rot.Angle*f1 + t.end.Rot.Angle*f2
+	t.tweened.Rot.X = t.start.Rot.X*f1 + t.end.Rot.X*f2
+	t.tweened.Rot.Y = t.start.Rot.Y*f1 + t.end.Rot.Y*f2
 }

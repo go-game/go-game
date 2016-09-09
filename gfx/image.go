@@ -24,24 +24,30 @@ func (t *Image) Delete() {
 
 // Render renders the image on the screen at x, y.
 func (t *Image) Render(o *RenderOptions) {
+	gl.LoadIdentity()
 	gl.BindTexture(gl.TEXTURE_2D, t.id)
+
+	gl.Translated(o.X+o.Rot.X, -o.Y-o.Rot.Y, 0)
+	gl.Rotated(-o.Rot.Angle, 0, 0, 1)
+	gl.Translated(-o.Rot.X, o.Rot.Y, 0)
+
 	gl.Begin(gl.QUADS)
 
 	gl.Color4d(o.R, o.G, o.B, o.A)
 	gl.TexCoord2f(0, 0)
-	gl.Vertex3d(o.X, -o.Y, 0)
+	gl.Vertex3d(0, 0, 0)
 
 	gl.Color4d(o.R, o.G, o.B, o.A)
 	gl.TexCoord2f(0, 1)
-	gl.Vertex3d(o.X, -o.Y-float64(t.height), 0)
+	gl.Vertex3d(0, -float64(t.height), 0)
 
 	gl.Color4d(o.R, o.G, o.B, o.A)
 	gl.TexCoord2f(1, 1)
-	gl.Vertex3d(o.X+float64(t.width), -o.Y-float64(t.height), 0)
+	gl.Vertex3d(float64(t.width), -float64(t.height), 0)
 
 	gl.Color4d(o.R, o.G, o.B, o.A)
 	gl.TexCoord2f(1, 0)
-	gl.Vertex3d(o.X+float64(t.width), -o.Y, 0)
+	gl.Vertex3d(float64(t.width), 0, 0)
 
 	gl.End()
 }
