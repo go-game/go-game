@@ -39,6 +39,7 @@ func render() {
 	gfx.Clear()
 
 	topLimit := 300.0
+	yOff := 25.0
 
 	renderOptions.Y = 00.0
 	for x := 15.0; x < topLimit; x += 30.0 {
@@ -47,56 +48,58 @@ func render() {
 		image.Render(renderOptions)
 	}
 
-	renderOptions.Y = 30.0
+	renderOptions.Y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
 		renderOptions.X = x
 		renderOptions.R = x / topLimit
 		image.Render(renderOptions)
-
 	}
 
-	renderOptions.Y = 60.0
+	renderOptions.Y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
 		renderOptions.X = x
 		renderOptions.G = x / topLimit
 		image.Render(renderOptions)
-
 	}
 
-	renderOptions.Y = 90.0
+	renderOptions.Y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
 		renderOptions.X = x
 		renderOptions.B = x / topLimit
 		image.Render(renderOptions)
-
 	}
 
-	renderOptions.Y = 120.0
+	renderOptions.Y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
 		renderOptions.X = x
 		renderOptions.R = x / topLimit
 		renderOptions.G = x / topLimit
 		image.Render(renderOptions)
-
 	}
 
-	renderOptions.Y = 150.0
+	renderOptions.Y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
 		renderOptions.X = x
 		renderOptions.R = x / topLimit
 		renderOptions.B = x / topLimit
 		image.Render(renderOptions)
-
 	}
 
-	renderOptions.Y = 180.0
+	renderOptions.Y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
 		renderOptions.X = x
 		renderOptions.G = x / topLimit
 		renderOptions.B = x / topLimit
 		image.Render(renderOptions)
-
 	}
+
+	renderOptions.Y += yOff
+	for x := 15.0; x < topLimit; x += 30.0 {
+		renderOptions.X = x
+		renderOptions.Rot = gfx.Rotation{Angle: x * 1.2, X: 8, Y: 8}
+		image.Render(renderOptions)
+	}
+	renderOptions.Rot = gfx.Rotation{Angle: 0, X: 8, Y: 8}
 }
 
 func onKeyDown(k keys.Key) {
