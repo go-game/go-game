@@ -13,7 +13,7 @@ var image *gfx.Image
 var renderOptions *gfx.RenderOptions
 
 func main() {
-	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
+	mode := &desktop.Mode{Width: 1280, Height: 1000, Fullscreen: false}
 	desktop.OpenWindow(mode)
 	gfx.SetPixelSize(4)
 	gfx.SetClearColor(0.5, 0.5, 0.5, 1.0)
@@ -100,6 +100,18 @@ func render() {
 		image.Render(renderOptions)
 	}
 	renderOptions.Rot = gfx.Rotation{Angle: 0, X: 8, Y: 8}
+
+	renderOptions.Y += yOff
+	scale := 1.0
+	for x := 15.0; x < topLimit; x += 30.0 {
+		renderOptions.X = x
+		scale += 0.1
+		renderOptions.Scale.Factor = scale
+		renderOptions.Scale.X = 8
+		renderOptions.Scale.Y = 8
+		image.Render(renderOptions)
+	}
+	renderOptions.Scale = gfx.Scale{Factor: 1, X: 0, Y: 0}
 }
 
 func onKeyDown(k keys.Key) {
