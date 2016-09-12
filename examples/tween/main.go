@@ -33,13 +33,15 @@ func main() {
 func initFunc() {
 	image = gfx.NewImage("assets/heart.png")
 	r1 := gfx.NewRenderOptions()
-	r1.X = 10
+	r1.X = 50
 	r1.Y = -16
 	r1.Rot = gfx.Rotation{Angle: 0, X: 8, Y: 8}
+	r1.Scale = gfx.Scale{Factor: 1, X: 8, Y: 8}
 	r2 := gfx.NewRenderOptions()
-	r2.X = 10
+	r2.X = 50
 	r2.Y = 216
 	r2.Rot = gfx.Rotation{Angle: 360, X: 8, Y: 8}
+	r2.Scale = gfx.Scale{Factor: 5, X: 8, Y: 8}
 	tween = gfx.NewTween(r1, r2, 2*time.Second, 0, true)
 }
 
