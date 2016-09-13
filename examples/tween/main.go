@@ -58,7 +58,7 @@ func keyDown(k keys.Key) {
 func render() {
 	gfx.Clear()
 	ro := tween.GetRenderOptions()
-	image.Render(ro)
+	gfx.Render(image, ro)
 }
 
 func update(delta time.Duration) {

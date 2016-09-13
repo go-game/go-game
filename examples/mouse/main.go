@@ -45,7 +45,7 @@ func logic(delta time.Duration) {
 
 func render() {
 	gfx.Clear()
-	image.Render(renderOptions)
+	gfx.Render(image, renderOptions)
 }
 
 func initGame() {

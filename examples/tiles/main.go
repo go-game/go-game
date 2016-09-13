@@ -46,8 +46,8 @@ func render() {
 			renderOptions2.X = x + 32
 			renderOptions2.Y = y - 16
 
-			tile1.Render(renderOptions1)
-			tile2.Render(renderOptions2)
+			gfx.Render(tile1, renderOptions1)
+			gfx.Render(tile2, renderOptions2)
 		}
 	}
 }

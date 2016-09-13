@@ -24,18 +24,7 @@ func (t *Image) Delete() {
 
 // Render renders the image on the screen at x, y.
 func (t *Image) Render(o *RenderOptions) {
-	gl.LoadIdentity()
 	gl.BindTexture(gl.TEXTURE_2D, t.id)
-
-	gl.Translated(o.X, -o.Y, 0)
-
-	gl.Translated(o.Scale.X, -o.Scale.Y, 0)
-	gl.Scaled(o.Scale.Factor, o.Scale.Factor, 1)
-	gl.Translated(-o.Scale.X, o.Scale.Y, 0)
-
-	gl.Translated(o.Rot.X, -o.Rot.Y, 0)
-	gl.Rotated(-o.Rot.Angle, 0, 0, 1)
-	gl.Translated(-o.Rot.X, o.Rot.Y, 0)
 
 	gl.Begin(gl.QUADS)
 

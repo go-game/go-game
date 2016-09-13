@@ -30,6 +30,7 @@ func setGLViewPort() {
 	// This is for retina stuff on macs
 	// var width, height = desktop.CurrentWindow.GlfwWindow.GetFramebufferSize()
 	// fX, fY := int32(width/desktop.CurrentWindow.Mode.Width), int32(height/desktop.CurrentWindow.Mode.Height)
+	gl.BindFramebuffer(gl.FRAMEBUFFER, 0)
 	gl.Viewport(x, y, int32(width*fX), int32(height*fY))
 
 	gl.MatrixMode(gl.MODELVIEW)
