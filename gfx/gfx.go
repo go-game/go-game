@@ -44,9 +44,7 @@ type Scale struct {
 // Render uses a renderer to put pixels onto the screen directly.
 func Render(r Renderer, o *RenderOptions) {
 	setGLViewPort()
-
 	transform(o)
-
 	r.render(o)
 }
 

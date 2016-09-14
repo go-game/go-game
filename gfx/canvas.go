@@ -10,7 +10,7 @@ var currentName uint32
 
 // Canvas is a offscreen area which can be rendered to and rendered on to the screen.
 type Canvas struct {
-	textureID     uint32
+	tex           *texture
 	frameBufferID uint32
 	width, height int32
 }
@@ -19,17 +19,11 @@ type Canvas struct {
 func NewCanvas(width, height int) (*Canvas, error) {
 	c := Canvas{width: int32(width), height: int32(height)}
 
-	gl.GenTextures(1, &c.textureID)
-	gl.BindTexture(gl.TEXTURE_2D, c.textureID)
-	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT)
-	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT)
-	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
-	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
-	gl.TexImage2D(gl.TEXTURE_2D, 0, gl.RGBA, int32(width), int32(height), 0, gl.RGBA, gl.UNSIGNED_BYTE, nil)
+	c.tex = newTexture(width, height, nil)
 
 	gl.GenFramebuffersEXT(1, &c.frameBufferID)
 	gl.BindFramebufferEXT(gl.FRAMEBUFFER_EXT, c.frameBufferID)
-	gl.FramebufferTexture2DEXT(gl.FRAMEBUFFER_EXT, gl.COLOR_ATTACHMENT0_EXT, gl.TEXTURE_2D, c.textureID, 0)
+	gl.FramebufferTexture2DEXT(gl.FRAMEBUFFER_EXT, gl.COLOR_ATTACHMENT0_EXT, gl.TEXTURE_2D, c.tex.id, 0)
 
 	status := gl.CheckFramebufferStatusEXT(gl.FRAMEBUFFER_EXT)
 	if status != gl.FRAMEBUFFER_COMPLETE_EXT {
@@ -59,7 +53,7 @@ func (c *Canvas) Render(r Renderer, o *RenderOptions) {
 
 // Delete removes the canvas from memory.
 func (c *Canvas) Delete() {
-	gl.DeleteTextures(1, &c.textureID)
+	gl.DeleteTextures(1, &c.tex.id)
 	gl.BindFramebufferEXT(gl.FRAMEBUFFER_EXT, 0)
 	gl.DeleteFramebuffersEXT(1, &c.frameBufferID)
 }
@@ -77,7 +71,7 @@ func (c *Canvas) render(o *RenderOptions) {
 	gl.Enable(gl.TEXTURE_2D)
 	// gl.Disable(gl.BLEND) // Needed?
 
-	gl.BindTexture(gl.TEXTURE_2D, c.textureID)
+	gl.BindTexture(gl.TEXTURE_2D, c.tex.id)
 
 	gl.Begin(gl.QUADS)
 
