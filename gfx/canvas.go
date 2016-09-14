@@ -40,7 +40,7 @@ func (c *Canvas) Render(r Renderer, o *RenderOptions) {
 
 	gl.MatrixMode(gl.PROJECTION)
 	gl.LoadIdentity()
-	gl.Ortho(0, float64(c.width), -float64(c.height), 0, -1, 1)
+	gl.Ortho(0, float64(c.width), 0, -float64(c.height), -1, 1)
 
 	gl.MatrixMode(gl.MODELVIEW)
 
@@ -60,7 +60,7 @@ func (c *Canvas) Delete() {
 
 // Clear clears the canvas
 func (c *Canvas) Clear() {
-	gl.Viewport(0, 0, c.width, c.height)
+	gl.Viewport(0, 0, c.width, c.height) // needed?
 	gl.ClearColor(0.0, 0.0, 0.0, 0.0)
 	gl.ClearDepth(1.0)
 	gl.Clear(gl.COLOR_BUFFER_BIT)
@@ -68,28 +68,5 @@ func (c *Canvas) Clear() {
 }
 
 func (c *Canvas) render(o *RenderOptions) {
-	gl.Enable(gl.TEXTURE_2D)
-	// gl.Disable(gl.BLEND) // Needed?
-
-	gl.BindTexture(gl.TEXTURE_2D, c.tex.id)
-
-	gl.Begin(gl.QUADS)
-
-	gl.Color4d(o.R, o.G, o.B, o.A)
-	gl.TexCoord2f(0, 0)
-	gl.Vertex3d(0, -float64(c.height), 0)
-
-	gl.Color4d(o.R, o.G, o.B, o.A)
-	gl.TexCoord2f(0, 1)
-	gl.Vertex3d(0, 0, 0)
-
-	gl.Color4d(o.R, o.G, o.B, o.A)
-	gl.TexCoord2f(1, 1)
-	gl.Vertex3d(float64(c.width), 0, 0)
-
-	gl.Color4d(o.R, o.G, o.B, o.A)
-	gl.TexCoord2f(1, 0)
-	gl.Vertex3d(float64(c.width), -float64(c.height), 0)
-
-	gl.End()
+	c.tex.render(o)
 }
