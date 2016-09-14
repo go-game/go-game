@@ -22,8 +22,9 @@ func (t *Image) Delete() {
 	gl.DeleteTextures(1, &t.id)
 }
 
-// Render renders the image on the screen at x, y.
-func (t *Image) Render(o *RenderOptions) {
+func (t *Image) render(o *RenderOptions) {
+	gl.Enable(gl.TEXTURE_2D)
+
 	gl.BindTexture(gl.TEXTURE_2D, t.id)
 
 	gl.Begin(gl.QUADS)

@@ -34,4 +34,5 @@ func setGLViewPort() {
 	gl.Viewport(x, y, int32(width*fX), int32(height*fY))
 
 	gl.MatrixMode(gl.MODELVIEW)
+	gl.LoadIdentity()
 }

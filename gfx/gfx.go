@@ -12,14 +12,14 @@ var clearR, clearG, clearB, clearA float32
 
 // Renderer imlpements render to put pixels on the screen.
 type Renderer interface {
-	Render(o *RenderOptions)
+	render(o *RenderOptions)
 }
 
 // Render uses a renderer to put pixels onto the screen directly.
 func Render(r Renderer, o *RenderOptions) {
-	setGLViewPort()
-
 	gl.LoadIdentity()
+
+	setGLViewPort()
 
 	gl.Translated(o.X, -o.Y, 0)
 
@@ -31,7 +31,7 @@ func Render(r Renderer, o *RenderOptions) {
 	gl.Rotated(-o.Rot.Angle, 0, 0, 1)
 	gl.Translated(-o.Rot.X, o.Rot.Y, 0)
 
-	r.Render(o)
+	r.render(o)
 }
 
 // Clear clears the whole drawing area.
