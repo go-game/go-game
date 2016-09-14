@@ -15,21 +15,37 @@ type Renderer interface {
 	render(o *RenderOptions)
 }
 
+// RenderOptions encompasses all transformations that can be done while rendering an Image.
+type RenderOptions struct {
+	X     float64
+	Y     float64
+	R     float64
+	G     float64
+	B     float64
+	A     float64
+	Rot   Rotation
+	Scale Scale
+}
+
+// Rotation describes the clockwise rotation around the center at X, Y.
+type Rotation struct {
+	Angle float64
+	X     float64
+	Y     float64
+}
+
+// Scale describes a scale with a center at x, y.
+type Scale struct {
+	Factor float64
+	X      float64
+	Y      float64
+}
+
 // Render uses a renderer to put pixels onto the screen directly.
 func Render(r Renderer, o *RenderOptions) {
-	gl.LoadIdentity()
-
 	setGLViewPort()
 
-	gl.Translated(o.X, -o.Y, 0)
-
-	gl.Translated(o.Scale.X, -o.Scale.Y, 0)
-	gl.Scaled(o.Scale.Factor, o.Scale.Factor, 1)
-	gl.Translated(-o.Scale.X, o.Scale.Y, 0)
-
-	gl.Translated(o.Rot.X, -o.Rot.Y, 0)
-	gl.Rotated(-o.Rot.Angle, 0, 0, 1)
-	gl.Translated(-o.Rot.X, o.Rot.Y, 0)
+	transform(o)
 
 	r.render(o)
 }
@@ -60,28 +76,16 @@ func NewRenderOptions() *RenderOptions {
 	}
 }
 
-// RenderOptions encompasses all transformations that can be done while rendering an Image.
-type RenderOptions struct {
-	X     float64
-	Y     float64
-	R     float64
-	G     float64
-	B     float64
-	A     float64
-	Rot   Rotation
-	Scale Scale
-}
+func transform(o *RenderOptions) {
+	gl.LoadIdentity()
 
-// Rotation describes the clockwise rotation around the center at X, Y.
-type Rotation struct {
-	Angle float64
-	X     float64
-	Y     float64
-}
+	gl.Translated(o.X, -o.Y, 0)
 
-// Scale describes a scale with a center at x, y.
-type Scale struct {
-	Factor float64
-	X      float64
-	Y      float64
+	gl.Translated(o.Scale.X, -o.Scale.Y, 0)
+	gl.Scaled(o.Scale.Factor, o.Scale.Factor, 1)
+	gl.Translated(-o.Scale.X, o.Scale.Y, 0)
+
+	gl.Translated(o.Rot.X, -o.Rot.Y, 0)
+	gl.Rotated(-o.Rot.Angle, 0, 0, 1)
+	gl.Translated(-o.Rot.X, o.Rot.Y, 0)
 }
