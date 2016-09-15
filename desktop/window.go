@@ -46,6 +46,16 @@ func FullscreenModes() []*Mode {
 	return modes
 }
 
+// CurrentMode returns the mode that is currently active.
+func CurrentMode() *Mode {
+	if window == nil {
+		monitor := glfw.GetPrimaryMonitor()
+		m := monitor.GetVideoMode()
+		return &Mode{Width: m.Width, Height: m.Height}
+	}
+	return window.mode
+}
+
 // OpenWindow creates a new window on the main monitor.
 func OpenWindow(m *Mode) *Window {
 	window = &Window{mode: m}

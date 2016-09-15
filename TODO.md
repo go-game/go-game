@@ -1,6 +1,5 @@
 # Todos
 
-- Current Screen Resolution
 - Drawing of primitives
   - Lines
   - Rectangles
