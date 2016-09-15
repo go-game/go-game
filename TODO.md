@@ -1,0 +1,29 @@
+# Todos
+
+- Current Screen Resolution
+- Drawing of primitives
+  - Lines
+  - Rectangles
+  - Circles
+- Modifier Keys like Shift and Ctrl
+- Mouse wheel support
+- Quads
+- Image Atlas
+- Font Rendering
+- Camera and Viewports
+- Controller support
+- Meshes with Textures
+- mp3-Support
+- Streaming of large audio files
+- Audio extensions
+  - Distance Model
+  - Doppler Scale
+  - Pause
+- Particle Systems
+- Shader
+- Image Batches
+- Text input
+- Timers
+- Multiple windows on multiple monitors
+- Video Support
+- Compressed Images
