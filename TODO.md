@@ -5,12 +5,12 @@
   - Rectangles
   - Circles
 - Modifier Keys like Shift and Ctrl
-- Flipbook animations
+- Flip book animations
 - Mouse wheel support
 - Quads
 - Image Atlas
 - Font Rendering
-- Camera and Viewports
+- Camera and View ports
 - Controller support
 - Meshes with Textures
 - mp3-Support
