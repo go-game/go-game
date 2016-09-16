@@ -8,12 +8,14 @@ import (
 	"git.mbuechmann.com/go-game/desktop"
 	"git.mbuechmann.com/go-game/game"
 	"git.mbuechmann.com/go-game/gfx"
+	"git.mbuechmann.com/go-game/gfx/animation"
 	"git.mbuechmann.com/go-game/keys"
 )
 
 var image *gfx.Image
-var tween *gfx.Tween
+var tween *animation.Tween
 var elapsed time.Duration = 0
+var running = true
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -42,7 +44,7 @@ func initFunc() {
 	r2.Y = 216
 	r2.Rot = gfx.Rotation{Angle: 360, X: 8, Y: 8}
 	r2.Scale = gfx.Scale{Factor: 5, X: 8, Y: 8}
-	tween = gfx.NewTween(r1, r2, 2*time.Second, 0, true)
+	tween = animation.NewTween(r1, r2, 2*time.Second, 0, true)
 }
 
 func cleanup() {
@@ -53,6 +55,9 @@ func keyDown(k keys.Key) {
 	if k == keys.Esc {
 		desktop.Exit()
 	}
+	if k == keys.Space {
+		running = !running
+	}
 }
 
 func render() {
@@ -62,6 +67,8 @@ func render() {
 }
 
 func update(delta time.Duration) {
-	elapsed += delta
-	tween.Update(elapsed)
+	if running {
+		elapsed += delta
+		tween.Update(elapsed)
+	}
 }

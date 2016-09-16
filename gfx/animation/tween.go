@@ -1,31 +1,35 @@
-package gfx
+package animation
 
-import "time"
+import (
+	"time"
+
+	"git.mbuechmann.com/go-game/gfx"
+)
 
 // NewTween returns a new Tween for two RenderOptions
-func NewTween(start, end *RenderOptions, duration time.Duration, offset time.Duration, looping bool) *Tween {
+func NewTween(start, end *gfx.RenderOptions, duration time.Duration, offset time.Duration, looping bool) *Tween {
 	return &Tween{
 		start:    start,
 		end:      end,
 		duration: duration,
 		offset:   offset,
 		looping:  looping,
-		tweened:  &RenderOptions{},
+		tweened:  &gfx.RenderOptions{},
 	}
 }
 
 // Tween interpolates two RenderOptions over time
 type Tween struct {
-	start    *RenderOptions
-	end      *RenderOptions
+	start    *gfx.RenderOptions
+	end      *gfx.RenderOptions
 	duration time.Duration
 	offset   time.Duration
 	looping  bool
-	tweened  *RenderOptions
+	tweened  *gfx.RenderOptions
 }
 
 // GetRenderOptions returns the interpolated RenderOptions
-func (t *Tween) GetRenderOptions() *RenderOptions {
+func (t *Tween) GetRenderOptions() *gfx.RenderOptions {
 	return t.tweened
 }
 
