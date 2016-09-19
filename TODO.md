@@ -5,7 +5,6 @@
   - Rectangles
   - Circles
 - Modifier Keys like Shift and Ctrl
-- Flip book animations
 - Mouse wheel support
 - Quads
 - Image Atlas
