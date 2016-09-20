@@ -22,6 +22,16 @@ func (i *Image) Delete() {
 	gl.DeleteTextures(1, &i.tex.id)
 }
 
+// Width returns the width of the image in pixels.
+func (i *Image) Width() int {
+	return width
+}
+
+// Height returns the height of the image in pixels.
+func (i *Image) Height() int {
+	return height
+}
+
 func (i *Image) render(o *RenderOptions) {
 	i.tex.render(o)
 }
