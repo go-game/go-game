@@ -1,7 +1,6 @@
 # Todos
 
 ## Basic
-- More error handling
 - Drawing of primitives
   - Lines
   - Rectangles
@@ -10,6 +9,7 @@
 - All keys
 - Mouse wheel support
 - Switching of game states
+- More/Better error handling
 - Better Documentation
 
 ## Advanced
