@@ -14,8 +14,8 @@ type State struct {
 	UpdateFunc        func(elapsed time.Duration)
 	CleanupFunc       func()
 	OnMouseMove       func(x, y float64)
-	OnMouseButtonUp   func(b mouse.Button)
-	OnMouseButtonDown func(b mouse.Button)
+	OnMouseButtonUp   func(b mouse.Button, x, y float32)
+	OnMouseButtonDown func(b mouse.Button, x, y float32)
 	OnKeyUp           func(k keys.Key)
 	OnKeyDown         func(k keys.Key)
 }
