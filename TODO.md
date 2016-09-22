@@ -2,7 +2,6 @@
 
 ## Basic
 - Drawing of primitives
-  - Lines
   - Rectangles
   - Circles
 - Modifier Keys like Shift and Ctrl
