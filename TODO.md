@@ -6,6 +6,7 @@
   - Circles
 - Modifier Keys like Shift and Ctrl
 - Mouse wheel support
+- Switching of game states
 - Quads
 - Image Atlas
 - Font Rendering
