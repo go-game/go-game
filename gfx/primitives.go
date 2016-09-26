@@ -30,10 +30,14 @@ func SetSmoothLines(b bool) {
 
 // RenderLines renders multiple lines for the given coords, coords must be an aven number of floats with alternating x and y coordinates.
 func RenderLines(coords ...float64) error {
-	if len(coords)%2 != 0 {
-		return fmt.Errorf("Can only render an even number of coords")
+	if len(coords)%4 != 0 {
+		return fmt.Errorf("Can only render an even number of x, y coords")
 	}
+	renderPoints(gl.LINES, coords...)
+	return nil
+}
 
+func renderPoints(mode uint32, coords ...float64) {
 	gl.LoadIdentity()
 	gl.LineWidth(lineWidth)
 	if smoothLines {
@@ -45,12 +49,24 @@ func RenderLines(coords ...float64) error {
 		gl.Disable(gl.LINE_SMOOTH)
 		gl.Disable(gl.POLYGON_SMOOTH)
 	}
-	gl.Begin(gl.LINES)
+
+	gl.Begin(mode)
 	for i := 0; i < len(coords); i += 2 {
 		gl.Color4d(lineR, lineG, lineB, lineA)
 		gl.Vertex3d(coords[i], -coords[i+1], 0)
 	}
 	gl.End()
+}
 
+// RenderPolygon renders a ploygon from the given coords. When closed is true, the last point will be connected to the first.
+func RenderPolygon(closed bool, coords ...float64) error {
+	if len(coords)%2 != 0 {
+		return fmt.Errorf("Can only render an even number of x, y coords")
+	}
+	var mode uint32 = gl.LINE_STRIP
+	if closed {
+		mode = gl.LINE_LOOP
+	}
+	renderPoints(mode, coords...)
 	return nil
 }
