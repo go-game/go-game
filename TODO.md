@@ -1,8 +1,6 @@
 # Todos
 
 ## Basic
-- Drawing of primitives
-  - Rectangles
 - Modifier Keys like Shift and Ctrl
 - All keys
 - Mouse wheel support

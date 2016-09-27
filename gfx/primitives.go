@@ -65,6 +65,11 @@ func RenderCircle(x, y, radius float64, segments int) {
 	RenderPolygon(true, coords...)
 }
 
+// RenderRectangle redners a rectangle for the given upper left and lower right corner.
+func RenderRectangle(x1, y1, x2, y2 float64) {
+	RenderPolygon(true, x1, y1, x1, y2, x2, y2, x2, y1)
+}
+
 func renderPoints(mode uint32, coords ...float64) {
 	gl.LoadIdentity()
 	gl.LineWidth(lineWidth)
