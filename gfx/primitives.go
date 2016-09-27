@@ -2,6 +2,7 @@ package gfx
 
 import (
 	"fmt"
+	"math"
 
 	"github.com/go-gl/gl/v2.1/gl"
 )
@@ -37,6 +38,33 @@ func RenderLines(coords ...float64) error {
 	return nil
 }
 
+// RenderPolygon renders a ploygon from the given coords. When closed is true, the last point will be connected to the first.
+func RenderPolygon(closed bool, coords ...float64) error {
+	if len(coords)%2 != 0 {
+		return fmt.Errorf("Can only render an even number of x, y coords")
+	}
+	var mode uint32 = gl.LINE_STRIP
+	if closed {
+		mode = gl.LINE_LOOP
+	}
+	renderPoints(mode, coords...)
+	return nil
+}
+
+// RenderCircle renders a cirlc at the given coordinates with the given radius and segments.
+func RenderCircle(x, y, radius float64, segments int) {
+	coords := make([]float64, segments*2)
+	diff := 2 * math.Pi / float64(segments)
+	angle := 0.0
+	for i := 0; i < segments*2; i += 2 {
+		coords[i] = math.Sin(angle)*radius + x
+		coords[i+1] = math.Cos(angle)*radius + y
+		angle += diff
+	}
+
+	RenderPolygon(true, coords...)
+}
+
 func renderPoints(mode uint32, coords ...float64) {
 	gl.LoadIdentity()
 	gl.LineWidth(lineWidth)
@@ -56,17 +84,4 @@ func renderPoints(mode uint32, coords ...float64) {
 		gl.Vertex3d(coords[i], -coords[i+1], 0)
 	}
 	gl.End()
-}
-
-// RenderPolygon renders a ploygon from the given coords. When closed is true, the last point will be connected to the first.
-func RenderPolygon(closed bool, coords ...float64) error {
-	if len(coords)%2 != 0 {
-		return fmt.Errorf("Can only render an even number of x, y coords")
-	}
-	var mode uint32 = gl.LINE_STRIP
-	if closed {
-		mode = gl.LINE_LOOP
-	}
-	renderPoints(mode, coords...)
-	return nil
 }

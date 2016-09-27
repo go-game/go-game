@@ -3,7 +3,6 @@
 ## Basic
 - Drawing of primitives
   - Rectangles
-  - Circles
 - Modifier Keys like Shift and Ctrl
 - All keys
 - Mouse wheel support
