@@ -7,13 +7,16 @@
 - Switching of game states
 - More/Better error handling
 - Better Documentation
+- Controller support
+- rework renderer, so that flipbook and primitives can be a renderer
 
 ## Advanced
 - Image Atlas
 - Font Rendering
 - Quads
-- Camera and View ports
-- Controller support
+- Camera and Viewports
+  - size and position
+  - filtering of offscreen renderers
 - Text input
 - mp3-Support
 
