@@ -24,12 +24,12 @@ func (i *Image) Delete() {
 
 // Width returns the width of the image in pixels.
 func (i *Image) Width() int {
-	return width
+	return i.width
 }
 
 // Height returns the height of the image in pixels.
 func (i *Image) Height() int {
-	return height
+	return i.height
 }
 
 func (i *Image) render(o *RenderOptions) {
@@ -58,5 +58,5 @@ func NewImage(file string) *Image {
 	height := rgba.Rect.Size().Y
 	tex := newTexture(width, height, rgba.Pix)
 
-	return &Image{tex: tex, width: rgba.Rect.Size().X, height: rgba.Rect.Size().Y}
+	return &Image{tex: tex, width: width, height: height}
 }
