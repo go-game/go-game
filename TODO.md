@@ -1,8 +1,6 @@
 # Todos
 
 ## Basic
-- Modifier Keys like Shift and Ctrl
-- All keys
 - Mouse wheel support
 - Switching of game states
 - More/Better error handling
