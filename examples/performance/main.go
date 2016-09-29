@@ -60,10 +60,12 @@ func render() {
 
 func update(delta time.Duration) {
 	if adding {
-		vx := (rand.Float64()*400 + 100) / float64(time.Second)
-		vy := (rand.Float64()*100 + 100) / float64(time.Second)
-		h := heart{RenderOptions: gfx.NewRenderOptions(), Vx: vx, Vy: vy}
-		hearts = append(hearts, &h)
+		for i := 0; i < rand.Intn(3); i++ {
+			vx := (rand.Float64()*400 + 100) / float64(time.Second)
+			vy := (rand.Float64()*100 + 100) / float64(time.Second)
+			h := heart{RenderOptions: gfx.NewRenderOptions(), Vx: vx, Vy: vy}
+			hearts = append(hearts, &h)
+		}
 	}
 
 	for _, h := range hearts {
