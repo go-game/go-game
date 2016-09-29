@@ -85,7 +85,6 @@ func update(delta time.Duration) {
 
 		h.Vy += G * float64(delta)
 		h.RenderOptions.Y += h.Vy * float64(delta)
-		// h.Vy = math.Min(h.Vy, VCAP)
 		if h.Vy > 0 {
 			d := HEIGHT - h.RenderOptions.Y - float64(image.Height())
 			if d < 0 {
