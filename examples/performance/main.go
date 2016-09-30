@@ -90,6 +90,9 @@ func update(delta time.Duration) {
 				h.Vy *= -1
 			}
 		}
+		if h.RenderOptions.Y > HEIGHT*2 {
+			h.RenderOptions.Y = -float64(image.Height())
+		}
 	}
 }
 
