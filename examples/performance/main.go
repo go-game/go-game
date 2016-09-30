@@ -10,7 +10,6 @@ import (
 	"git.mbuechmann.com/go-game/game"
 	"git.mbuechmann.com/go-game/gfx"
 	"git.mbuechmann.com/go-game/keys"
-	"git.mbuechmann.com/go-game/mouse"
 )
 
 type heart struct {
@@ -33,13 +32,12 @@ func main() {
 	desktop.OpenWindow(mode)
 
 	desktop.Run(&game.State{
-		InitFunc:          initGame,
-		CleanupFunc:       cleanup,
-		UpdateFunc:        update,
-		RenderFunc:        render,
-		OnKeyDown:         onKeyPress,
-		OnMouseButtonDown: onMouseButtonDown,
-		OnMouseButtonUp:   onMouseButtonUp,
+		InitFunc:    initGame,
+		CleanupFunc: cleanup,
+		UpdateFunc:  update,
+		RenderFunc:  render,
+		OnKeyDown:   onKeyDown,
+		OnKeyUp:     onKeyUp,
 	})
 }
 
@@ -95,16 +93,17 @@ func update(delta time.Duration) {
 	}
 }
 
-func onMouseButtonUp(b mouse.Button, x, y float32) {
-	adding = false
-}
-
-func onMouseButtonDown(b mouse.Button, x, y float32) {
-	adding = true
-}
-
-func onKeyPress(k keys.Key) {
+func onKeyDown(k keys.Key) {
 	if k == keys.Esc {
 		desktop.Exit()
+	}
+	if k == keys.Space {
+		adding = true
+	}
+}
+
+func onKeyUp(k keys.Key) {
+	if k == keys.Space {
+		adding = false
 	}
 }
