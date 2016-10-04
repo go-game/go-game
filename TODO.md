@@ -7,6 +7,7 @@
 - Better Documentation
 - Controller support
 - rework renderer, so that flipbook and primitives can be a renderer
+- Performance tuning, Remove unecessary open gl calls
 
 ## Advanced
 - Image Atlas
@@ -17,6 +18,7 @@
   - filtering of offscreen renderers
 - Text input
 - mp3-Support
+- MipMap-Support
 
 ## Sophisticated
 - Meshes with Textures
