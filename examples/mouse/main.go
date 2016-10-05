@@ -18,10 +18,10 @@ const pixelsize = 4
 
 func main() {
 	gameState := &game.State{
-		InitFunc:    initGame,
-		RenderFunc:  render,
-		UpdateFunc:  logic,
-		CleanupFunc: cleanupGame,
+		OnInit:      onInit,
+		OnRender:    onRender,
+		OnUpdate:    onUpdate,
+		OnCleanup:   cleanupGame,
 		OnMouseMove: onMouseMove,
 	}
 
@@ -37,18 +37,18 @@ func onMouseMove(x, y float64) {
 	renderOptions.Y = y / pixelsize
 }
 
-func logic(delta time.Duration) {
+func onUpdate(delta time.Duration) {
 	if keys.IsDown(keys.Esc) {
 		desktop.Exit()
 	}
 }
 
-func render() {
+func onRender() {
 	gfx.Clear()
 	gfx.Render(image, renderOptions)
 }
 
-func initGame() {
+func onInit() {
 	image = gfx.NewImage("assets/heart.png")
 }
 

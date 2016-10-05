@@ -34,15 +34,15 @@ func main() {
 	gfx.SetPixelSize(4)
 
 	desktop.Run(&game.State{
-		InitFunc:    initGame,
-		CleanupFunc: cleanup,
-		RenderFunc:  render,
-		UpdateFunc:  update,
-		OnKeyDown:   onKeyDown,
+		OnInit:    onInit,
+		OnCleanup: onCleanup,
+		OnRender:  render,
+		OnUpdate:  update,
+		OnKeyDown: onKeyDown,
 	})
 }
 
-func initGame() {
+func onInit() {
 	pages = [8]*gfx.Image{}
 	for i := 0; i < len(pages); i++ {
 		pages[i] = gfx.NewImage(fmt.Sprintf("assets/pointer/%d.png", i))
@@ -79,7 +79,7 @@ func initGame() {
 	renderOptions.Y = 100
 }
 
-func cleanup() {
+func onCleanup() {
 	for i := 0; i < len(pages); i++ {
 		pages[i].Delete()
 	}

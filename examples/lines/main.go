@@ -15,12 +15,12 @@ func main() {
 	gfx.SetClearColor(0.2, 0.2, 0.2, 1.0)
 
 	desktop.Run(&game.State{
-		RenderFunc: render,
-		OnKeyDown:  onKeyDown,
+		OnRender:  onRender,
+		OnKeyDown: onKeyDown,
 	})
 }
 
-func render() {
+func onRender() {
 	gfx.Clear()
 
 	gfx.SetSmoothLines(false)

@@ -13,10 +13,13 @@ func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
 	desktop.OpenWindow(mode)
 
-	desktop.Run(&game.State{RenderFunc: render, OnKeyDown: onKeyDown})
+	desktop.Run(&game.State{
+		OnRender:  onRender,
+		OnKeyDown: onKeyDown,
+	})
 }
 
-func render() {
+func onRender() {
 	gfx.Clear()
 	for i := 0; i < 12; i++ {
 		gfx.RenderCircle(100*float64(i+1), 100, 40, (i+2)*2)

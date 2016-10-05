@@ -19,19 +19,19 @@ func main() {
 	gfx.SetClearColor(0.5, 0.5, 0.5, 1.0)
 
 	desktop.Run(&game.State{
-		OnKeyDown:   onKeyDown,
-		RenderFunc:  render,
-		InitFunc:    initFunc,
-		CleanupFunc: cleanup,
+		OnKeyDown: onKeyDown,
+		OnRender:  render,
+		OnInit:    onInit,
+		OnCleanup: onCleanup,
 	})
 }
 
-func initFunc() {
+func onInit() {
 	image = gfx.NewImage("assets/grey.png")
 	renderOptions = gfx.NewRenderOptions()
 }
 
-func cleanup() {
+func onCleanup() {
 	image.Delete()
 }
 

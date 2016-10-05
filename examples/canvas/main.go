@@ -22,14 +22,14 @@ func main() {
 	gfx.SetPixelSize(4)
 
 	desktop.Run(&game.State{
-		InitFunc:    initGame,
-		CleanupFunc: cleanup,
-		RenderFunc:  render,
-		OnKeyDown:   onKeyDown,
+		OnInit:    onInit,
+		OnCleanup: onCleanup,
+		OnRender:  onRender,
+		OnKeyDown: onKeyDown,
 	})
 }
 
-func initGame() {
+func onInit() {
 	heart = gfx.NewImage("assets/heart.png")
 	grey = gfx.NewImage("assets/grey.png")
 
@@ -56,13 +56,13 @@ func initGame() {
 	gfx.Render(canvas, roCanvas)
 }
 
-func cleanup() {
+func onCleanup() {
 	heart.Delete()
 	grey.Delete()
 	canvas.Delete()
 }
 
-func render() {
+func onRender() {
 	gfx.Clear()
 
 	roImage.X = 200

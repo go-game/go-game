@@ -114,25 +114,25 @@ func Run(state *game.State) {
 		})
 	}
 
-	if state.InitFunc != nil {
-		state.InitFunc()
+	if state.OnInit != nil {
+		state.OnInit()
 	}
 	last := time.Now()
 	for !window.GlfwWindow.ShouldClose() {
-		if state.UpdateFunc != nil {
+		if state.OnUpdate != nil {
 			elapsed := time.Since(last)
 			last = time.Now()
-			state.UpdateFunc(elapsed)
+			state.OnUpdate(elapsed)
 		}
-		if state.RenderFunc != nil {
-			state.RenderFunc()
+		if state.OnRender != nil {
+			state.OnRender()
 		}
 		glfw.SwapInterval(1)
 		window.GlfwWindow.SwapBuffers()
 		glfw.PollEvents()
 	}
-	if state.CleanupFunc != nil {
-		state.CleanupFunc()
+	if state.OnCleanup != nil {
+		state.OnCleanup()
 	}
 	glfw.Terminate()
 }

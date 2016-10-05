@@ -32,31 +32,31 @@ func main() {
 	desktop.OpenWindow(mode)
 
 	desktop.Run(&game.State{
-		InitFunc:    initGame,
-		CleanupFunc: cleanup,
-		UpdateFunc:  update,
-		RenderFunc:  render,
-		OnKeyDown:   onKeyDown,
-		OnKeyUp:     onKeyUp,
+		OnInit:    onInit,
+		OnCleanup: onCleanup,
+		OnUpdate:  onUpdate,
+		OnRender:  onRender,
+		OnKeyDown: onKeyDown,
+		OnKeyUp:   onKeyUp,
 	})
 }
 
-func initGame() {
+func onInit() {
 	image = gfx.NewImage("assets/heart.png")
 }
 
-func cleanup() {
+func onCleanup() {
 	image.Delete()
 }
 
-func render() {
+func onRender() {
 	gfx.Clear()
 	for _, h := range hearts {
 		gfx.Render(image, h.RenderOptions)
 	}
 }
 
-func update(delta time.Duration) {
+func onUpdate(delta time.Duration) {
 	if adding {
 		for i := 0; i < rand.Intn(3); i++ {
 			vx := (rand.Float64()*400 + 100) / float64(time.Second)

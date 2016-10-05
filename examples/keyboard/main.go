@@ -19,12 +19,12 @@ const speed float64 = 100
 
 func main() {
 	gameState := &game.State{
-		InitFunc:    initGame,
-		RenderFunc:  render,
-		UpdateFunc:  logic,
-		CleanupFunc: cleanupGame,
-		OnKeyUp:     onKeyUp,
-		OnKeyDown:   onKeyDown,
+		OnInit:    onInit,
+		OnRender:  onRender,
+		OnUpdate:  onUpdate,
+		OnCleanup: onCleanup,
+		OnKeyUp:   onKeyUp,
+		OnKeyDown: onKeyDown,
 	}
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -68,21 +68,21 @@ func onKeyDown(k keys.Key) {
 	}
 }
 
-func logic(delta time.Duration) {
+func onUpdate(delta time.Duration) {
 	var seconds = (float64(delta) / 1000000000)
 	renderOptions.X += vX * seconds
 	renderOptions.Y += vY * seconds
 }
 
-func render() {
+func onRender() {
 	gfx.Clear()
 	gfx.Render(image, renderOptions)
 }
 
-func initGame() {
+func onInit() {
 	image = gfx.NewImage("assets/heart.png")
 }
 
-func cleanupGame() {
+func onCleanup() {
 	image.Delete()
 }

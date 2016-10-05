@@ -16,10 +16,13 @@ func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
 	desktop.OpenWindow(mode)
 
-	desktop.Run(&game.State{RenderFunc: render, OnKeyDown: onKeyDown})
+	desktop.Run(&game.State{
+		OnRender:  onRender,
+		OnKeyDown: onKeyDown,
+	})
 }
 
-func render() {
+func onRender() {
 	gfx.Clear()
 	gfx.RenderPolygon(false, coordsOpen...)
 	gfx.RenderPolygon(true, coordsClosed...)

@@ -24,15 +24,15 @@ func main() {
 	gfx.SetPixelSize(4)
 
 	desktop.Run(&game.State{
-		InitFunc:    initFunc,
-		CleanupFunc: cleanup,
-		UpdateFunc:  update,
-		OnKeyDown:   keyDown,
-		RenderFunc:  render,
+		OnInit:    onInit,
+		OnCleanup: onCleanup,
+		OnUpdate:  onUpdate,
+		OnKeyDown: keyDown,
+		OnRender:  onRender,
 	})
 }
 
-func initFunc() {
+func onInit() {
 	image = gfx.NewImage("assets/heart.png")
 	r1 := gfx.NewRenderOptions()
 	r1.X = 50
@@ -47,7 +47,7 @@ func initFunc() {
 	tween = animation.NewTween(r1, r2, 2*time.Second, 0, true)
 }
 
-func cleanup() {
+func onCleanup() {
 	image.Delete()
 }
 
@@ -60,13 +60,13 @@ func keyDown(k keys.Key) {
 	}
 }
 
-func render() {
+func onRender() {
 	gfx.Clear()
 	ro := tween.GetRenderOptions()
 	gfx.Render(image, ro)
 }
 
-func update(delta time.Duration) {
+func onUpdate(delta time.Duration) {
 	if running {
 		elapsed += delta
 		tween.Update(elapsed)

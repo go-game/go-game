@@ -1,8 +1,6 @@
 package main
 
 import (
-	"time"
-
 	"git.mbuechmann.com/go-game/audio"
 	"git.mbuechmann.com/go-game/desktop"
 	"git.mbuechmann.com/go-game/game"
@@ -14,10 +12,9 @@ var source *audio.Source
 
 func main() {
 	gameState := &game.State{
-		InitFunc:   initGame,
-		RenderFunc: render,
-		UpdateFunc: logic,
-		OnKeyDown:  onKeyDown,
+		OnInit:    onInit,
+		OnRender:  onRender,
+		OnKeyDown: onKeyDown,
 	}
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -28,7 +25,7 @@ func main() {
 
 }
 
-func initGame() {
+func onInit() {
 	data, err := audio.LoadData("assets/welcome.wav")
 	if err != nil {
 		panic(err)
@@ -41,7 +38,7 @@ func initGame() {
 
 }
 
-func render() {
+func onRender() {
 	gfx.Clear()
 }
 
@@ -49,8 +46,4 @@ func onKeyDown(k keys.Key) {
 	if k == keys.Esc {
 		desktop.Exit()
 	}
-}
-
-func logic(delta time.Duration) {
-
 }

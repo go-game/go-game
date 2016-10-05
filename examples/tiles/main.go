@@ -16,10 +16,10 @@ var tile2 *gfx.Image
 
 func main() {
 	gameState := &game.State{
-		InitFunc:    initGame,
-		RenderFunc:  render,
-		UpdateFunc:  logic,
-		CleanupFunc: cleanupGame,
+		OnInit:    onInit,
+		OnRender:  onRender,
+		OnUpdate:  onUpdate,
+		OnCleanup: onCleanup,
 	}
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -28,12 +28,12 @@ func main() {
 	desktop.Run(gameState)
 }
 
-func initGame() {
+func onInit() {
 	tile1 = gfx.NewImage("assets/tile1.png")
 	tile2 = gfx.NewImage("assets/tile2.png")
 }
 
-func render() {
+func onRender() {
 	gfx.Clear()
 
 	renderOptions1 := gfx.NewRenderOptions()
@@ -52,13 +52,13 @@ func render() {
 	}
 }
 
-func logic(elapsed time.Duration) {
+func onUpdate(elapsed time.Duration) {
 	if keys.IsDown(keys.Esc) {
 		desktop.Exit()
 	}
 }
 
-func cleanupGame() {
+func onCleanup() {
 	tile1.Delete()
 	tile2.Delete()
 }

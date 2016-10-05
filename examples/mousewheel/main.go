@@ -23,7 +23,7 @@ func main() {
 	gfx.SetPixelSize(4)
 
 	desktop.Run(&game.State{
-		RenderFunc:   render,
+		OnRender:     onRender,
 		OnKeyDown:    onKeyDown,
 		OnMouseWheel: onMouseWheel,
 	})
@@ -33,7 +33,7 @@ func onMouseWheel(x, y float64) {
 	height += y * 2
 }
 
-func render() {
+func onRender() {
 	gfx.Clear()
 	gfx.RenderRectangle(X, Y, X+WIDTH, Y+height)
 }
