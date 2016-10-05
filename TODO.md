@@ -1,7 +1,6 @@
 # Todos
 
 ## Basic
-- Mouse wheel support
 - Switching of game states
 - More/Better error handling
 - Better Documentation

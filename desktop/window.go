@@ -97,6 +97,12 @@ func Run(state *game.State) {
 		})
 	}
 
+	if state.OnMouseWheel != nil {
+		window.GlfwWindow.SetScrollCallback(func(w *glfw.Window, x, y float64) {
+			state.OnMouseWheel(x, y)
+		})
+	}
+
 	if state.OnKeyUp != nil || state.OnKeyDown != nil {
 		window.GlfwWindow.SetKeyCallback(func(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
 			if state.OnKeyUp != nil && action == glfw.Release {

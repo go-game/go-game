@@ -16,6 +16,7 @@ type State struct {
 	OnMouseMove       func(x, y float64)
 	OnMouseButtonUp   func(b mouse.Button, x, y float32)
 	OnMouseButtonDown func(b mouse.Button, x, y float32)
+	OnMouseWheel      func(x, y float64)
 	OnKeyUp           func(k keys.Key)
 	OnKeyDown         func(k keys.Key)
 }
