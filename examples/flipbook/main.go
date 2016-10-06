@@ -9,12 +9,11 @@ import (
 	"git.mbuechmann.com/go-game/desktop"
 	"git.mbuechmann.com/go-game/game"
 	"git.mbuechmann.com/go-game/gfx"
-	"git.mbuechmann.com/go-game/gfx/animation"
 	"git.mbuechmann.com/go-game/keys"
 )
 
 var (
-	flipBook      *animation.Flipbook
+	flipBook      *gfx.Flipbook
 	renderOptions *gfx.RenderOptions
 	pages         [8]*gfx.Image
 
@@ -23,7 +22,7 @@ var (
 	tickTock   *gfx.Image
 	roTickTock *gfx.RenderOptions
 
-	callback   animation.OnFlip
+	callback   gfx.OnFlip
 	showSounds bool
 )
 
@@ -55,16 +54,16 @@ func onInit() {
 	roTickTock.Y = 100
 
 	d := time.Second / 2
-	flipBook = animation.NewFlipbook(
+	flipBook = gfx.NewFlipbook(
 		true,
-		&animation.Page{Duration: d, Renderer: pages[0]},
-		&animation.Page{Duration: d, Renderer: pages[1]},
-		&animation.Page{Duration: d, Renderer: pages[2]},
-		&animation.Page{Duration: d, Renderer: pages[3]},
-		&animation.Page{Duration: d, Renderer: pages[4]},
-		&animation.Page{Duration: d, Renderer: pages[5]},
-		&animation.Page{Duration: d, Renderer: pages[6]},
-		&animation.Page{Duration: d, Renderer: pages[7]},
+		&gfx.Page{Duration: d, Renderer: pages[0]},
+		&gfx.Page{Duration: d, Renderer: pages[1]},
+		&gfx.Page{Duration: d, Renderer: pages[2]},
+		&gfx.Page{Duration: d, Renderer: pages[3]},
+		&gfx.Page{Duration: d, Renderer: pages[4]},
+		&gfx.Page{Duration: d, Renderer: pages[5]},
+		&gfx.Page{Duration: d, Renderer: pages[6]},
+		&gfx.Page{Duration: d, Renderer: pages[7]},
 	)
 
 	callback = func(page int) {
@@ -87,10 +86,7 @@ func onCleanup() {
 
 func render() {
 	gfx.Clear()
-	r := flipBook.CurrentRenderer()
-	if r != nil {
-		gfx.Render(r, renderOptions)
-	}
+	gfx.Render(flipBook, renderOptions)
 	if showSounds {
 		gfx.Render(tickTock, roTickTock)
 	}

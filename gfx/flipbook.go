@@ -1,9 +1,7 @@
-package animation
+package gfx
 
 import (
 	"time"
-
-	"git.mbuechmann.com/go-game/gfx"
 )
 
 // OnFlip is a callback that gets triggered when a page is changed.
@@ -13,7 +11,7 @@ type OnFlip func(page int)
 // Page represents one part of a Flipbook animation. May have nil as renderer for empty pages.
 type Page struct {
 	Duration time.Duration
-	Renderer gfx.Renderer
+	Renderer Renderer
 }
 
 // Flipbook represents a timed sequence of renderers.
@@ -66,11 +64,12 @@ func (fb *Flipbook) ClearPageListeners() {
 	fb.callbacks = []OnFlip{}
 }
 
-// CurrentRenderer returns the renderer to be currently rendered.
-func (fb *Flipbook) CurrentRenderer() gfx.Renderer {
-	return fb.currentPage().Renderer
-}
-
 func (fb *Flipbook) currentPage() *Page {
 	return fb.pages[fb.current]
+}
+
+func (fb *Flipbook) render(ro *RenderOptions) {
+	if fb.currentPage().Renderer != nil {
+		fb.currentPage().Renderer.render(ro)
+	}
 }

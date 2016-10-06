@@ -5,8 +5,7 @@
 - More/Better error handling
 - Better Documentation
 - Controller support
-- rework renderer, so that flipbook and primitives can be a renderer
-- Performance tuning, Remove unecessary open gl calls
+- Performance tuning, Remove unnecessary open gl calls
 
 ## Advanced
 - Image Atlas
