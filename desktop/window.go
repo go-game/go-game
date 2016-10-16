@@ -39,7 +39,6 @@ func FullscreenModes() []*Mode {
 
 	var modes = make([]*Mode, len(videoModes))
 	for i, m := range videoModes {
-		// modes = append(modes, &Mode{Width: m.Width, Height: m.Height, Fullscreen: true})
 		modes[i] = &Mode{Width: m.Width, Height: m.Height, Fullscreen: true}
 	}
 
