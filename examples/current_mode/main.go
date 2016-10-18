@@ -1,9 +1,12 @@
+// +build example
+
 package main
 
 import (
 	"fmt"
-	"git.mbuechmann.com/go-game/desktop"
 	"time"
+
+	"git.mbuechmann.com/go-game/desktop"
 )
 
 func main() {
