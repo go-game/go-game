@@ -7,10 +7,15 @@ type texture struct {
 	width, height float64
 }
 
+var currentlyBoundTextureID uint32
+
 func (t *texture) render(o *RenderOptions) {
 	gl.Enable(gl.TEXTURE_2D)
 
-	gl.BindTexture(gl.TEXTURE_2D, t.id)
+	if currentlyBoundTextureID != t.id {
+		gl.BindTexture(gl.TEXTURE_2D, t.id)
+		currentlyBoundTextureID = t.id
+	}
 
 	gl.Begin(gl.QUADS)
 
@@ -31,7 +36,10 @@ func (t *texture) render(o *RenderOptions) {
 	gl.Vertex3d(float64(t.width), 0, 0)
 
 	gl.End()
+}
 
+func (t *texture) delete() {
+	gl.DeleteTextures(1, &t.id)
 }
 
 func newTexture(width, height int, pixelData interface{}) *texture {

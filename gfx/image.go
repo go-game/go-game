@@ -6,8 +6,6 @@ import (
 	"image"
 	"image/draw"
 	"os"
-
-	"github.com/go-gl/gl/v2.1/gl"
 )
 
 // Image represents an image and can be rendered on the screen.
@@ -19,7 +17,7 @@ type Image struct {
 
 // Delete removes the image from memory.
 func (i *Image) Delete() {
-	gl.DeleteTextures(1, &i.tex.id)
+	i.tex.delete()
 }
 
 // Width returns the width of the image in pixels.
