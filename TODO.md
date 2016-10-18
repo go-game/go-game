@@ -5,7 +5,6 @@
 - More/Better error handling
 - Better Documentation
 - Controller support
-- Performance tuning, Remove unnecessary open gl calls
 
 ## Advanced
 - Image Atlas
