@@ -35,6 +35,8 @@ func NewCanvas(width, height int) (*Canvas, error) {
 
 // Render uses a renderer to put pixels onto the canvas.
 func (c *Canvas) Render(r Renderer, o *RenderOptions) {
+	activeCamera = nil
+
 	gl.Disable(gl.TEXTURE_2D)
 	gl.Disable(gl.BLEND)
 

@@ -43,7 +43,7 @@ type Scale struct {
 
 // Render uses a renderer to put pixels onto the screen directly.
 func Render(r Renderer, o *RenderOptions) {
-	activeCamera.Render(r, o)
+	mainCamera.Render(r, o)
 }
 
 // Clear clears the whole drawing area.
