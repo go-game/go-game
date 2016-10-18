@@ -3,6 +3,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"time"
 
@@ -26,6 +27,9 @@ const (
 var hearts []*heart
 var image *gfx.Image
 var adding bool
+
+var frames int
+var elapsed time.Duration
 
 func main() {
 	mode := &desktop.Mode{Width: WIDTH, Height: HEIGHT, Fullscreen: false}
@@ -54,11 +58,15 @@ func onRender() {
 	for _, h := range hearts {
 		gfx.Render(image, h.RenderOptions)
 	}
+	frames++
+	fmt.Printf("fps: %f\n", float64(frames)/float64(elapsed/time.Second))
+	fmt.Printf("#hearts: %d\n", len(hearts))
 }
 
 func onUpdate(delta time.Duration) {
+	elapsed += delta
 	if adding {
-		for i := 0; i < rand.Intn(3); i++ {
+		for i := 0; i < rand.Intn(30); i++ {
 			vx := (rand.Float64()*400 + 100) / float64(time.Second)
 			vy := (rand.Float64()*100 + 100) / float64(time.Second)
 			h := heart{RenderOptions: gfx.NewRenderOptions(), Vx: vx, Vy: vy}
