@@ -1,4 +1,2 @@
-/*
-Package audio manages the loading and playback of sound files.
-*/
+// Package audio manages the loading and playback of sound files.
 package audio
