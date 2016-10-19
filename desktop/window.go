@@ -43,19 +43,15 @@ func OpenWindow(m *Mode) *Window {
 }
 
 // Run starts the main game loop for the given game state by invocing all defined callbacks in the given game state.
-func Run(state *game.State) {
-	if window == nil {
-		panic("No open window for game state. Call OpenWindow() first")
-	}
-
+func (w *Window) Run(state *game.State) {
 	if state.OnMouseMove != nil {
-		window.GlfwWindow.SetCursorPosCallback(func(w *glfw.Window, xpos float64, ypos float64) {
+		w.GlfwWindow.SetCursorPosCallback(func(w *glfw.Window, xpos float64, ypos float64) {
 			state.OnMouseMove(xpos, ypos)
 		})
 	}
 
 	if state.OnMouseButtonUp != nil || state.OnMouseButtonDown != nil {
-		window.GlfwWindow.SetMouseButtonCallback(func(w *glfw.Window, button glfw.MouseButton, action glfw.Action, mod glfw.ModifierKey) {
+		w.GlfwWindow.SetMouseButtonCallback(func(w *glfw.Window, button glfw.MouseButton, action glfw.Action, mod glfw.ModifierKey) {
 			x, y := mouse.Position()
 			if state.OnMouseButtonUp != nil && action == glfw.Release {
 				state.OnMouseButtonUp(mouse.Button(button), x, y)
@@ -67,13 +63,13 @@ func Run(state *game.State) {
 	}
 
 	if state.OnMouseWheel != nil {
-		window.GlfwWindow.SetScrollCallback(func(w *glfw.Window, x, y float64) {
+		w.GlfwWindow.SetScrollCallback(func(w *glfw.Window, x, y float64) {
 			state.OnMouseWheel(x, y)
 		})
 	}
 
 	if state.OnKeyUp != nil || state.OnKeyDown != nil {
-		window.GlfwWindow.SetKeyCallback(func(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
+		w.GlfwWindow.SetKeyCallback(func(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
 			if state.OnKeyUp != nil && action == glfw.Release {
 				state.OnKeyUp(keys.Key(key))
 			}
@@ -87,7 +83,7 @@ func Run(state *game.State) {
 		state.OnInit()
 	}
 	last := time.Now()
-	for !window.GlfwWindow.ShouldClose() {
+	for !w.GlfwWindow.ShouldClose() {
 		if state.OnUpdate != nil {
 			elapsed := time.Since(last)
 			last = time.Now()
@@ -97,7 +93,7 @@ func Run(state *game.State) {
 			state.OnRender()
 		}
 		glfw.SwapInterval(1)
-		window.GlfwWindow.SwapBuffers()
+		w.GlfwWindow.SwapBuffers()
 		glfw.PollEvents()
 	}
 	if state.OnCleanup != nil {

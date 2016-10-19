@@ -33,9 +33,9 @@ var elapsed time.Duration
 
 func main() {
 	mode := &desktop.Mode{Width: WIDTH, Height: HEIGHT, Fullscreen: false}
-	desktop.OpenWindow(mode)
+	window := desktop.OpenWindow(mode)
 
-	desktop.Run(&game.State{
+	window.Run(&game.State{
 		OnInit:    onInit,
 		OnCleanup: onCleanup,
 		OnUpdate:  onUpdate,

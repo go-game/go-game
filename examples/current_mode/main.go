@@ -16,7 +16,7 @@ func main() {
 	fmt.Println("Switching to fullscreen in 3 seconds")
 	time.Sleep(3 * time.Second)
 	m := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: true}
-	desktop.OpenWindow(m)
+	window := desktop.OpenWindow(m)
 
 	mode = desktop.CurrentMode()
 	printMode(mode)

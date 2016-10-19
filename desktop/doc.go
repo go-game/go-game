@@ -6,9 +6,9 @@ To start a game you have to create a window with a mode and pass it a game state
 
 	func main() {
 		mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-		desktop.OpenWindow(mode)
+		window := desktop.OpenWindow(mode)
 
-		desktop.Run(&game.State{
+		window.Run(&game.State{
 			// define your callbacks here...
 		})
 	}

@@ -28,10 +28,10 @@ func main() {
 	}
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-	desktop.OpenWindow(mode)
+	window := desktop.OpenWindow(mode)
 	gfx.SetPixelSize(4)
 
-	desktop.Run(gameState)
+	window.Run(gameState)
 }
 
 func onKeyUp(k keys.Key) {

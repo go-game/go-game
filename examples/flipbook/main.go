@@ -28,11 +28,11 @@ var (
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-	desktop.OpenWindow(mode)
+	window := desktop.OpenWindow(mode)
 	gfx.SetClearColor(0.2, 0.2, 0.2, 1.0)
 	gfx.SetPixelSize(4)
 
-	desktop.Run(&game.State{
+	window.Run(&game.State{
 		OnInit:    onInit,
 		OnCleanup: onCleanup,
 		OnRender:  render,

@@ -14,9 +14,9 @@ var coordsClosed []float64 = []float64{310, 10, 400, 20, 550, 25, 530, 300, 340,
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-	desktop.OpenWindow(mode)
+	window := desktop.OpenWindow(mode)
 
-	desktop.Run(&game.State{
+	window.Run(&game.State{
 		OnRender:  onRender,
 		OnKeyDown: onKeyDown,
 	})

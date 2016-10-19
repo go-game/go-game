@@ -1,7 +1,6 @@
 # Todos
 
 ## Notes
-* Move Run func from desktop to Window
 * Make canvas use a camera
 * Add getters to mode for width, height and fullscreen?
 * Name params in all OnUpdate funcs either 'delta' or "elapsed"
