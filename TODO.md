@@ -2,9 +2,7 @@
 
 ## Notes
 * Move Run func from desktop to Window
-* Extract stuff to gfx/mode.go
 * Make canvas use a camera
-* Move CurrentMode() out of mode
 * Add getters to mode for width, height and fullscreen?
 * Name params in all OnUpdate funcs either 'delta' or "elapsed"
 * Activate the main camera in gfx.Clear()
