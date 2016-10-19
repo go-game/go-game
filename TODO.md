@@ -1,5 +1,7 @@
 # Todos
 
+This is a list of stuff I want to complete.
+
 ## Notes
 * Make canvas use a camera
 * Add getters to mode for width, height and fullscreen?
