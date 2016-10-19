@@ -72,7 +72,7 @@ func OpenWindow(m *Mode) *Window {
 	return window
 }
 
-// Run starts the main game loop for the given game state.
+// Run starts the main game loop for the given game state by invocing all defined callbacks in the given game state.
 func Run(state *game.State) {
 	if window == nil {
 		panic("No open window for game state. Call OpenWindow() first")
@@ -136,7 +136,7 @@ func Run(state *game.State) {
 	glfw.Terminate()
 }
 
-// Exit closes the game and cleans up.
+// Exit closes the game and calls the cleanup callbacks.
 func Exit() {
 	window.GlfwWindow.SetShouldClose(true)
 }

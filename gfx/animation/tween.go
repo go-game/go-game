@@ -6,7 +6,9 @@ import (
 	"git.mbuechmann.com/go-game/gfx"
 )
 
-// NewTween returns a new Tween for two RenderOptions
+// NewTween returns a new Tween for two RenderOptions, where start and end are the two RenderOptions to be interpolated.
+// offset indicates the duration after which the interpolation starts. looping indicates if the interpolation should go
+// back to the beginning when the end is reached.
 func NewTween(start, end *gfx.RenderOptions, duration time.Duration, offset time.Duration, looping bool) *Tween {
 	return &Tween{
 		start:    start,
@@ -18,7 +20,7 @@ func NewTween(start, end *gfx.RenderOptions, duration time.Duration, offset time
 	}
 }
 
-// Tween interpolates two RenderOptions over time
+// Tween interpolates two RenderOptions over time. Use NewTween() to create a new Tween.
 type Tween struct {
 	start    *gfx.RenderOptions
 	end      *gfx.RenderOptions
@@ -28,12 +30,12 @@ type Tween struct {
 	tweened  *gfx.RenderOptions
 }
 
-// GetRenderOptions returns the interpolated RenderOptions
+// GetRenderOptions returns the interpolated RenderOptions.
 func (t *Tween) GetRenderOptions() *gfx.RenderOptions {
 	return t.tweened
 }
 
-// Update updates the tweened RenderOptions
+// Update updates the tweened RenderOptions.
 func (t *Tween) Update(elapsed time.Duration) {
 	d := elapsed - t.offset
 
