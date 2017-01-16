@@ -1,9 +1,0 @@
-[submodule "vendor/github.com/go-gl/glfw"]
-	path = vendor/github.com/go-gl/glfw
-	url = https://github.com/go-gl/glfw
-[submodule "vendor/github.com/go-gl/gl"]
-	path = vendor/github.com/go-gl/gl
-	url = https://github.com/go-gl/gl
-[submodule "vendor/github.com/vova616/go-openal"]
-	path = vendor/github.com/vova616/go-openal
-	url = https://github.com/vova616/go-openal
