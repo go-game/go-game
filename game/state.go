@@ -3,6 +3,7 @@ package game
 import (
 	"time"
 
+	"git.mbuechmann.com/go-game/controller"
 	"git.mbuechmann.com/go-game/keys"
 	"git.mbuechmann.com/go-game/mouse"
 )
@@ -32,4 +33,8 @@ type State struct {
 	OnKeyDown func(k keys.Key)
 	// OnKeyUp gets called when the user releases a key on the keyboard, where k indicates which key is released.
 	OnKeyUp func(k keys.Key)
+	// OnControllerAdded gets called when a controller is added.
+	OnControllerAdded func(c *controller.Controller)
+	// OnControllerRemoved gets called when a controller is removed.
+	// OnControllerRemoved func(c *controller.Controller)
 }

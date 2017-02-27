@@ -1,13 +1,16 @@
 package desktop
 
 import (
+	"fmt"
 	"time"
 
+	"git.mbuechmann.com/go-game/controller"
 	"git.mbuechmann.com/go-game/game"
 	"git.mbuechmann.com/go-game/gfx"
 	"git.mbuechmann.com/go-game/keys"
 	"git.mbuechmann.com/go-game/mouse"
 	"github.com/go-gl/glfw/v3.1/glfw"
+	"github.com/veandco/go-sdl2/sdl"
 )
 
 var window *Window
@@ -84,6 +87,32 @@ func (w *Window) Run(state *game.State) {
 	}
 	last := time.Now()
 	for !w.GlfwWindow.ShouldClose() {
+		for event := sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
+			switch t := event.(type) {
+			case *sdl.ControllerButtonEvent:
+				if t.State == 1 {
+					fmt.Printf("Button %d of controller %d was pressed\n", t.Button, t.Which)
+				} else {
+					fmt.Printf("Button %d of controller %d was released\n", t.Button, t.Which)
+				}
+			case *sdl.ControllerAxisEvent:
+				fmt.Printf("Axis %d of controller %d moved to %d\n", t.Axis, t.Which, t.Value)
+			case *sdl.ControllerDeviceEvent:
+				if t.Type == sdl.CONTROLLERDEVICEADDED {
+					if state.OnControllerAdded != nil {
+						ctrl := controller.Open(int(t.Which))
+						state.OnControllerAdded(ctrl)
+					}
+				}
+				if t.Type == sdl.CONTROLLERDEVICEREMOVED {
+					fmt.Printf("Controller %d removed\n", t.Which)
+				}
+				if t.Type == sdl.CONTROLLERDEVICEREMAPPED {
+					fmt.Printf("Controller %d remapped\n", t.Which)
+				}
+			}
+		}
+
 		if state.OnUpdate != nil {
 			elapsed := time.Since(last)
 			last = time.Now()
