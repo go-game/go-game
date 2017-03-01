@@ -3,8 +3,6 @@
 package main
 
 import (
-	"time"
-
 	"git.mbuechmann.com/go-game/desktop"
 	"git.mbuechmann.com/go-game/game"
 	"git.mbuechmann.com/go-game/gfx"
@@ -20,9 +18,9 @@ func main() {
 	gameState := &game.State{
 		OnInit:      onInit,
 		OnRender:    onRender,
-		OnUpdate:    onUpdate,
 		OnCleanup:   cleanupGame,
 		OnMouseMove: onMouseMove,
+		OnKeyDown:   onKeyDown,
 	}
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -37,8 +35,8 @@ func onMouseMove(x, y float64) {
 	renderOptions.Y = y / pixelsize
 }
 
-func onUpdate(delta time.Duration) {
-	if keys.IsDown(keys.Esc) {
+func onKeyDown(k keys.Key) {
+	if k == keys.Esc {
 		desktop.Exit()
 	}
 }

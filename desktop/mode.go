@@ -1,6 +1,6 @@
 package desktop
 
-import 	"github.com/go-gl/glfw/v3.1/glfw"
+import "github.com/veandco/go-sdl2/sdl"
 
 // Mode represents the resolution of a window and whether it is fullscreen.
 type Mode struct {
@@ -11,23 +11,25 @@ type Mode struct {
 
 // FullscreenModes returns an array of all available fullscreen modes.
 func FullscreenModes() []*Mode {
-	monitor := glfw.GetPrimaryMonitor()
-	videoModes := monitor.GetVideoModes()
+	res := []*Mode{}
 
-	var modes = make([]*Mode, len(videoModes))
-	for i, m := range videoModes {
-		modes[i] = &Mode{Width: m.Width, Height: m.Height, Fullscreen: true}
+	alreadyIncluded := func(m *Mode) bool {
+		for _, mode := range res {
+			if mode.Width == m.Width && mode.Height == m.Height {
+				return true
+			}
+		}
+		return false
 	}
 
-	return modes
-}
-
-// CurrentMode returns the mode that is currently active.
-func CurrentMode() *Mode {
-	if window == nil {
-		monitor := glfw.GetPrimaryMonitor()
-		m := monitor.GetVideoMode()
-		return &Mode{Width: m.Width, Height: m.Height}
+	count, _ := sdl.GetNumDisplayModes(0)
+	for i := 0; i < count; i++ {
+		sdlMode := &sdl.DisplayMode{}
+		sdl.GetDisplayMode(0, i, sdlMode)
+		mode := &Mode{Width: int(sdlMode.W), Height: int(sdlMode.H), Fullscreen: true}
+		if !alreadyIncluded(mode) {
+			res = append(res, mode)
+		}
 	}
-	return window.mode
+	return res
 }
