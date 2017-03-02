@@ -77,7 +77,7 @@ func (w *Window) Run(state *game.State) {
 			switch t := event.(type) {
 			case *sdl.MouseMotionEvent:
 				if state.OnMouseMove != nil {
-					state.OnMouseMove(float64(t.X), float64(t.Y))
+					state.OnMouseMove(t.X, t.Y)
 				}
 			case *sdl.MouseButtonEvent:
 				if state.OnMouseButtonDown != nil && t.State == 1 {
@@ -88,7 +88,7 @@ func (w *Window) Run(state *game.State) {
 				}
 			case *sdl.MouseWheelEvent:
 				if state.OnMouseWheel != nil {
-					state.OnMouseWheel(float64(t.X), float64(t.Y))
+					state.OnMouseWheel(t.X, t.Y)
 				}
 			case *sdl.KeyDownEvent:
 				if state.OnKeyDown != nil {

@@ -30,9 +30,9 @@ func main() {
 	window.Run(gameState)
 }
 
-func onMouseMove(x, y float64) {
-	renderOptions.X = x / pixelsize
-	renderOptions.Y = y / pixelsize
+func onMouseMove(x, y int32) {
+	renderOptions.X = float64(x) / pixelsize
+	renderOptions.Y = float64(y) / pixelsize
 }
 
 func onKeyDown(k keys.Key) {

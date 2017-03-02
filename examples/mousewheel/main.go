@@ -15,7 +15,7 @@ const (
 	WIDTH = 20
 )
 
-var height float64
+var height int32
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -29,13 +29,13 @@ func main() {
 	})
 }
 
-func onMouseWheel(x, y float64) {
+func onMouseWheel(x, y int32) {
 	height += y * 2
 }
 
 func onRender() {
 	gfx.Clear()
-	gfx.RenderRectangle(X, Y, X+WIDTH, Y+height)
+	gfx.RenderRectangle(X, Y, X+WIDTH, float64(Y+height))
 }
 
 func onKeyDown(k keys.Key) {

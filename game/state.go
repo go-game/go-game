@@ -19,7 +19,7 @@ type State struct {
 	// OnCleanup gets called once when the game state exits. Put all your cleanuo stuff here, like deleting assets.
 	OnCleanup func()
 	// OnMouseMove gets called whenever the user moves the mouse, where x and y are the coordinates on the screen.
-	OnMouseMove func(x, y float64)
+	OnMouseMove func(x, y int32)
 	// OnMouseButtonDown gets called when the user presses a mouse button, where b indicates which button is pressed
 	// and s and y are the coordinates on the screen.
 	OnMouseButtonDown func(b mouse.Button, x, y float32)
@@ -28,7 +28,7 @@ type State struct {
 	OnMouseButtonUp func(b mouse.Button, x, y float32)
 	// OnMouseWheel gets called when the user scrolls with the mouse wheel or the touchpad, where x and y are the amounts
 	// by which the user scrolled horizontally and vertically.
-	OnMouseWheel func(x, y float64)
+	OnMouseWheel func(x, y int32)
 	// OnKeyDown gets called when the user pressed a key on the keyboard, where k indicates which key is pressed.
 	OnKeyDown func(k keys.Key)
 	// OnKeyUp gets called when the user releases a key on the keyboard, where k indicates which key is released.
