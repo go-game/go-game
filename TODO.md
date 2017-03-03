@@ -3,10 +3,12 @@
 This is a list of stuff I want to complete.
 
 ## Notes
+* Identify events by type and move callbacks to packages
 * Make canvas use a camera
 * Add getters to mode for width, height and fullscreen?
 * Name params in all OnUpdate funcs either 'delta' or "elapsed"
 * Activate the main camera in gfx.Clear()
+* Make window's border / resizability etc. configurable
 
 ## Basic
 - Switching of game states
