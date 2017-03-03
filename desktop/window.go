@@ -43,7 +43,7 @@ type Window struct {
 
 // OpenWindow creates a new window on the main monitor.
 func OpenWindow(m *Mode) *Window {
-	options := sdl.WINDOW_OPENGL | sdl.WINDOW_BORDERLESS
+	options := sdl.WINDOW_OPENGL
 	if m.Fullscreen {
 		options |= sdl.WINDOW_FULLSCREEN
 	}
@@ -75,6 +75,8 @@ func (w *Window) Run(state *game.State) {
 	for running {
 		for event := sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
 			switch t := event.(type) {
+			case *sdl.QuitEvent:
+				Exit()
 			case *sdl.MouseMotionEvent:
 				if state.OnMouseMove != nil {
 					state.OnMouseMove(t.X, t.Y)
