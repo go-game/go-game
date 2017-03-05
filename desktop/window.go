@@ -26,8 +26,8 @@ func CurrentMode() *Mode {
 	mode := &sdl.DisplayMode{}
 	sdl.GetCurrentDisplayMode(0, mode)
 	fullscreen := false
-	if window != nil && window.SDLWindow != nil {
-		flags := window.SDLWindow.GetFlags()
+	if window != nil && window.sdlWindow != nil {
+		flags := window.sdlWindow.GetFlags()
 		fullscreen = flags&sdl.WINDOW_FULLSCREEN == 1
 	}
 
@@ -37,8 +37,8 @@ func CurrentMode() *Mode {
 // Window is the os application frame where all the stuff will  happen.
 type Window struct {
 	mode      *Mode
-	SDLWindow *sdl.Window
-	GLContext sdl.GLContext
+	sdlWindow *sdl.Window
+	glContext sdl.GLContext
 }
 
 // OpenWindow creates a new window on the main monitor.
@@ -56,8 +56,12 @@ func OpenWindow(m *Mode) *Window {
 	if err != nil {
 		panic(err)
 	}
+	err = sdl.GL_SetSwapInterval(1)
+	if err != nil {
+		fmt.Println("Failed to enable vsync")
+	}
 
-	window = &Window{mode: m, SDLWindow: sdlWindow, GLContext: context}
+	window = &Window{mode: m, sdlWindow: sdlWindow, glContext: context}
 
 	gfx.SetArea(m.Width, m.Height)
 	mouse.Hide()
@@ -134,7 +138,7 @@ func (w *Window) Run(state *game.State) {
 		if state.OnRender != nil {
 			state.OnRender()
 		}
-		sdl.GL_SwapWindow(window.SDLWindow)
+		sdl.GL_SwapWindow(window.sdlWindow)
 	}
 	if state.OnCleanup != nil {
 		state.OnCleanup()
@@ -145,8 +149,8 @@ func (w *Window) Run(state *game.State) {
 func Exit() {
 	// TODO: Call cleanup of all packages
 
-	sdl.GL_DeleteContext(window.GLContext)
-	window.SDLWindow.Destroy()
+	sdl.GL_DeleteContext(window.glContext)
+	window.sdlWindow.Destroy()
 	sdl.Quit()
 	running = false
 }
