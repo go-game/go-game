@@ -35,7 +35,7 @@ func onMouseWheel(x, y int32) {
 
 func onRender() {
 	gfx.Clear()
-	gfx.RenderRectangle(X, Y, X+WIDTH, float64(Y+height))
+	gfx.RenderRectangle(false, X, Y, X+WIDTH, float64(Y+height))
 }
 
 func onKeyDown(k keys.Key) {

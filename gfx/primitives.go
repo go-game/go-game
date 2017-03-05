@@ -29,7 +29,7 @@ func SetSmoothLines(b bool) {
 	smoothLines = b
 }
 
-// RenderLines renders multiple lines for the given coords, coords must be an aven number of floats with alternating x and y coordinates.
+// RenderLines renders multiple lines for the given coords, coords must be an even number of floats with alternating x and y coordinates.
 func RenderLines(coords ...float64) error {
 	if len(coords)%4 != 0 {
 		return fmt.Errorf("Can only render an even number of x, y coords")
@@ -38,15 +38,17 @@ func RenderLines(coords ...float64) error {
 	return nil
 }
 
-// RenderPolygon renders a ploygon from the given coords. When closed is true, the last point will be connected to the first.
-func RenderPolygon(closed bool, coords ...float64) error {
+// RenderPolygon renders a polygon from the given coords. When filled is true, the shape will be filled with a solid color..
+func RenderPolygon(filled bool, coords ...float64) error {
 	if len(coords)%2 != 0 {
 		return fmt.Errorf("Can only render an even number of x, y coords")
 	}
-	var mode uint32 = gl.LINE_STRIP
-	if closed {
-		mode = gl.LINE_LOOP
+	if filled {
+		gl.PolygonMode(gl.FRONT_AND_BACK, gl.FILL)
+	} else {
+		gl.PolygonMode(gl.FRONT_AND_BACK, gl.LINE)
 	}
+	var mode uint32 = gl.POLYGON
 	renderPoints(mode, coords...)
 	return nil
 }
@@ -65,9 +67,9 @@ func RenderCircle(x, y, radius float64, segments int) {
 	RenderPolygon(true, coords...)
 }
 
-// RenderRectangle redners a rectangle for the given upper left and lower right corner.
-func RenderRectangle(x1, y1, x2, y2 float64) {
-	RenderPolygon(true, x1, y1, x1, y2, x2, y2, x2, y1)
+// RenderRectangle redners a rectangle for the given upper left and lower right corner. If filled is true the rectangle will be filled with a color.
+func RenderRectangle(filled bool, x1, y1, x2, y2 float64) {
+	RenderPolygon(filled, x1, y1, x1, y2, x2, y2, x2, y1)
 }
 
 func renderPoints(mode uint32, coords ...float64) {
