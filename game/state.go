@@ -15,7 +15,7 @@ type State struct {
 	// OnRender gets called periodically when things have to be rendered onto the screen.
 	OnRender func()
 	// OnUpdate gets calles periodically when your your game objects have to be updated. elapsed indicates the duration elapsed
-	OnUpdate func(elapsed time.Duration)
+	OnUpdate func(delta time.Duration)
 	// OnCleanup gets called once when the game state exits. Put all your cleanuo stuff here, like deleting assets.
 	OnCleanup func()
 	// OnMouseMove gets called whenever the user moves the mouse, where x and y are the coordinates on the screen.

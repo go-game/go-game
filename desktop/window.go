@@ -127,9 +127,9 @@ func (w *Window) Run(state *game.State) {
 		}
 
 		if state.OnUpdate != nil {
-			elapsed := time.Since(last)
+			delta := time.Since(last)
 			last = time.Now()
-			state.OnUpdate(elapsed)
+			state.OnUpdate(delta)
 		}
 		if state.OnRender != nil {
 			state.OnRender()
