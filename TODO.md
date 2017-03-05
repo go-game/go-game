@@ -3,7 +3,6 @@
 This is a list of stuff I want to complete.
 
 ## Notes
-* Identify events by type and move callbacks to packages
 * Make canvas use a camera
 * Add getters to mode for width, height and fullscreen?
 * Name params in all OnUpdate funcs either 'delta' or "elapsed"
