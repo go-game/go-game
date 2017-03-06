@@ -107,17 +107,13 @@ func (w *Window) Run(state *game.State) {
 					state.OnKeyUp(keys.Key(t.Keysym.Sym))
 				}
 			case *sdl.ControllerButtonEvent:
-				if t.State == 1 {
-					fmt.Printf("Button %d of controller %d was pressed\n", t.Button, t.Which)
-				} else {
-					fmt.Printf("Button %d of controller %d was released\n", t.Button, t.Which)
-				}
+				controller.DispatchButtonEvent(t.Which, t.Button, t.State)
 			case *sdl.ControllerAxisEvent:
-				fmt.Printf("Axis %d of controller %d moved to %d\n", t.Axis, t.Which, t.Value)
+				controller.DispatchAxisEvent(t.Which, t.Axis, t.Value)
 			case *sdl.ControllerDeviceEvent:
 				if t.Type == sdl.CONTROLLERDEVICEADDED {
+					ctrl := controller.Open(t.Which)
 					if state.OnControllerAdded != nil {
-						ctrl := controller.Open(int(t.Which))
 						state.OnControllerAdded(ctrl)
 					}
 				}

@@ -1,0 +1,24 @@
+package controller
+
+import "github.com/veandco/go-sdl2/sdl"
+
+// Button is a controller's button.
+type Button int
+
+const (
+	BUTTON_A             = Button(sdl.CONTROLLER_BUTTON_A)
+	BUTTON_B             = Button(sdl.CONTROLLER_BUTTON_B)
+	BUTTON_X             = Button(sdl.CONTROLLER_BUTTON_X)
+	BUTTON_Y             = Button(sdl.CONTROLLER_BUTTON_Y)
+	BUTTON_BACK          = Button(sdl.CONTROLLER_BUTTON_BACK)
+	BUTTON_GUIDE         = Button(sdl.CONTROLLER_BUTTON_GUIDE)
+	BUTTON_START         = Button(sdl.CONTROLLER_BUTTON_START)
+	BUTTON_LEFTSTICK     = Button(sdl.CONTROLLER_BUTTON_LEFTSTICK)
+	BUTTON_RIGHTSTICK    = Button(sdl.CONTROLLER_BUTTON_RIGHTSTICK)
+	BUTTON_LEFTSHOULDER  = Button(sdl.CONTROLLER_BUTTON_LEFTSHOULDER)
+	BUTTON_RIGHTSHOULDER = Button(sdl.CONTROLLER_BUTTON_RIGHTSHOULDER)
+	BUTTON_DPAD_UP       = Button(sdl.CONTROLLER_BUTTON_DPAD_UP)
+	BUTTON_DPAD_DOWN     = Button(sdl.CONTROLLER_BUTTON_DPAD_DOWN)
+	BUTTON_DPAD_LEFT     = Button(sdl.CONTROLLER_BUTTON_DPAD_LEFT)
+	BUTTON_DPAD_RIGHT    = Button(sdl.CONTROLLER_BUTTON_DPAD_RIGHT)
+)

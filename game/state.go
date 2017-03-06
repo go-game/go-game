@@ -36,5 +36,5 @@ type State struct {
 	// OnControllerAdded gets called when a controller is added.
 	OnControllerAdded func(c *controller.Controller)
 	// OnControllerRemoved gets called when a controller is removed.
-	// OnControllerRemoved func(c *controller.Controller)
+	OnControllerRemoved func(c *controller.Controller)
 }
