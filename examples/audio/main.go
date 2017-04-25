@@ -10,7 +10,7 @@ import (
 	"git.mbuechmann.com/go-game/keys"
 )
 
-var source *audio.Source
+var sound *audio.Sound
 
 func main() {
 	gameState := &game.State{
@@ -27,15 +27,11 @@ func main() {
 }
 
 func onInit() {
-	data, err := audio.LoadData("assets/welcome.wav")
+	var err error
+	sound, err = audio.NewSound("assets/welcome.wav")
 	if err != nil {
 		panic(err)
 	}
-
-	source = data.NewSource()
-
-	source.Play()
-	return
 }
 
 func onRender() {
@@ -45,5 +41,8 @@ func onRender() {
 func onKeyDown(k keys.Key) {
 	if k == keys.Esc {
 		desktop.Exit()
+	}
+	if k == keys.Space {
+		sound.Play()
 	}
 }
