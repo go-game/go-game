@@ -1,5 +1,6 @@
 package controller
 
+// Listener is used as a scaffold to listen to controller events.
 type Listener struct {
 	// OnButtonDown gets called when a button is pressed.
 	OnButtonDown func(b Button)
