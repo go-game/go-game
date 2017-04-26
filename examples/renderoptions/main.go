@@ -41,7 +41,7 @@ func render() {
 	topLimit := 300.0
 	yOff := 25.0
 
-	renderOptions.Y = 00.0
+	renderOptions.Y = 0.0
 	for x := 15.0; x < topLimit; x += 30.0 {
 		renderOptions.X = x
 		renderOptions.A = x / topLimit
