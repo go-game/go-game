@@ -1,11 +1,14 @@
 package audio
 
 import (
+	"fmt"
+
 	mix "github.com/veandco/go-sdl2/sdl_mixer"
 )
 
 type Sound struct {
-	c *mix.Chunk
+	c       *mix.Chunk
+	channel int
 }
 
 // NewSound open the file for the given filename and returns a Sound.
@@ -19,6 +22,12 @@ func NewSound(fileName string) (*Sound, error) {
 }
 
 // Play plays the sound.
-func (s *Sound) Play() {
-	s.c.Play(0, 0)
+func (s *Sound) Play() (err error) {
+	s.channel, err = s.c.Play(-1, 0)
+	fmt.Printf("channel: %d\n", s.channel)
+	return
+}
+
+func (s *Sound) setVolume(v float) {
+	s.c.Volume(int(v * mix.MAX_VOLUME))
 }
