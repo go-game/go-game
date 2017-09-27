@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"git.mbuechmann.com/go-game/desktop"
+	"github.com/mbuechmann/go-game/desktop"
 )
 
 func main() {

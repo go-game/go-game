@@ -3,7 +3,7 @@ package audio
 import (
 	"fmt"
 
-	mix "github.com/veandco/go-sdl2/sdl_mixer"
+	mix "github.com/veandco/go-sdl2/mix"
 )
 
 type Sound struct {
