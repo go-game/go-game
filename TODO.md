@@ -7,20 +7,22 @@ This is a list of stuff I want to complete.
 * Add getters to mode for width, height and fullscreen?
 * Activate the main camera in gfx.Clear()
 * Make window's border / resizability etc. configurable
+* Add texts to examples
 
 ## Basic
+- Controller support (example missing)
 - Switching of game states
 - More/Better error handling
 - Better Documentation
-- Controller support
+  - Wiki?
+  - Linux Documentation
+  - Windows Documentation
 
 ## Advanced
 - Image Atlas
-- Font Rendering
-- Quads
 - Camera and Viewports
   - size and position
-  - filtering of offscreen renderers
+  - filtering of off screen renderers
 - Text input
 - mp3-Support
 - MipMap-Support
