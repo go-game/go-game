@@ -69,7 +69,7 @@ func OpenWindow(m *Mode) *Window {
 	return window
 }
 
-// Run starts the main game loop for the given game state by invocing all defined callbacks in the given game state.
+// Run starts the main game loop for the given game state by invoking all defined callbacks in the given game state.
 func (w *Window) Run(state *game.State) {
 	if state.OnInit != nil {
 		state.OnInit()
