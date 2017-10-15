@@ -1,6 +1,7 @@
 package animation
 
 import (
+	"math"
 	"time"
 
 	"github.com/mbuechmann/go-game/gfx"
@@ -17,6 +18,7 @@ func NewTween(start, end *gfx.RenderOptions, duration time.Duration, offset time
 		offset:   offset,
 		looping:  looping,
 		tweened:  &gfx.RenderOptions{},
+		progress: -offset,
 	}
 }
 
@@ -26,6 +28,7 @@ type Tween struct {
 	end      *gfx.RenderOptions
 	duration time.Duration
 	offset   time.Duration
+	progress time.Duration
 	looping  bool
 	tweened  *gfx.RenderOptions
 }
@@ -35,25 +38,27 @@ func (t *Tween) GetRenderOptions() *gfx.RenderOptions {
 	return t.tweened
 }
 
+// Finished indicates if the animation is at the end.
+func (t *Tween) Finished() bool {
+	if t.looping {
+		return false
+	}
+	return t.progress >= t.duration
+}
+
 // Update updates the tweened RenderOptions.
-func (t *Tween) Update(elapsed time.Duration) {
-	d := elapsed - t.offset
+func (t *Tween) Update(delta time.Duration) {
+	t.progress += delta
 
 	if t.looping {
-		d %= t.duration
-		if d < 0 {
-			d += t.duration
-		}
+		t.progress %= t.duration
 	} else {
-		if elapsed >= t.offset+t.duration {
-			d = t.offset + t.duration
-		}
-		if elapsed < t.offset {
-			d = 0
+		if t.progress > t.duration {
+			t.progress = t.duration
 		}
 	}
 
-	f1 := 1 - float64(d)/float64(t.duration)
+	f1 := 1 - math.Max(0.0, float64(t.progress))/float64(t.duration)
 	f2 := 1 - f1
 
 	t.tweened.X = t.start.X*f1 + t.end.X*f2

@@ -12,9 +12,10 @@ import (
 	"github.com/mbuechmann/go-game/keys"
 )
 
+const offset time.Duration = 0
+
 var image *gfx.Image
 var tween *animation.Tween
-var elapsed time.Duration = 0
 var running = true
 
 func main() {
@@ -44,7 +45,7 @@ func onInit() {
 	r2.Y = 216
 	r2.Rot = gfx.Rotation{Angle: 360, X: 8, Y: 8}
 	r2.Scale = gfx.Scale{Factor: 5, X: 8, Y: 8}
-	tween = animation.NewTween(r1, r2, 2*time.Second, 0, true)
+	tween = animation.NewTween(r1, r2, 2*time.Second, offset, true)
 }
 
 func onCleanup() {
@@ -68,7 +69,6 @@ func onRender() {
 
 func onUpdate(delta time.Duration) {
 	if running {
-		elapsed += delta
-		tween.Update(elapsed)
+		tween.Update(delta)
 	}
 }
