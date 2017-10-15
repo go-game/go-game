@@ -11,12 +11,17 @@ This is a list of stuff I want to complete.
 
 ## Basic
 - Controller support (example missing)
+- Choose interpolation type of texture
 - Switching of game states
 - More/Better error handling
 - Better Documentation
   - Wiki?
   - Linux Documentation
   - Windows Documentation
+- Timer
+  - Pause / Play
+  - Updates connected entities when updated itself
+  - Factor for slower/faster playback
 
 ## Advanced
 - Image Atlas
