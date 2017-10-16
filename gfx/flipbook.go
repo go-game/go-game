@@ -1,8 +1,6 @@
 package gfx
 
-import (
-	"time"
-)
+import "time"
 
 // OnFlip is a callback that gets triggered when a page is changed.
 // The param page is the page number of the new page.
@@ -36,7 +34,7 @@ func NewFlipbook(l bool, pages ...*Page) *Flipbook {
 
 // Update updates increases the elapsed time and sets the current renderer for rendering.
 func (fb *Flipbook) Update(delta time.Duration) {
-	if !fb.looping && fb.current >= len(fb.pages)-1 {
+	if fb.Finished() {
 		return
 	}
 
@@ -44,14 +42,28 @@ func (fb *Flipbook) Update(delta time.Duration) {
 
 	for fb.elapsed >= fb.currentPage().Duration {
 		fb.elapsed -= fb.currentPage().Duration
+
 		fb.current++
 		for _, cb := range fb.callbacks {
 			cb(fb.current)
 		}
-		if fb.current >= len(fb.pages) {
+		if fb.looping && fb.current >= len(fb.pages) {
 			fb.current = 0
 		}
 	}
+}
+
+// Finished indicates if the flipbook is at the end
+func (fb *Flipbook) Finished() bool {
+	if fb.looping {
+		return false
+	}
+	return fb.current >= len(fb.pages)
+}
+
+// Reset resets the Flipbook to the firt frame
+func (fb *Flipbook) Reset() {
+	fb.current = 0
 }
 
 // AddPageListener adds a callback that will be called when the page is changed.
@@ -65,7 +77,11 @@ func (fb *Flipbook) ClearPageListeners() {
 }
 
 func (fb *Flipbook) currentPage() *Page {
-	return fb.pages[fb.current]
+	i := fb.current
+	if len(fb.pages)-1 < i {
+		i = len(fb.pages) - 1
+	}
+	return fb.pages[i]
 }
 
 func (fb *Flipbook) render(ro *RenderOptions) {
