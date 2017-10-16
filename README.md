@@ -1,14 +1,14 @@
 # go-game
 
-A 2d game framwork for the go programming language.
+A 2d game framework for the go programming language.
 
 ## Installation
 ```bash
-go get -v github.com/go-gl/gl/v2.1/gl
-go get -v github.com/veandco/go-sdl2/sdl
-go get -v github.com/veandco/go-sdl2/img
-go get -v github.com/veandco/go-sdl2/mix
-go get -v github.com/veandco/go-sdl2/ttf
+go get -u -v github.com/go-gl/gl/v2.1/gl
+go get -u -v github.com/veandco/go-sdl2/sdl
+go get -u -v github.com/veandco/go-sdl2/img
+go get -u -v github.com/veandco/go-sdl2/mix
+go get -u -v github.com/veandco/go-sdl2/ttf
 ```
 
 ## Notes for OS X
