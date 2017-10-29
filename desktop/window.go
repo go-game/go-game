@@ -9,6 +9,7 @@ import (
 	"github.com/mbuechmann/go-game/gfx"
 	"github.com/mbuechmann/go-game/keys"
 	"github.com/mbuechmann/go-game/mouse"
+	"github.com/veandco/go-sdl2/mix"
 	"github.com/veandco/go-sdl2/sdl"
 )
 
@@ -145,6 +146,7 @@ func (w *Window) Run(state *game.State) {
 func Exit() {
 	// TODO: Call cleanup of all packages
 
+	mix.CloseAudio()
 	sdl.GL_DeleteContext(window.glContext)
 	window.sdlWindow.Destroy()
 	sdl.Quit()
