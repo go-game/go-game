@@ -1,6 +1,8 @@
 package gfx
 
-import "github.com/go-gl/gl/v2.1/gl"
+import (
+	"github.com/go-gl/gl/v2.1/gl"
+)
 
 type texture struct {
 	id            uint32
@@ -42,7 +44,24 @@ func (t *texture) delete() {
 	gl.DeleteTextures(1, &t.id)
 }
 
-func newTexture(width, height int, pixelData interface{}) *texture {
+func newTexture(width, height int, pixelData []byte) *texture {
+	numBytes := width * height / len(pixelData)
+
+	format := gl.RGBA
+	switch numBytes {
+	case 1:
+		format = gl.ALPHA
+		for i, p := range pixelData {
+			if p > 0 {
+				pixelData[i] *= 255
+			}
+		}
+	case 3:
+		format = gl.RGB
+	case 4:
+		format = gl.RGBA
+	}
+
 	var id uint32
 	gl.Enable(gl.TEXTURE_2D)
 	gl.GenTextures(1, &id)
@@ -54,11 +73,11 @@ func newTexture(width, height int, pixelData interface{}) *texture {
 	gl.TexImage2D(
 		gl.TEXTURE_2D,
 		0,
-		gl.RGBA,
+		int32(format),
 		int32(width),
 		int32(height),
 		0,
-		gl.RGBA,
+		uint32(format),
 		gl.UNSIGNED_BYTE,
 		gl.Ptr(pixelData))
 	return &texture{id: id, width: float64(width), height: float64(height)}

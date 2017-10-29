@@ -10,6 +10,7 @@ This is a list of stuff I want to complete.
 * Add texts to examples
 
 ## Basic
+- Font text rendering has bad performance
 - Controller support (example missing)
 - Choose interpolation type of texture
 - Switching of game states

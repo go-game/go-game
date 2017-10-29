@@ -26,6 +26,7 @@ type Font struct {
 	Italic        bool
 	Underline     bool
 	Strikethrough bool
+	Antialiased   bool
 	sdlFont       *ttf.Font
 	sdlColor      sdl.Color
 }
@@ -39,7 +40,7 @@ func (f *Font) Size(text string) (x, y int, err error) {
 func (f *Font) Render(text string) (*Image, error) {
 	style := 0
 	if f.Bold {
-		style += 1
+		style++
 	}
 	if f.Italic {
 		style += 2
@@ -52,7 +53,15 @@ func (f *Font) Render(text string) (*Image, error) {
 	}
 	f.sdlFont.SetStyle(style)
 
-	sdlSurface, err := f.sdlFont.RenderUTF8_Blended(text, fontColor)
+	var sdlSurface *sdl.Surface
+	var err error
+
+	if f.Antialiased {
+		sdlSurface, err = f.sdlFont.RenderUTF8_Blended(text, fontColor)
+	} else {
+		sdlSurface, err = f.sdlFont.RenderUTF8_Solid(text, fontColor)
+	}
+
 	if err != nil {
 		return nil, err
 	}
