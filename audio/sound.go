@@ -6,6 +6,7 @@ import (
 	mix "github.com/veandco/go-sdl2/mix"
 )
 
+// Sound represents a loaded sound file that can be played back.
 type Sound struct {
 	c       *mix.Chunk
 	channel int
@@ -28,6 +29,12 @@ func (s *Sound) Play() (err error) {
 	return
 }
 
-func (s *Sound) setVolume(v float) {
+// Delete deletes the sound from memory.
+func (s *Sound) Delete() {
+	mix.ExpireChannel(s.channel, 0)
+	s.c.Free()
+}
+
+func (s *Sound) setVolume(v float64) {
 	s.c.Volume(int(v * mix.MAX_VOLUME))
 }
