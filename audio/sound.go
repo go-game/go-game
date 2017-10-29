@@ -1,8 +1,6 @@
 package audio
 
 import (
-	"fmt"
-
 	mix "github.com/veandco/go-sdl2/mix"
 )
 
@@ -25,7 +23,6 @@ func NewSound(fileName string) (*Sound, error) {
 // Play plays the sound.
 func (s *Sound) Play() (err error) {
 	s.channel, err = s.c.Play(-1, 0)
-	fmt.Printf("channel: %d\n", s.channel)
 	return
 }
 
