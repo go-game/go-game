@@ -19,7 +19,7 @@ type Canvas struct {
 func NewCanvas(width, height int) (*Canvas, error) {
 	c := Canvas{width: int32(width), height: int32(height)}
 
-	c.tex = newTexture(width, height, nil)
+	c.tex = newTexture(width, height, make([]byte, width, height*4))
 
 	gl.GenFramebuffersEXT(1, &c.frameBufferID)
 	gl.BindFramebufferEXT(gl.FRAMEBUFFER_EXT, c.frameBufferID)
