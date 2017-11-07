@@ -17,6 +17,10 @@ type Canvas struct {
 
 // NewCanvas returns a new canvas.
 func NewCanvas(width, height int) (*Canvas, error) {
+	if !CanvasAvailable() {
+		return nil, fmt.Errorf("Cannot use Canvas: Framebuffer not supported")
+	}
+
 	c := Canvas{width: int32(width), height: int32(height)}
 
 	c.tex = newTexture(width, height, make([]byte, width, height*4))
@@ -25,12 +29,13 @@ func NewCanvas(width, height int) (*Canvas, error) {
 	gl.BindFramebufferEXT(gl.FRAMEBUFFER_EXT, c.frameBufferID)
 	gl.FramebufferTexture2DEXT(gl.FRAMEBUFFER_EXT, gl.COLOR_ATTACHMENT0_EXT, gl.TEXTURE_2D, c.tex.id, 0)
 
-	status := gl.CheckFramebufferStatusEXT(gl.FRAMEBUFFER_EXT)
-	if status != gl.FRAMEBUFFER_COMPLETE_EXT {
-		return nil, fmt.Errorf("Cannot use Canvas: Framebuffer not supported")
-	}
-
 	return &c, nil
+}
+
+// CanvasAvailable returns if the hardware supports a canvas.
+func CanvasAvailable() bool {
+	status := gl.CheckFramebufferStatusEXT(gl.FRAMEBUFFER_EXT)
+	return status == gl.FRAMEBUFFER_COMPLETE_EXT
 }
 
 // Render uses a renderer to put pixels onto the canvas.
