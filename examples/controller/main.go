@@ -5,11 +5,11 @@ package main
 import (
 	"fmt"
 
-	"github.com/mbuechmann/go-game/controller"
-	"github.com/mbuechmann/go-game/desktop"
-	"github.com/mbuechmann/go-game/game"
-	"github.com/mbuechmann/go-game/gfx"
-	"github.com/mbuechmann/go-game/keys"
+	"github.com/go-game/go-game/controller"
+	"github.com/go-game/go-game/desktop"
+	"github.com/go-game/go-game/game"
+	"github.com/go-game/go-game/gfx"
+	"github.com/go-game/go-game/keys"
 )
 
 func main() {

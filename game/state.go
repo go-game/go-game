@@ -3,9 +3,9 @@ package game
 import (
 	"time"
 
-	"github.com/mbuechmann/go-game/controller"
-	"github.com/mbuechmann/go-game/keys"
-	"github.com/mbuechmann/go-game/mouse"
+	"github.com/go-game/go-game/controller"
+	"github.com/go-game/go-game/keys"
+	"github.com/go-game/go-game/mouse"
 )
 
 // State is used as a scaffold to generate a new game.

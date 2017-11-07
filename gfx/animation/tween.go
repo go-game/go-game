@@ -4,7 +4,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/mbuechmann/go-game/gfx"
+	"github.com/go-game/go-game/gfx"
 )
 
 // NewTween returns a new Tween for two RenderOptions, where start and end are the two RenderOptions to be interpolated.

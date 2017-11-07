@@ -3,10 +3,10 @@
 package main
 
 import (
-	"github.com/mbuechmann/go-game/desktop"
-	"github.com/mbuechmann/go-game/game"
-	"github.com/mbuechmann/go-game/gfx"
-	"github.com/mbuechmann/go-game/keys"
+	"github.com/go-game/go-game/desktop"
+	"github.com/go-game/go-game/game"
+	"github.com/go-game/go-game/gfx"
+	"github.com/go-game/go-game/keys"
 )
 
 var coordsOpen []float64 = []float64{10, 10, 100, 20, 250, 25, 230, 300, 40, 280}

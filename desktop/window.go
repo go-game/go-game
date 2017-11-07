@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/mbuechmann/go-game/controller"
-	"github.com/mbuechmann/go-game/game"
-	"github.com/mbuechmann/go-game/gfx"
-	"github.com/mbuechmann/go-game/keys"
-	"github.com/mbuechmann/go-game/mouse"
+	"github.com/go-game/go-game/controller"
+	"github.com/go-game/go-game/game"
+	"github.com/go-game/go-game/gfx"
+	"github.com/go-game/go-game/keys"
+	"github.com/go-game/go-game/mouse"
 	"github.com/veandco/go-sdl2/mix"
 	"github.com/veandco/go-sdl2/sdl"
 )

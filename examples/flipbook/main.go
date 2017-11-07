@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/mbuechmann/go-game/desktop"
-	"github.com/mbuechmann/go-game/game"
-	"github.com/mbuechmann/go-game/gfx"
-	"github.com/mbuechmann/go-game/keys"
+	"github.com/go-game/go-game/desktop"
+	"github.com/go-game/go-game/game"
+	"github.com/go-game/go-game/gfx"
+	"github.com/go-game/go-game/keys"
 )
 
 var (
