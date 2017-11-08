@@ -9,8 +9,9 @@ func init() {
 }
 
 var clearR, clearG, clearB, clearA float32
+var currentCamera *Camera
 
-// Renderer imlpements render to put pixels on the screen.
+// Renderer implements render to put pixels on the screen.
 type Renderer interface {
 	render(o *RenderOptions)
 }
@@ -41,9 +42,19 @@ type Scale struct {
 	Y      float64
 }
 
+// SetPixelSize scales all graphics by the given factor.
+func SetPixelSize(size int) {
+	currentCamera.SetPixelSize(size)
+}
+
+// SetCamera sets the currently used Camera.
+func SetCamera(c *Camera) {
+	currentCamera = c
+}
+
 // Render uses a renderer to put pixels onto the screen directly.
 func Render(r Renderer, o *RenderOptions) {
-	mainCamera.Render(r, o)
+	currentCamera.Render(r, o)
 }
 
 // Clear clears the whole drawing area.

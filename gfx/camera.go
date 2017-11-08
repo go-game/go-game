@@ -7,13 +7,13 @@ var activeCamera *Camera
 // Camera represents an area on the screen.
 type Camera struct {
 	pixelSize     int
-	x, y          int32
-	width, height int
+	X, Y          int32
+	Width, Height int
 }
 
 // NewCamera returns a new Camera
 func NewCamera(w, h int) *Camera {
-	c := Camera{width: w, height: h, pixelSize: 1}
+	c := Camera{Width: w, Height: h, pixelSize: 1}
 	c.setGLViewPort()
 	return &c
 }
@@ -41,13 +41,13 @@ func (c *Camera) setGLViewPort() {
 
 	gl.MatrixMode(gl.PROJECTION)
 	gl.LoadIdentity()
-	gl.Ortho(0, float64(c.width/c.pixelSize), -float64(c.height/c.pixelSize), 0, -1, 1)
+	gl.Ortho(0, float64(c.Width/c.pixelSize), -float64(c.Height/c.pixelSize), 0, -1, 1)
 	// This is for retina stuff on macs
 	// var c.width, c.height = desktop.CurrentWindow.GlfwWindow.GetFramebufferSize()
 	// fX, fY := int32(width/desktop.CurrentWindow.Mode.Width), int32(height/desktop.CurrentWindow.Mode.Height)
 	fX, fY := 1, 1
 	gl.BindFramebuffer(gl.FRAMEBUFFER, 0)
-	gl.Viewport(c.x, c.y, int32(c.width*fX), int32(c.height*fY))
+	gl.Viewport(c.X, c.Y, int32(c.Width*fX), int32(c.Height*fY))
 
 	gl.MatrixMode(gl.MODELVIEW)
 }
