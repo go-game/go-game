@@ -69,7 +69,7 @@ func (c *Canvas) Delete() {
 
 // Clear clears the canvas
 func (c *Canvas) Clear() {
-	gl.Viewport(0, 0, c.width, c.height) // needed?
+	gl.Viewport(0, 0, c.width, c.height)
 	gl.ClearColor(0.0, 0.0, 0.0, 0.0)
 	gl.ClearDepth(1.0)
 	gl.Clear(gl.COLOR_BUFFER_BIT)
