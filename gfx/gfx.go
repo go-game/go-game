@@ -21,6 +21,11 @@ func SetPixelSize(size int) {
 	currentCamera.SetPixelSize(size)
 }
 
+// CurrentCamera returns the currently used Camera.
+func CurrentCamera() *Camera {
+	return currentCamera
+}
+
 // SetCamera sets the currently used Camera.
 func SetCamera(c *Camera) {
 	currentCamera = c
