@@ -18,15 +18,15 @@ func NewCamera(w, h int) *Camera {
 	return &c
 }
 
-// Render renders the given Renderer with the given RenderOptions.
-func (c *Camera) Render(r Renderer, o *RenderOptions) {
+// Render renders the given Renderer with the given Params.
+func (c *Camera) Render(r Renderer, p *Params) {
 	if activeCamera != c {
 		c.setGLViewPort()
 		activeCamera = c
 	}
 	gl.LoadIdentity()
-	transform(o)
-	r.render(o)
+	transform(p)
+	r.render(p)
 }
 
 // SetPixelSize scales all graphics by the given factor.

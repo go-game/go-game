@@ -7,34 +7,34 @@ import (
 	"github.com/go-game/go-game/gfx"
 )
 
-// NewTween returns a new Tween for two RenderOptions, where start and end are the two RenderOptions to be interpolated.
+// NewTween returns a new Tween for two Params, where start and end are the two Params to be interpolated.
 // offset indicates the duration after which the interpolation starts. looping indicates if the interpolation should go
 // back to the beginning when the end is reached.
-func NewTween(start, end *gfx.RenderOptions, duration time.Duration, offset time.Duration, looping bool) *Tween {
+func NewTween(start, end *gfx.Params, duration time.Duration, offset time.Duration, looping bool) *Tween {
 	return &Tween{
 		start:    start,
 		end:      end,
 		duration: duration,
 		offset:   offset,
 		looping:  looping,
-		tweened:  &gfx.RenderOptions{},
+		tweened:  &gfx.Params{},
 		progress: -offset,
 	}
 }
 
-// Tween interpolates two RenderOptions over time. Use NewTween() to create a new Tween.
+// Tween interpolates two Params over time. Use NewTween() to create a new Tween.
 type Tween struct {
-	start    *gfx.RenderOptions
-	end      *gfx.RenderOptions
+	start    *gfx.Params
+	end      *gfx.Params
 	duration time.Duration
 	offset   time.Duration
 	progress time.Duration
 	looping  bool
-	tweened  *gfx.RenderOptions
+	tweened  *gfx.Params
 }
 
-// GetRenderOptions returns the interpolated RenderOptions.
-func (t *Tween) GetRenderOptions() *gfx.RenderOptions {
+// GetParams returns the interpolated Params.
+func (t *Tween) GetParams() *gfx.Params {
 	return t.tweened
 }
 
@@ -46,7 +46,7 @@ func (t *Tween) Finished() bool {
 	return t.progress >= t.duration
 }
 
-// Update updates the tweened RenderOptions.
+// Update updates the tweened Params.
 func (t *Tween) Update(delta time.Duration) {
 	t.progress += delta
 

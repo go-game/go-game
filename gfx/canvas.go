@@ -41,7 +41,7 @@ func CanvasAvailable() bool {
 }
 
 // Render uses a renderer to put pixels onto the canvas.
-func (c *Canvas) Render(r Renderer, o *RenderOptions) {
+func (c *Canvas) Render(r Renderer, p *Params) {
 	activeCamera = nil
 
 	gl.Disable(gl.TEXTURE_2D)
@@ -53,9 +53,9 @@ func (c *Canvas) Render(r Renderer, o *RenderOptions) {
 
 	gl.MatrixMode(gl.MODELVIEW)
 
-	transform(o)
+	transform(p)
 
-	r.render(o)
+	r.render(p)
 
 	gl.BindFramebufferEXT(gl.FRAMEBUFFER_EXT, c.frameBufferID)
 }
@@ -76,6 +76,6 @@ func (c *Canvas) Clear() {
 	gl.BindFramebufferEXT(gl.FRAMEBUFFER_EXT, c.frameBufferID)
 }
 
-func (c *Canvas) render(o *RenderOptions) {
-	c.tex.render(o)
+func (c *Canvas) render(p *Params) {
+	c.tex.render(p)
 }

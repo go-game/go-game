@@ -10,7 +10,7 @@ import (
 )
 
 var image *gfx.Image
-var renderOptions = gfx.NewRenderOptions()
+var params = gfx.NewParams()
 
 const pixelsize = 4
 
@@ -31,8 +31,8 @@ func main() {
 }
 
 func onMouseMove(x, y int32) {
-	renderOptions.X = float64(x) / pixelsize
-	renderOptions.Y = float64(y) / pixelsize
+	params.X = float64(x) / pixelsize
+	params.Y = float64(y) / pixelsize
 }
 
 func onKeyDown(k keys.Key) {
@@ -43,7 +43,7 @@ func onKeyDown(k keys.Key) {
 
 func onRender() {
 	gfx.Clear()
-	gfx.Render(image, renderOptions)
+	gfx.Render(image, params)
 }
 
 func onInit() {

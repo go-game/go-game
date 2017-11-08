@@ -35,12 +35,12 @@ func main() {
 
 func onInit() {
 	image = gfx.NewImage("assets/heart.png")
-	r1 := gfx.NewRenderOptions()
+	r1 := gfx.NewParams()
 	r1.X = 50
 	r1.Y = -16
 	r1.Rot = gfx.Rotation{Angle: 0, X: 8, Y: 8}
 	r1.Scale = gfx.Scale{Factor: 1, X: 8, Y: 8}
-	r2 := gfx.NewRenderOptions()
+	r2 := gfx.NewParams()
 	r2.X = 50
 	r2.Y = 216
 	r2.Rot = gfx.Rotation{Angle: 360, X: 8, Y: 8}
@@ -63,8 +63,8 @@ func keyDown(k keys.Key) {
 
 func onRender() {
 	gfx.Clear()
-	ro := tween.GetRenderOptions()
-	gfx.Render(image, ro)
+	p := tween.GetParams()
+	gfx.Render(image, p)
 }
 
 func onUpdate(delta time.Duration) {

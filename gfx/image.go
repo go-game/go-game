@@ -30,8 +30,8 @@ func (i *Image) Height() int {
 	return i.height
 }
 
-func (i *Image) render(o *RenderOptions) {
-	i.tex.render(o)
+func (i *Image) render(p *Params) {
+	i.tex.render(p)
 }
 
 // NewImage creates a new Image from the given file name. File must be a png.

@@ -13,7 +13,7 @@ import (
 
 var image *gfx.Image
 var vX, vY float64 = 0, 0
-var renderOptions = gfx.NewRenderOptions()
+var params = gfx.NewParams()
 
 const speed float64 = 100
 
@@ -70,13 +70,13 @@ func onKeyDown(k keys.Key) {
 
 func onUpdate(delta time.Duration) {
 	var seconds = (float64(delta) / 1000000000)
-	renderOptions.X += vX * seconds
-	renderOptions.Y += vY * seconds
+	params.X += vX * seconds
+	params.Y += vY * seconds
 }
 
 func onRender() {
 	gfx.Clear()
-	gfx.Render(image, renderOptions)
+	gfx.Render(image, params)
 }
 
 func onInit() {

@@ -14,8 +14,8 @@ import (
 )
 
 type heart struct {
-	RenderOptions *gfx.RenderOptions
-	Vx, Vy        float64
+	Params *gfx.Params
+	Vx, Vy float64
 }
 
 const (
@@ -56,7 +56,7 @@ func onCleanup() {
 func onRender() {
 	gfx.Clear()
 	for _, h := range hearts {
-		gfx.Render(image, h.RenderOptions)
+		gfx.Render(image, h.Params)
 	}
 	frames++
 	fmt.Printf("fps: %f\n", float64(frames)/float64(elapsed/time.Second))
@@ -69,37 +69,37 @@ func onUpdate(delta time.Duration) {
 		for i := 0; i < rand.Intn(30); i++ {
 			vx := (rand.Float64()*400 + 100) / float64(time.Second)
 			vy := (rand.Float64()*100 + 100) / float64(time.Second)
-			h := heart{RenderOptions: gfx.NewRenderOptions(), Vx: vx, Vy: vy}
+			h := heart{Params: gfx.NewParams(), Vx: vx, Vy: vy}
 			hearts = append(hearts, &h)
 		}
 	}
 
 	for _, h := range hearts {
-		h.RenderOptions.X += h.Vx * float64(delta)
+		h.Params.X += h.Vx * float64(delta)
 		if h.Vx > 0 {
-			d := WIDTH - h.RenderOptions.X - float64(image.Width())
+			d := WIDTH - h.Params.X - float64(image.Width())
 			if d < 0 {
-				h.RenderOptions.X -= d
+				h.Params.X -= d
 				h.Vx *= -1
 			}
 		} else {
-			if h.RenderOptions.X < 0 {
-				h.RenderOptions.X *= -1
+			if h.Params.X < 0 {
+				h.Params.X *= -1
 				h.Vx *= -1
 			}
 		}
 
 		h.Vy += G * float64(delta)
-		h.RenderOptions.Y += h.Vy * float64(delta)
+		h.Params.Y += h.Vy * float64(delta)
 		if h.Vy > 0 {
-			d := HEIGHT - h.RenderOptions.Y - float64(image.Height())
+			d := HEIGHT - h.Params.Y - float64(image.Height())
 			if d < 0 {
-				h.RenderOptions.Y -= d
+				h.Params.Y -= d
 				h.Vy *= -1
 			}
 		}
-		if h.RenderOptions.Y > HEIGHT*2 {
-			h.RenderOptions.Y = -float64(image.Height())
+		if h.Params.Y > HEIGHT*2 {
+			h.Params.Y = -float64(image.Height())
 		}
 	}
 }

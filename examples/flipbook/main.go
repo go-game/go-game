@@ -13,14 +13,14 @@ import (
 )
 
 var (
-	flipBook      *gfx.Flipbook
-	renderOptions *gfx.RenderOptions
-	pages         [8]*gfx.Image
+	flipBook *gfx.Flipbook
+	params   *gfx.Params
+	pages    [8]*gfx.Image
 
-	tick       *gfx.Image
-	tock       *gfx.Image
-	tickTock   *gfx.Image
-	roTickTock *gfx.RenderOptions
+	tick      *gfx.Image
+	tock      *gfx.Image
+	tickTock  *gfx.Image
+	pTickTock *gfx.Params
 
 	callback   gfx.OnFlip
 	showSounds bool
@@ -49,9 +49,9 @@ func onInit() {
 	tick = gfx.NewImage("assets/tick.png")
 	tock = gfx.NewImage("assets/tock.png")
 	tickTock = tick
-	roTickTock = gfx.NewRenderOptions()
-	roTickTock.X = 130
-	roTickTock.Y = 100
+	pTickTock = gfx.NewParams()
+	pTickTock.X = 130
+	pTickTock.Y = 100
 
 	d := time.Second / 2
 	flipBook = gfx.NewFlipbook(
@@ -73,9 +73,9 @@ func onInit() {
 		}
 	}
 
-	renderOptions = gfx.NewRenderOptions()
-	renderOptions.X = 100
-	renderOptions.Y = 100
+	params = gfx.NewParams()
+	params.X = 100
+	params.Y = 100
 }
 
 func onCleanup() {
@@ -86,9 +86,9 @@ func onCleanup() {
 
 func render() {
 	gfx.Clear()
-	gfx.Render(flipBook, renderOptions)
+	gfx.Render(flipBook, params)
 	if showSounds {
-		gfx.Render(tickTock, roTickTock)
+		gfx.Render(tickTock, pTickTock)
 	}
 }
 

@@ -34,18 +34,18 @@ func onInit() {
 func onRender() {
 	gfx.Clear()
 
-	renderOptions1 := gfx.NewRenderOptions()
-	renderOptions2 := gfx.NewRenderOptions()
+	params1 := gfx.NewParams()
+	params2 := gfx.NewParams()
 
 	for x := -64.0; x <= 1280; x += 64 {
 		for y := 0.0; y <= 96; y += 32 {
-			renderOptions1.X = x
-			renderOptions1.Y = y
-			renderOptions2.X = x + 32
-			renderOptions2.Y = y - 16
+			params1.X = x
+			params1.Y = y
+			params2.X = x + 32
+			params2.Y = y - 16
 
-			gfx.Render(tile1, renderOptions1)
-			gfx.Render(tile2, renderOptions2)
+			gfx.Render(tile1, params1)
+			gfx.Render(tile2, params2)
 		}
 	}
 }

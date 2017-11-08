@@ -11,9 +11,9 @@ import (
 
 var heart *gfx.Image
 var grey *gfx.Image
-var roImage *gfx.RenderOptions
+var roImage *gfx.Params
 var canvas *gfx.Canvas
-var roCanvas *gfx.RenderOptions
+var roCanvas *gfx.Params
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -39,7 +39,7 @@ func onInit() {
 		panic(err)
 	}
 
-	roImage = gfx.NewRenderOptions()
+	roImage = gfx.NewParams()
 	roImage.X = 0
 	roImage.Y = 0
 	canvas.Render(heart, roImage)
@@ -48,7 +48,7 @@ func onInit() {
 	roImage.Y = 0
 	canvas.Render(heart, roImage)
 
-	roCanvas = gfx.NewRenderOptions()
+	roCanvas = gfx.NewParams()
 	roCanvas.X = 100
 	roCanvas.Y = 100
 	gfx.Render(canvas, roCanvas)
