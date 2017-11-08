@@ -39,8 +39,6 @@ func onInit() {
 		panic(err)
 	}
 
-	canvas.Clear()
-
 	roImage = gfx.NewRenderOptions()
 	roImage.X = 0
 	roImage.Y = 0

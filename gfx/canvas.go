@@ -29,6 +29,8 @@ func NewCanvas(width, height int) (*Canvas, error) {
 	gl.BindFramebufferEXT(gl.FRAMEBUFFER_EXT, c.frameBufferID)
 	gl.FramebufferTexture2DEXT(gl.FRAMEBUFFER_EXT, gl.COLOR_ATTACHMENT0_EXT, gl.TEXTURE_2D, c.tex.id, 0)
 
+	c.Clear()
+
 	return &c, nil
 }
 
