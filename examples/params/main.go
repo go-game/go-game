@@ -16,7 +16,7 @@ func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 1000, Fullscreen: false}
 	window := desktop.OpenWindow(mode)
 	gfx.SetPixelSize(4)
-	gfx.SetClearColor(0.5, 0.5, 0.5, 1.0)
+	gfx.SetClearColor(0.5, 0.5, 0.5)
 
 	window.Run(&game.State{
 		OnKeyDown: onKeyDown,

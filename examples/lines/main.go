@@ -12,7 +12,7 @@ import (
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
 	window := desktop.OpenWindow(mode)
-	gfx.SetClearColor(0.2, 0.2, 0.2, 1.0)
+	gfx.SetClearColor(0.2, 0.2, 0.2)
 
 	window.Run(&game.State{
 		OnRender:  onRender,
