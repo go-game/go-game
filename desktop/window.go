@@ -67,6 +67,10 @@ func OpenWindow(m *Mode) *Window {
 	gfx.SetCamera(gfx.NewCamera(m.Width, m.Height))
 	mouse.Hide()
 
+	gfx.Width = m.Width
+	gfx.Height = m.Height
+	gfx.Fullscreen = m.Fullscreen
+
 	return window
 }
 

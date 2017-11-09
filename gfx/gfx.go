@@ -8,6 +8,15 @@ func init() {
 	}
 }
 
+// Width is the width in pixels of the complete drawing area.
+var Width int
+
+// Height is the height in pixels of the complete drawing area.
+var Height int
+
+// Fullscreen indicates whether the graphics are in fullscreen mode or not.
+var Fullscreen bool
+
 var clearR, clearG, clearB float32
 var currentCamera *Camera
 
