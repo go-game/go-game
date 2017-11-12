@@ -13,6 +13,7 @@ type Canvas struct {
 	tex           *texture
 	frameBufferID uint32
 	width, height int32
+	filterMode    FilterMode
 }
 
 // NewCanvas returns a new canvas.
@@ -21,7 +22,7 @@ func NewCanvas(width, height int) (*Canvas, error) {
 		return nil, fmt.Errorf("Cannot use Canvas: Framebuffer not supported")
 	}
 
-	c := Canvas{width: int32(width), height: int32(height)}
+	c := Canvas{width: int32(width), height: int32(height), filterMode: defaultFilterMode}
 
 	c.tex = newTexture(width, height, make([]byte, width, height*4))
 
@@ -77,5 +78,6 @@ func (c *Canvas) Clear() {
 }
 
 func (c *Canvas) render(p *Params) {
+	c.tex.activate(c.filterMode)
 	c.tex.render(p)
 }

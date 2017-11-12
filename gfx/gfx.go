@@ -20,9 +20,17 @@ var Fullscreen bool
 var clearR, clearG, clearB float32
 var currentCamera *Camera
 
+var defaultFilterMode = NearestFilter
+
 // Renderer implements render to put pixels on the screen.
 type Renderer interface {
 	render(*Params)
+}
+
+// SetDefaultFilterMode sets the filtermode which will be used by default when
+// creating a new Image or Canvas.
+func SetDefaultFilterMode(fm FilterMode) {
+	defaultFilterMode = fm
 }
 
 // SetPixelSize scales all graphics by the given factor.

@@ -4,6 +4,16 @@ import (
 	"github.com/go-gl/gl/v2.1/gl"
 )
 
+// FilterMode represents the interpolation mode for texture rendering.
+type FilterMode int
+
+const (
+	// NearestFilter scales images with nearest neighbor interpolation.
+	NearestFilter FilterMode = iota
+	// LinearFilter scales image with linear interpolation.
+	LinearFilter FilterMode = iota
+)
+
 type texture struct {
 	id            uint32
 	width, height float64
@@ -11,7 +21,7 @@ type texture struct {
 
 var currentlyBoundTextureID uint32
 
-func (t *texture) render(p *Params) {
+func (t *texture) activate(mode FilterMode) {
 	gl.Enable(gl.TEXTURE_2D)
 
 	if currentlyBoundTextureID != t.id {
@@ -19,6 +29,17 @@ func (t *texture) render(p *Params) {
 		currentlyBoundTextureID = t.id
 	}
 
+	switch mode {
+	case NearestFilter:
+		gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
+		gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
+	case LinearFilter:
+		gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
+		gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
+	}
+}
+
+func (t *texture) render(p *Params) {
 	gl.Begin(gl.QUADS)
 
 	gl.Color4d(p.R, p.G, p.B, p.A)
@@ -66,8 +87,6 @@ func newTexture(width, height int, pixelData []byte) *texture {
 	gl.Enable(gl.TEXTURE_2D)
 	gl.GenTextures(1, &id)
 	gl.BindTexture(gl.TEXTURE_2D, id)
-	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
-	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
 	gl.TexImage2D(

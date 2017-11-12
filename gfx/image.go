@@ -10,9 +10,10 @@ import (
 
 // Image represents an image and can be rendered on the screen.
 type Image struct {
-	tex    *texture
-	width  int
-	height int
+	tex        *texture
+	width      int
+	height     int
+	filterMode FilterMode
 }
 
 // Delete removes the image from memory.
@@ -31,6 +32,7 @@ func (i *Image) Height() int {
 }
 
 func (i *Image) render(p *Params) {
+	i.tex.activate(i.filterMode)
 	i.tex.render(p)
 }
 
@@ -56,5 +58,5 @@ func NewImage(file string) *Image {
 	height := rgba.Rect.Size().Y
 	tex := newTexture(width, height, rgba.Pix)
 
-	return &Image{tex: tex, width: width, height: height}
+	return &Image{tex: tex, width: width, height: height, filterMode: defaultFilterMode}
 }
