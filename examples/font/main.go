@@ -38,6 +38,7 @@ func onInit() {
 	if err != nil {
 		panic(err)
 	}
+	font.Antialiased = true
 
 	image, err = font.Render("Hello, Go-Game!")
 	if err != nil {
