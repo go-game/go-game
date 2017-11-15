@@ -1,2 +1,2 @@
-// Package controller lets you poll controllers and their buttons and
+// Package controller lets you poll controllers, their buttons their axes and let them rumble.
 package controller
