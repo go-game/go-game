@@ -9,6 +9,8 @@ type Camera struct {
 	pixelSize     int
 	X, Y          int32
 	Width, Height int
+	posX          float64
+	posY          float64
 }
 
 // NewCamera returns a new Camera
@@ -21,10 +23,9 @@ func NewCamera(w, h, x, y, ps int) *Camera {
 // Render renders the given Renderer with the given Params.
 func (c *Camera) Render(r Renderer, p *Params) {
 	if activeCamera != c {
-		c.setGLViewPort()
 		activeCamera = c
+		c.setGLViewPort()
 	}
-	gl.LoadIdentity()
 	transform(p)
 	r.render(p)
 }
@@ -33,6 +34,12 @@ func (c *Camera) Render(r Renderer, p *Params) {
 func (c *Camera) SetPixelSize(i int) {
 	c.pixelSize = i
 	c.setGLViewPort()
+}
+
+// Move moves the camera bey the given values.
+func (c *Camera) Move(x, y float64) {
+	c.posX += x
+	c.posY += y
 }
 
 func (c *Camera) setGLViewPort() {

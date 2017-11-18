@@ -30,6 +30,9 @@ var vY = 0.0
 var camera1 *gfx.Camera
 var camera2 *gfx.Camera
 
+var vcX = 0.0
+var vcY = 0.0
+
 var text1 *gfx.Image
 var text2 *gfx.Image
 
@@ -70,6 +73,8 @@ func onRender() {
 func onUpdate(delta time.Duration) {
 	ballParams.X += vX * float64(delta)
 	ballParams.Y += vY * float64(delta)
+
+	camera1.Move(vcX*float64(delta), vcY*float64(delta))
 }
 
 func onKeyDown(k keys.Key) {
@@ -86,6 +91,15 @@ func onKeyDown(k keys.Key) {
 		vY += v
 	case keys.Up:
 		vY -= v
+
+	case keys.W:
+		vcY += v
+	case keys.A:
+		vcX += v
+	case keys.S:
+		vcY -= v
+	case keys.D:
+		vcX -= v
 	}
 }
 
@@ -103,6 +117,15 @@ func onKeyUp(k keys.Key) {
 		vY -= v
 	case keys.Up:
 		vY += v
+
+	case keys.W:
+		vcY -= v
+	case keys.A:
+		vcX -= v
+	case keys.S:
+		vcY += v
+	case keys.D:
+		vcX += v
 	}
 }
 

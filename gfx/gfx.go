@@ -70,6 +70,7 @@ func transform(p *Params) {
 	gl.LoadIdentity()
 
 	gl.Translated(p.X, -p.Y, 0)
+	gl.Translated(activeCamera.posX, activeCamera.posY, 0)
 
 	gl.Translated(p.Scale.X, -p.Scale.Y, 0)
 	gl.Scaled(p.Scale.Factor, p.Scale.Factor, 1)
