@@ -93,11 +93,11 @@ func onKeyDown(k keys.Key) {
 		vY -= v
 
 	case keys.W:
-		vcY += v
+		vcY -= v
 	case keys.A:
 		vcX += v
 	case keys.S:
-		vcY -= v
+		vcY += v
 	case keys.D:
 		vcX -= v
 	}
@@ -119,11 +119,11 @@ func onKeyUp(k keys.Key) {
 		vY += v
 
 	case keys.W:
-		vcY -= v
+		vcY += v
 	case keys.A:
 		vcX -= v
 	case keys.S:
-		vcY += v
+		vcY -= v
 	case keys.D:
 		vcX += v
 	}
