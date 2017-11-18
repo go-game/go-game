@@ -12,8 +12,8 @@ type Camera struct {
 }
 
 // NewCamera returns a new Camera
-func NewCamera(w, h int) *Camera {
-	c := Camera{Width: w, Height: h, pixelSize: 1}
+func NewCamera(w, h, x, y, ps int) *Camera {
+	c := Camera{Width: w, Height: h, X: int32(x), Y: int32(y), pixelSize: ps}
 	c.setGLViewPort()
 	return &c
 }

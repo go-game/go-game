@@ -64,7 +64,7 @@ func OpenWindow(m *Mode) *Window {
 
 	window = &Window{mode: m, sdlWindow: sdlWindow, glContext: context}
 
-	gfx.SetCamera(gfx.NewCamera(m.Width, m.Height))
+	gfx.SetCamera(gfx.NewCamera(m.Width, m.Height, 0, 0, 1))
 	mouse.Hide()
 
 	gfx.Width = m.Width
