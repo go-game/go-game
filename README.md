@@ -1,6 +1,6 @@
 # go-game
 
-A 2d game framework for the go programming language.
+A 2D game framework for the go programming language.
 
 ## Installation
 ```bash
