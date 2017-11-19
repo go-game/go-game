@@ -2,7 +2,6 @@ package gfx
 
 import (
 	"fmt"
-	"math"
 
 	"github.com/go-gl/gl/v2.1/gl"
 )
@@ -54,27 +53,12 @@ func RenderPolygon(filled bool, coords ...float64) error {
 	return nil
 }
 
-// RenderCircle renders a cirlc at the given coordinates with the given radius and segments.
-func RenderCircle(x, y, radius float64, segments int) {
-	coords := make([]float64, segments*2)
-	diff := 2 * math.Pi / float64(segments)
-	angle := 0.0
-	for i := 0; i < segments*2; i += 2 {
-		coords[i] = math.Sin(angle)*radius + x
-		coords[i+1] = math.Cos(angle)*radius + y
-		angle += diff
-	}
-
-	RenderPolygon(true, coords...)
-}
-
 // RenderRectangle redners a rectangle for the given upper left and lower right corner. If filled is true the rectangle will be filled with a color.
 func RenderRectangle(filled bool, x1, y1, x2, y2 float64) {
 	RenderPolygon(filled, x1, y1, x1, y2, x2, y2, x2, y1)
 }
 
 func renderPoints(mode uint32, coords ...float64) {
-	gl.LoadIdentity()
 	gl.LineWidth(lineWidth)
 	if smoothLines {
 		gl.Enable(gl.POINT_SMOOTH)
