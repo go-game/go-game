@@ -9,6 +9,9 @@ import (
 	"github.com/go-game/go-game/keys"
 )
 
+var params = gfx.NewParams()
+var rect = &gfx.Rectangle{}
+
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
 	window := desktop.OpenWindow(mode)
@@ -21,17 +24,32 @@ func main() {
 
 func onRender() {
 	gfx.Clear()
-	var i int
-	for i = 0; i < 12.0; i++ {
-		gfx.RenderRectangle((i%2 == 0), 10.0+float64(i)*100.0, 10.0, 100.0+float64(i)*100.0, 100.0)
+
+	rect.Y1 = 10.0
+	rect.Y2 = 100.0
+	for i := 0; i < 12.0; i++ {
+		rect.Filled = (i%2 == 0)
+		rect.X1 = 10.0 + float64(i)*100.0
+		rect.X2 = 100.0 + float64(i)*100.0
+		gfx.Render(rect, params)
 	}
 
-	for i = 0; i < 12.0; i += 2 {
-		gfx.RenderRectangle((i%4 == 0), 10.0+float64(i)*100.0, 110.0, 200.0+float64(i)*100.0, 300.0)
+	rect.Y1 = 110.0
+	rect.Y2 = 300.0
+	for i := 0; i < 12.0; i += 2 {
+		rect.Filled = (i%4 == 0)
+		rect.X1 = 10.0 + float64(i)*100.0
+		rect.X2 = 200.0 + float64(i)*100.0
+		gfx.Render(rect, params)
 	}
 
-	for i = 0; i < 12.0; i += 4 {
-		gfx.RenderRectangle((i%8 == 0), 10.0+float64(i)*100.0, 310.0, 400.0+float64(i)*100.0, 700.0)
+	rect.Y1 = 310.0
+	rect.Y2 = 700.0
+	for i := 0; i < 12.0; i += 4 {
+		rect.Filled = (i%8 == 0)
+		rect.X1 = 10.0 + float64(i)*100.0
+		rect.X2 = 400.0 + float64(i)*100.0
+		gfx.Render(rect, params)
 	}
 }
 

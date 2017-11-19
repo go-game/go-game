@@ -53,11 +53,6 @@ func RenderPolygon(filled bool, coords ...float64) error {
 	return nil
 }
 
-// RenderRectangle redners a rectangle for the given upper left and lower right corner. If filled is true the rectangle will be filled with a color.
-func RenderRectangle(filled bool, x1, y1, x2, y2 float64) {
-	RenderPolygon(filled, x1, y1, x1, y2, x2, y2, x2, y1)
-}
-
 func renderPoints(mode uint32, coords ...float64) {
 	gl.LineWidth(lineWidth)
 	if smoothLines {
