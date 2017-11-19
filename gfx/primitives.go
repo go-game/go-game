@@ -72,7 +72,6 @@ func renderPoints(mode uint32, coords ...float64) {
 
 	gl.Begin(mode)
 	for i := 0; i < len(coords); i += 2 {
-		gl.Color4d(lineR, lineG, lineB, lineA)
 		gl.Vertex3d(coords[i], -coords[i+1], 0)
 	}
 	gl.End()
