@@ -1,6 +1,6 @@
 package gfx
 
-import "github.com/go-gl-legacy/gl"
+import "github.com/go-gl/gl/v2.1/gl"
 
 // Rectangle is a geometric shape that can be rendered with gfx.Render.
 type Rectangle struct {
@@ -13,5 +13,5 @@ type Rectangle struct {
 
 func (r *Rectangle) render(p *Params) {
 	gl.Color4d(p.R, p.G, p.B, p.A)
-	RenderPolygon(r.Filled, r.X1, r.Y1, r.X1, r.Y2, r.X2, r.Y2, r.X2, r.Y1)
+	renderPolygon(r.Filled, r.X1, r.Y1, r.X1, r.Y2, r.X2, r.Y2, r.X2, r.Y1)
 }

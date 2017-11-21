@@ -37,8 +37,7 @@ func RenderLines(coords ...float64) error {
 	return nil
 }
 
-// RenderPolygon renders a polygon from the given coords. When filled is true, the shape will be filled with a solid color..
-func RenderPolygon(filled bool, coords ...float64) error {
+func renderPolygon(filled bool, coords ...float64) error {
 	gl.Disable(gl.TEXTURE_2D)
 	if len(coords)%2 != 0 {
 		return fmt.Errorf("Can only render an even number of x, y coords")
@@ -48,8 +47,7 @@ func RenderPolygon(filled bool, coords ...float64) error {
 	} else {
 		gl.PolygonMode(gl.FRONT_AND_BACK, gl.LINE)
 	}
-	var mode uint32 = gl.POLYGON
-	renderPoints(mode, coords...)
+	renderPoints(gl.POLYGON, coords...)
 	return nil
 }
 

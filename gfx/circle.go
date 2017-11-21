@@ -24,5 +24,5 @@ func (c *Circle) render(p *Params) {
 		angle += diff
 	}
 
-	RenderPolygon(c.Filled, coords...)
+	renderPolygon(c.Filled, coords...)
 }
