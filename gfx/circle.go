@@ -14,7 +14,6 @@ type Circle struct {
 }
 
 func (c *Circle) render(p *Params) {
-	gl.Color4d(p.R, p.G, p.B, p.A)
 	coords := make([]float64, c.Segments*2)
 	diff := 2 * math.Pi / float64(c.Segments)
 	angle := 0.0
@@ -24,5 +23,6 @@ func (c *Circle) render(p *Params) {
 		angle += diff
 	}
 
+	gl.Color4d(p.R, p.G, p.B, p.A)
 	renderPolygon(c.Filled, coords...)
 }
