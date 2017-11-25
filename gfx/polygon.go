@@ -6,9 +6,10 @@ import "github.com/go-gl/gl/v2.1/gl"
 type Polygon struct {
 	Points []float64
 	Filled bool
+	Mode   *LineMode
 }
 
 func (p *Polygon) render(params *Params) {
 	gl.Color4d(params.R, params.G, params.B, params.A)
-	renderPolygon(p.Filled, p.Points...)
+	renderPolygon(p.Filled, p.Mode, p.Points...)
 }

@@ -6,38 +6,21 @@ import (
 	"github.com/go-gl/gl/v2.1/gl"
 )
 
-var lineWidth float32 = 1
-var lineR float64 = 1
-var lineG float64 = 1
-var lineB float64 = 1
-var lineA float64 = 1
-var smoothLines bool
-
-// SetLineWidth sets the width of the line for all primitives.
-func SetLineWidth(w float64) {
-	lineWidth = float32(w)
-}
-
-// SetLineColor sets the color of the line for all primitives.
-func SetLineColor(r, g, b, a float64) {
-	lineR, lineG, lineB, lineA = r, g, b, a
-}
-
-// SetSmoothLines sets if lines should be drawn with jagged edges or anti-aliasing.
-func SetSmoothLines(b bool) {
-	smoothLines = b
-}
-
-// RenderLines renders multiple lines for the given coords, coords must be an even number of floats with alternating x and y coordinates.
-func RenderLines(coords ...float64) error {
-	if len(coords)%4 != 0 {
-		return fmt.Errorf("Can only render an even number of x, y coords")
+// NewLineMode returns a pointer to a new LineMode with width 1.0 and not smooth.
+func NewLineMode() *LineMode {
+	return &LineMode{
+		Width:  1.0,
+		Smooth: false,
 	}
-	renderPoints(gl.LINES, coords...)
-	return nil
 }
 
-func renderPolygon(filled bool, coords ...float64) error {
+// LineMode defines the way how (out)lines are rendered.
+type LineMode struct {
+	Width  float32
+	Smooth bool
+}
+
+func renderPolygon(filled bool, mode *LineMode, coords ...float64) error {
 	gl.Disable(gl.TEXTURE_2D)
 	if len(coords)%2 != 0 {
 		return fmt.Errorf("Can only render an even number of x, y coords")
@@ -47,13 +30,13 @@ func renderPolygon(filled bool, coords ...float64) error {
 	} else {
 		gl.PolygonMode(gl.FRONT_AND_BACK, gl.LINE)
 	}
-	renderPoints(gl.POLYGON, coords...)
+	renderPoints(gl.POLYGON, mode, coords...)
 	return nil
 }
 
-func renderPoints(mode uint32, coords ...float64) {
-	gl.LineWidth(lineWidth)
-	if smoothLines {
+func renderPoints(glMode uint32, mode *LineMode, coords ...float64) {
+	gl.LineWidth(mode.Width)
+	if mode.Smooth {
 		gl.Enable(gl.POINT_SMOOTH)
 		gl.Enable(gl.LINE_SMOOTH)
 		gl.Enable(gl.POLYGON_SMOOTH)
@@ -63,7 +46,7 @@ func renderPoints(mode uint32, coords ...float64) {
 		gl.Disable(gl.POLYGON_SMOOTH)
 	}
 
-	gl.Begin(mode)
+	gl.Begin(glMode)
 	for i := 0; i < len(coords); i += 2 {
 		gl.Vertex3d(coords[i], -coords[i+1], 0)
 	}

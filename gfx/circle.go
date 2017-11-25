@@ -11,6 +11,7 @@ type Circle struct {
 	Radius   float64
 	Segments int
 	Filled   bool
+	Mode     *LineMode
 }
 
 func (c *Circle) render(p *Params) {
@@ -24,5 +25,5 @@ func (c *Circle) render(p *Params) {
 	}
 
 	gl.Color4d(p.R, p.G, p.B, p.A)
-	renderPolygon(c.Filled, coords...)
+	renderPolygon(c.Filled, c.Mode, coords...)
 }
