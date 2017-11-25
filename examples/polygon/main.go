@@ -9,8 +9,8 @@ import (
 	"github.com/go-game/go-game/keys"
 )
 
-var coordsOpen []float64 = []float64{10, 10, 100, 20, 250, 25, 230, 300, 40, 280}
-var coordsClosed []float64 = []float64{310, 10, 400, 20, 550, 25, 530, 300, 340, 280}
+var params = gfx.NewParams()
+var polygon = &gfx.Polygon{Points: []float64{0, 0, 90, 10, 240, 15, 220, 290, 30, 270}}
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -24,8 +24,16 @@ func main() {
 
 func onRender() {
 	gfx.Clear()
-	gfx.RenderPolygon(false, coordsOpen...)
-	gfx.RenderPolygon(true, coordsClosed...)
+
+	polygon.Filled = false
+	params.X = 10.0
+	params.Y = 10.0
+	gfx.Render(polygon, params)
+
+	params.X = 300.0
+	params.Y = 10.0
+	polygon.Filled = true
+	gfx.Render(polygon, params)
 }
 
 func onKeyDown(k keys.Key) {
