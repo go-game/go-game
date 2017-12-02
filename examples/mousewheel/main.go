@@ -16,6 +16,8 @@ const (
 )
 
 var height int32
+var rect *gfx.Rectangle
+var params *gfx.Params
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -23,19 +25,28 @@ func main() {
 	gfx.SetPixelSize(4)
 
 	window.Run(&game.State{
+		OnInit: onInit,
 		OnRender:     onRender,
 		OnKeyDown:    onKeyDown,
 		OnMouseWheel: onMouseWheel,
 	})
 }
 
+func onInit() {
+	rect = &gfx.Rectangle{X1: 0, Y1: 0, X2: WIDTH, Y2: 0, Mode: gfx.NewLineMode()}
+	params = gfx.NewParams()
+	params.X = X
+	params.Y = Y
+}
+
 func onMouseWheel(x, y int32) {
 	height += y * 2
+	rect.Y2 = float64(height)
 }
 
 func onRender() {
 	gfx.Clear()
-	gfx.RenderRectangle(false, X, Y, X+WIDTH, float64(Y+height))
+	gfx.Render(rect, params)
 }
 
 func onKeyDown(k keys.Key) {
