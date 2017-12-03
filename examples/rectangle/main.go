@@ -10,7 +10,7 @@ import (
 )
 
 var params = gfx.NewParams()
-var rect = &gfx.Rectangle{}
+var rect = &gfx.Rectangle{Mode: gfx.NewLineMode()}
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}

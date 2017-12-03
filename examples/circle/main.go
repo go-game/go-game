@@ -10,7 +10,7 @@ import (
 )
 
 var params = gfx.NewParams()
-var circle = &gfx.Circle{Radius: 100, Segments: 10, Filled: true}
+var circle = &gfx.Circle{Radius: 100, Segments: 10, Filled: true, Mode: gfx.NewLineMode()}
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}

@@ -10,7 +10,7 @@ import (
 )
 
 var params = gfx.NewParams()
-var polygon = &gfx.Polygon{Points: []float64{0, 0, 90, 10, 240, 15, 220, 290, 30, 270}}
+var polygon = &gfx.Polygon{Points: []float64{0, 0, 90, 10, 240, 15, 220, 290, 30, 270}, Mode: gfx.NewLineMode()}
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
