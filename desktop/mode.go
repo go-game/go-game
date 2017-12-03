@@ -4,8 +4,8 @@ import "github.com/veandco/go-sdl2/sdl"
 
 // Mode represents the resolution of a window and whether it is fullscreen.
 type Mode struct {
-	Width      int
-	Height     int
+	Width      int32
+	Height     int32
 	Fullscreen bool
 }
 
@@ -26,7 +26,7 @@ func FullscreenModes() []*Mode {
 	for i := 0; i < count; i++ {
 		sdlMode := &sdl.DisplayMode{}
 		sdl.GetDisplayMode(0, i, sdlMode)
-		mode := &Mode{Width: int(sdlMode.W), Height: int(sdlMode.H), Fullscreen: true}
+		mode := &Mode{Width: sdlMode.W, Height: sdlMode.H, Fullscreen: true}
 		if !alreadyIncluded(mode) {
 			res = append(res, mode)
 		}

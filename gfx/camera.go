@@ -6,16 +6,16 @@ var activeCamera *Camera
 
 // Camera represents an area on the screen.
 type Camera struct {
-	pixelSize     int
+	pixelSize     int32
 	X, Y          int32
-	Width, Height int
+	Width, Height int32
 	posX          float64
 	posY          float64
 }
 
 // NewCamera returns a new Camera
-func NewCamera(w, h, x, y, ps int) *Camera {
-	c := Camera{Width: w, Height: h, X: int32(x), Y: int32(y), pixelSize: ps}
+func NewCamera(w, h, x, y, ps int32) *Camera {
+	c := Camera{Width: w, Height: h, X: x, Y: y, pixelSize: ps}
 	c.setGLViewPort()
 	return &c
 }
@@ -31,7 +31,7 @@ func (c *Camera) Render(r Renderer, p *Params) {
 }
 
 // SetPixelSize scales all graphics by the given factor.
-func (c *Camera) SetPixelSize(i int) {
+func (c *Camera) SetPixelSize(i int32) {
 	c.pixelSize = i
 	c.setGLViewPort()
 }
@@ -52,9 +52,9 @@ func (c *Camera) setGLViewPort() {
 	// This is for retina stuff on macs
 	// var c.width, c.height = desktop.CurrentWindow.GlfwWindow.GetFramebufferSize()
 	// fX, fY := int32(width/desktop.CurrentWindow.Mode.Width), int32(height/desktop.CurrentWindow.Mode.Height)
-	fX, fY := 1, 1
+	var fX, fY int32 = 1, 1
 	gl.BindFramebuffer(gl.FRAMEBUFFER, 0)
-	gl.Viewport(c.X, c.Y, int32(c.Width*fX), int32(c.Height*fY))
+	gl.Viewport(c.X, c.Y, c.Width*fX, c.Height*fY)
 
 	gl.MatrixMode(gl.MODELVIEW)
 }

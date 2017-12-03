@@ -33,9 +33,6 @@ var camera2 *gfx.Camera
 var vcX = 0.0
 var vcY = 0.0
 
-var text1 *gfx.Image
-var text2 *gfx.Image
-
 func main() {
 	state := &game.State{
 		OnInit:    onInit,

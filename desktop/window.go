@@ -32,7 +32,7 @@ func CurrentMode() *Mode {
 		fullscreen = flags&sdl.WINDOW_FULLSCREEN == 1
 	}
 
-	return &Mode{Width: int(mode.W), Height: int(mode.H), Fullscreen: fullscreen}
+	return &Mode{Width: mode.W, Height: mode.H, Fullscreen: fullscreen}
 }
 
 // Window is the os application frame where all the stuff will  happen.
@@ -53,11 +53,11 @@ func OpenWindow(m *Mode) *Window {
 		panic(err)
 	}
 
-	context, err := sdl.GL_CreateContext(sdlWindow)
+	context, err := sdl.GLCreateContext(sdlWindow)
 	if err != nil {
 		panic(err)
 	}
-	err = sdl.GL_SetSwapInterval(1)
+	err = sdl.GLSetSwapInterval(1)
 	if err != nil {
 		fmt.Println("Failed to enable vsync")
 	}
@@ -101,15 +101,19 @@ func (w *Window) Run(state *game.State) {
 				if state.OnMouseWheel != nil {
 					state.OnMouseWheel(t.X, t.Y)
 				}
-			case *sdl.KeyDownEvent:
-				if state.OnKeyDown != nil {
-					if t.Repeat == 0 {
-						state.OnKeyDown(keys.Key(t.Keysym.Sym))
+			case *sdl.KeyboardEvent:
+				if t.Repeat == 0 {
+					if t.Type == sdl.KEYDOWN {
+						if state.OnKeyDown != nil {
+
+							state.OnKeyDown(keys.Key(t.Keysym.Sym))
+						}
 					}
-				}
-			case *sdl.KeyUpEvent:
-				if state.OnKeyUp != nil {
-					state.OnKeyUp(keys.Key(t.Keysym.Sym))
+					if t.Type == sdl.KEYUP {
+						if state.OnKeyUp != nil {
+							state.OnKeyUp(keys.Key(t.Keysym.Sym))
+						}
+					}
 				}
 			case *sdl.ControllerButtonEvent:
 				controller.DispatchButtonEvent(t.Which, t.Button, t.State)
@@ -139,7 +143,7 @@ func (w *Window) Run(state *game.State) {
 		if state.OnRender != nil {
 			state.OnRender()
 		}
-		sdl.GL_SwapWindow(window.sdlWindow)
+		sdl.GLSwapWindow(window.sdlWindow)
 	}
 	if state.OnCleanup != nil {
 		state.OnCleanup()
@@ -151,7 +155,7 @@ func Exit() {
 	// TODO: Call cleanup of all packages
 
 	mix.CloseAudio()
-	sdl.GL_DeleteContext(window.glContext)
+	sdl.GLDeleteContext(window.glContext)
 	window.sdlWindow.Destroy()
 	sdl.Quit()
 	running = false

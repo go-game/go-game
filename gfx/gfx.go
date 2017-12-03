@@ -9,10 +9,10 @@ func init() {
 }
 
 // Width is the width in pixels of the complete drawing area.
-var Width int
+var Width int32
 
 // Height is the height in pixels of the complete drawing area.
-var Height int
+var Height int32
 
 // Fullscreen indicates whether the graphics are in fullscreen mode or not.
 var Fullscreen bool
@@ -34,7 +34,7 @@ func SetDefaultFilterMode(fm FilterMode) {
 }
 
 // SetPixelSize scales all graphics by the given factor.
-func SetPixelSize(size int) {
+func SetPixelSize(size int32) {
 	currentCamera.SetPixelSize(size)
 }
 

@@ -20,10 +20,12 @@ func Count() int {
 // Open opens the joystick for the given id and returns it.
 func Open(id sdl.JoystickID) *Controller {
 	sdlCtrl := sdl.GameControllerOpen(int(id))
-	haptic := sdl.HapticOpen(int(id))
-	err := haptic.RumbleInit()
-	if err != 0 {
-		haptic = nil
+	haptic, _ := sdl.HapticOpen(int(id))
+	if haptic != nil {
+		err := haptic.RumbleInit()
+		if err != nil {
+			haptic = nil
+		}
 	}
 	if All[id] == nil {
 		All[id] = &Controller{}

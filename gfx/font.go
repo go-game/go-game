@@ -57,9 +57,9 @@ func (f *Font) Render(text string) (*Image, error) {
 	var err error
 
 	if f.Antialiased {
-		sdlSurface, err = f.sdlFont.RenderUTF8_Blended(text, fontColor)
+		sdlSurface, err = f.sdlFont.RenderUTF8Blended(text, fontColor)
 	} else {
-		sdlSurface, err = f.sdlFont.RenderUTF8_Solid(text, fontColor)
+		sdlSurface, err = f.sdlFont.RenderUTF8Solid(text, fontColor)
 	}
 
 	if err != nil {
