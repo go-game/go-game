@@ -49,6 +49,7 @@ func Close(id sdl.JoystickID) *Controller {
 	return ctrl
 }
 
+// DispatchButtonEvent triggers a button event. This func should not be called manually.
 func DispatchButtonEvent(id sdl.JoystickID, b uint8, state uint8) {
 	ctrl := All[id]
 	if ctrl.listener != nil {
@@ -64,6 +65,7 @@ func DispatchButtonEvent(id sdl.JoystickID, b uint8, state uint8) {
 	}
 }
 
+// DispatchAxisEvent triggers a axis event. This func should not be called manually.
 func DispatchAxisEvent(id sdl.JoystickID, a uint8, value int16) {
 	ctrl := All[id]
 	if ctrl.listener != nil && ctrl.listener.OnAxisMoved != nil {
@@ -88,10 +90,12 @@ type Controller struct {
 	listener  *Listener
 }
 
+// SetListener sets the Listener that will get notified when controller events occurr.
 func (c *Controller) SetListener(l *Listener) {
 	c.listener = l
 }
 
+// ClearListener removes the Listener for the controller.
 func (c *Controller) ClearListener() {
 	c.listener = nil
 }
