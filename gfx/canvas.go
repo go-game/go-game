@@ -24,10 +24,10 @@ func NewCanvas(width, height int) (*Canvas, error) {
 
 	c := Canvas{width: int32(width), height: int32(height), filterMode: defaultFilterMode}
 
-	c.tex = newTexture(width, height, make([]byte, width, height*4))
-
 	gl.GenFramebuffersEXT(1, &c.frameBufferID)
 	gl.BindFramebufferEXT(gl.FRAMEBUFFER_EXT, c.frameBufferID)
+
+	c.tex = newTexture(width, height, make([]byte, width, height*4))
 	gl.FramebufferTexture2DEXT(gl.FRAMEBUFFER_EXT, gl.COLOR_ATTACHMENT0_EXT, gl.TEXTURE_2D, c.tex.id, 0)
 
 	c.Clear()
@@ -43,22 +43,17 @@ func CanvasAvailable() bool {
 
 // Render uses a renderer to put pixels onto the canvas.
 func (c *Canvas) Render(r Renderer, p *Params) {
-	activeCamera = nil
-
-	gl.Disable(gl.TEXTURE_2D)
-	gl.Disable(gl.BLEND)
-
 	gl.MatrixMode(gl.PROJECTION)
 	gl.LoadIdentity()
 	gl.Ortho(0, float64(c.width), 0, -float64(c.height), -1, 1)
-
+	gl.BindFramebufferEXT(gl.FRAMEBUFFER_EXT, c.frameBufferID)
+	gl.Viewport(0, 0, c.width, c.height)
 	gl.MatrixMode(gl.MODELVIEW)
 
 	transform(p)
-
 	r.render(p)
 
-	gl.BindFramebufferEXT(gl.FRAMEBUFFER_EXT, c.frameBufferID)
+	gl.BindFramebuffer(gl.FRAMEBUFFER, 0)
 }
 
 // Delete removes the canvas from memory.
@@ -68,13 +63,12 @@ func (c *Canvas) Delete() {
 	gl.DeleteFramebuffersEXT(1, &c.frameBufferID)
 }
 
-// Clear clears the canvas
+// Clear clears the canvas.
 func (c *Canvas) Clear() {
 	gl.Viewport(0, 0, c.width, c.height)
 	gl.ClearColor(0.0, 0.0, 0.0, 0.0)
 	gl.ClearDepth(1.0)
 	gl.Clear(gl.COLOR_BUFFER_BIT)
-	gl.BindFramebufferEXT(gl.FRAMEBUFFER_EXT, c.frameBufferID)
 }
 
 func (c *Canvas) render(p *Params) {
