@@ -21,16 +21,20 @@ type LineMode struct {
 }
 
 func renderPolygon(filled bool, mode *LineMode, coords ...float64) error {
-	gl.Disable(gl.TEXTURE_2D)
 	if len(coords)%2 != 0 {
 		return fmt.Errorf("Can only render an even number of x, y coords")
 	}
+
+	gl.Disable(gl.TEXTURE_2D)
 	if filled {
 		gl.PolygonMode(gl.FRONT_AND_BACK, gl.FILL)
 	} else {
 		gl.PolygonMode(gl.FRONT_AND_BACK, gl.LINE)
 	}
 	renderPoints(gl.POLYGON, mode, coords...)
+
+	gl.PolygonMode(gl.FRONT_AND_BACK, gl.FILL)
+
 	return nil
 }
 

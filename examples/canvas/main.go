@@ -11,9 +11,13 @@ import (
 
 var heart *gfx.Image
 var grey *gfx.Image
-var roImage *gfx.Params
+var imageParams *gfx.Params
+
 var canvas *gfx.Canvas
-var roCanvas *gfx.Params
+var canvasParams *gfx.Params
+
+var circle *gfx.Circle
+var circleParams *gfx.Params
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -30,6 +34,7 @@ func main() {
 }
 
 func onInit() {
+	gfx.SetClearColor(0.2, 0.2, 0.2)
 	heart = gfx.NewImage("assets/heart.png")
 	grey = gfx.NewImage("assets/grey.png")
 
@@ -39,19 +44,24 @@ func onInit() {
 		panic(err)
 	}
 
-	roImage = gfx.NewParams()
-	roImage.X = 0
-	roImage.Y = 0
-	canvas.Render(heart, roImage)
+	circleParams = gfx.NewParams()
+	circleParams.X = 10
+	circleParams.Y = 10
 
-	roImage.X = 20
-	roImage.Y = 0
-	canvas.Render(heart, roImage)
+	circle = &gfx.Circle{
+		Radius:   10.0,
+		Segments: 10,
+		Filled:   false,
+		Mode:     &gfx.LineMode{Width: 1.0},
+	}
+	canvas.Render(circle, circleParams)
 
-	roCanvas = gfx.NewParams()
-	roCanvas.X = 100
-	roCanvas.Y = 100
-	gfx.Render(canvas, roCanvas)
+	imageParams = gfx.NewParams()
+	imageParams.X = 2
+	imageParams.Y = 2
+	canvas.Render(heart, imageParams)
+
+	canvasParams = gfx.NewParams()
 }
 
 func onCleanup() {
@@ -63,13 +73,17 @@ func onCleanup() {
 func onRender() {
 	gfx.Clear()
 
-	roImage.X = 200
-	roImage.Y = 92
-	gfx.Render(grey, roImage)
+	imageParams.X = 200
+	imageParams.Y = 92
+	gfx.Render(grey, imageParams)
 
-	roCanvas.X = 200
-	roCanvas.Y = 100
-	gfx.Render(canvas, roCanvas)
+	canvasParams.X = 100
+	canvasParams.Y = 100
+	gfx.Render(canvas, canvasParams)
+
+	canvasParams.X = 200
+	canvasParams.Y = 100
+	gfx.Render(canvas, canvasParams)
 }
 
 func onKeyDown(k keys.Key) {
