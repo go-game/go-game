@@ -16,6 +16,9 @@ var imageParams *gfx.Params
 var canvas *gfx.Canvas
 var canvasParams *gfx.Params
 
+var circle *gfx.Circle
+var circleParams *gfx.Params
+
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
 	window := desktop.OpenWindow(mode)
@@ -41,13 +44,21 @@ func onInit() {
 		panic(err)
 	}
 
-	imageParams = gfx.NewParams()
-	imageParams.X = 0
-	imageParams.Y = 0
-	canvas.Render(heart, imageParams)
+	circleParams = gfx.NewParams()
+	circleParams.X = 10
+	circleParams.Y = 10
 
-	imageParams.X = 20
-	imageParams.Y = 0
+	circle = &gfx.Circle{
+		Radius:   10.0,
+		Segments: 10,
+		Filled:   false,
+		Mode:     &gfx.LineMode{Width: 1.0},
+	}
+	canvas.Render(circle, circleParams)
+
+	imageParams = gfx.NewParams()
+	imageParams.X = 2
+	imageParams.Y = 2
 	canvas.Render(heart, imageParams)
 
 	canvasParams = gfx.NewParams()
