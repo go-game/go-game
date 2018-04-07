@@ -48,12 +48,7 @@ func onInit() {
 	circleParams.X = 10
 	circleParams.Y = 10
 
-	circle = &gfx.Circle{
-		Radius:   10.0,
-		Segments: 10,
-		Filled:   false,
-		Mode:     &gfx.LineMode{Width: 1.0},
-	}
+	circle, _ = gfx.NewCircle(10.0, 10, false)
 	canvas.Render(circle, circleParams)
 
 	imageParams = gfx.NewParams()

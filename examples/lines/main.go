@@ -28,7 +28,7 @@ func main() {
 }
 
 func onInit() {
-	line = &gfx.Line{Mode: gfx.NewLineMode(), Points: []float64{0.0, 0.0, 100.0, 150.0}}
+	line, _ = gfx.NewLine(gfx.NewLineMode(), 0.0, 0.0, 100.0, 150.0)
 }
 
 func onRender() {
