@@ -5,12 +5,15 @@ package main
 import (
 	"github.com/go-game/go-game/audio"
 	"github.com/go-game/go-game/desktop"
+	"github.com/go-game/go-game/examples"
 	"github.com/go-game/go-game/game"
 	"github.com/go-game/go-game/gfx"
 	"github.com/go-game/go-game/keys"
 )
 
 var sound *audio.Sound
+
+var textImage *gfx.Image
 
 func main() {
 	gameState := &game.State{
@@ -27,6 +30,8 @@ func main() {
 }
 
 func onInit() {
+	textImage = examples.TextImage("Press Space to play a sound")
+
 	var err error
 	sound, err = audio.NewSound("assets/welcome.wav")
 	if err != nil {
@@ -36,6 +41,7 @@ func onInit() {
 
 func onRender() {
 	gfx.Clear()
+	examples.RenderImage(textImage, 10, 10)
 }
 
 func onKeyDown(k keys.Key) {
