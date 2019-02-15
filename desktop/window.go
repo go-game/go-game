@@ -24,8 +24,7 @@ func init() {
 
 // CurrentMode returns the mode that is currently active.
 func CurrentMode() *Mode {
-	mode := &sdl.DisplayMode{}
-	sdl.GetCurrentDisplayMode(0, mode)
+	mode, _ := sdl.GetCurrentDisplayMode(0)
 	fullscreen := false
 	if window != nil && window.sdlWindow != nil {
 		flags := window.sdlWindow.GetFlags()
@@ -53,7 +52,7 @@ func OpenWindow(m *Mode) *Window {
 		panic(err)
 	}
 
-	context, err := sdl.GLCreateContext(sdlWindow)
+	context, err := sdlWindow.GLCreateContext()
 	if err != nil {
 		panic(err)
 	}
@@ -143,7 +142,7 @@ func (w *Window) Run(state *game.State) {
 		if state.OnRender != nil {
 			state.OnRender()
 		}
-		sdl.GLSwapWindow(window.sdlWindow)
+		window.sdlWindow.GLSwap()
 	}
 	if state.OnCleanup != nil {
 		state.OnCleanup()

@@ -24,8 +24,7 @@ func FullscreenModes() []*Mode {
 
 	count, _ := sdl.GetNumDisplayModes(0)
 	for i := 0; i < count; i++ {
-		sdlMode := &sdl.DisplayMode{}
-		sdl.GetDisplayMode(0, i, sdlMode)
+		sdlMode, _ := sdl.GetDisplayMode(0, i)
 		mode := &Mode{Width: sdlMode.W, Height: sdlMode.H, Fullscreen: true}
 		if !alreadyIncluded(mode) {
 			res = append(res, mode)
