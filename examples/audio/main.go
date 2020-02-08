@@ -43,6 +43,9 @@ func onKeyDown(k keys.Key) {
 		desktop.Exit()
 	}
 	if k == keys.Space {
-		sound.Play()
+		err := sound.Play()
+		if err != nil {
+			panic(err)
+		}
 	}
 }
