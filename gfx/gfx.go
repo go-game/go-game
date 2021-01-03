@@ -27,7 +27,7 @@ type Renderer interface {
 	render(*Params)
 }
 
-// SetDefaultFilterMode sets the filtermode which will be used by default when
+// SetDefaultFilterMode sets the filter mode which will be used by default when
 // creating a new Image or Canvas.
 func SetDefaultFilterMode(fm FilterMode) {
 	defaultFilterMode = fm
