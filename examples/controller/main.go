@@ -4,6 +4,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 
 	"github.com/go-game/go-game/controller"
 	"github.com/go-game/go-game/desktop"
@@ -35,10 +36,12 @@ func onKeyDown(k keys.Key) {
 }
 
 func onControllerAdded(c *controller.Controller) {
-	fmt.Printf("Controller #%d has connected\n", c.ID)
+	fmt.Printf("Controller #%d (%s) has connected\n", c.ID, c.Name)
 	l := &controller.Listener{
 		OnAxisMoved: func(a controller.Axis, value float64) {
-			fmt.Printf("Axis #%d of controller #%d has been moved by %f\n", a, c.ID, value)
+			if math.Abs(value) > 0.2 {
+				fmt.Printf("Axis #%d of controller #%d has been moved by %f\n", a, c.ID, value)
+			}
 		},
 		OnButtonDown: func(b controller.Button) {
 			fmt.Printf("Button #%d of controller #%d has been pressed\n", b, c.ID)
