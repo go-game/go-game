@@ -19,7 +19,7 @@ type Canvas struct {
 // NewCanvas returns a new canvas.
 func NewCanvas(width, height int) (*Canvas, error) {
 	if !CanvasAvailable() {
-		return nil, fmt.Errorf("Cannot use Canvas: Framebuffer not supported")
+		return nil, fmt.Errorf("cannot use Canvas: Framebuffer not supported")
 	}
 
 	c := Canvas{width: int32(width), height: int32(height), filterMode: defaultFilterMode}

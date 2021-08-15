@@ -11,7 +11,7 @@ type Mode struct {
 
 // FullscreenModes returns an array of all available fullscreen modes.
 func FullscreenModes() []*Mode {
-	res := []*Mode{}
+	var res []*Mode
 
 	alreadyIncluded := func(m *Mode) bool {
 		for _, mode := range res {

@@ -11,7 +11,7 @@ const (
 	// NearestFilter scales images with nearest neighbor interpolation.
 	NearestFilter FilterMode = iota
 	// LinearFilter scales image with linear interpolation.
-	LinearFilter FilterMode = iota
+	LinearFilter
 )
 
 type texture struct {
@@ -48,15 +48,15 @@ func (t *texture) render(p *Params) {
 
 	gl.Color4d(p.R, p.G, p.B, p.A)
 	gl.TexCoord2f(0, 1)
-	gl.Vertex3d(0, -float64(t.height), 0)
+	gl.Vertex3d(0, -t.height, 0)
 
 	gl.Color4d(p.R, p.G, p.B, p.A)
 	gl.TexCoord2f(1, 1)
-	gl.Vertex3d(float64(t.width), -float64(t.height), 0)
+	gl.Vertex3d(t.width, -t.height, 0)
 
 	gl.Color4d(p.R, p.G, p.B, p.A)
 	gl.TexCoord2f(1, 0)
-	gl.Vertex3d(float64(t.width), 0, 0)
+	gl.Vertex3d(t.width, 0, 0)
 
 	gl.End()
 }

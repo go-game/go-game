@@ -126,10 +126,10 @@ func (w *Window) Run(state *game.State) {
 					}
 				}
 				if t.Type == sdl.CONTROLLERDEVICEREMOVED {
-					fmt.Printf("Controller %d removed\n", t.Which)
+					fmt.Printf("Controller %v removed\n", t.Which)
 				}
 				if t.Type == sdl.CONTROLLERDEVICEREMAPPED {
-					fmt.Printf("Controller %d remapped\n", t.Which)
+					fmt.Printf("Controller %v remapped\n", t.Which)
 				}
 			}
 		}

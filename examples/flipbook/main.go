@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	flipBook *gfx.Flipbook
+	flipBook *gfx.FlipBook
 	params   *gfx.Params
 	pages    [8]*gfx.Image
 
@@ -54,7 +54,7 @@ func onInit() {
 	pTickTock.Y = 100
 
 	d := time.Second / 2
-	flipBook = gfx.NewFlipbook(
+	flipBook = gfx.NewFlipBook(
 		true,
 		&gfx.Page{Duration: d, Renderer: pages[0]},
 		&gfx.Page{Duration: d, Renderer: pages[1]},

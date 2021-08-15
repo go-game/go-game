@@ -90,7 +90,7 @@ type Controller struct {
 	listener  *Listener
 }
 
-// SetListener sets the Listener that will get notified when controller events occurr.
+// SetListener sets the Listener that will get notified when controller events occur.
 func (c *Controller) SetListener(l *Listener) {
 	c.listener = l
 }
@@ -100,7 +100,7 @@ func (c *Controller) ClearListener() {
 	c.listener = nil
 }
 
-// Rumble lets the controller vibrate for a given time and strngth.
+// Rumble lets the controller vibrate for a given time and strength.
 func (c *Controller) Rumble(strength float32, duration uint32) {
 	if c.haptic != nil {
 		c.haptic.RumblePlay(strength, duration)

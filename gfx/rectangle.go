@@ -14,10 +14,11 @@ func NewRectangle(x1, y1, x2, y2 float64, filled bool, mode ...*LineMode) (*Rect
 	}
 
 	r := Rectangle{
-		X1: x1,
-		Y1: y1,
-		X2: x2,
-		Y2: y2,
+		X1:     x1,
+		Y1:     y1,
+		X2:     x2,
+		Y2:     y2,
+		Filled: filled,
 	}
 
 	return &r, nil
@@ -38,5 +39,5 @@ func (r *Rectangle) render(p *Params) {
 	gl.Color4d(p.R, p.G, p.B, p.A)
 	gl.Color4d(p.R, p.G, p.B, p.A)
 	gl.Color4d(p.R, p.G, p.B, p.A)
-	renderPolygon(r.Filled, r.Mode, r.X1, r.Y1, r.X1, r.Y2, r.X2, r.Y2, r.X2, r.Y1)
+	_ = renderPolygon(r.Filled, r.Mode, r.X1, r.Y1, r.X1, r.Y2, r.X2, r.Y2, r.X2, r.Y1)
 }

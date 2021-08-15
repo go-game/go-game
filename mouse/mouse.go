@@ -20,10 +20,10 @@ const (
 
 // Hide makes the mouse cursor invisible.
 func Hide() {
-	sdl.ShowCursor(sdl.DISABLE)
+	_, _ = sdl.ShowCursor(sdl.DISABLE)
 }
 
 // Show makes the mouse cursor visible
 func Show() {
-	sdl.ShowCursor(sdl.ENABLE)
+	_, _ = sdl.ShowCursor(sdl.ENABLE)
 }

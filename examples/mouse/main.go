@@ -12,7 +12,7 @@ import (
 var image *gfx.Image
 var params = gfx.NewParams()
 
-const pixelsize = 4
+const pixelSize = 4
 
 func main() {
 	gameState := &game.State{
@@ -25,14 +25,14 @@ func main() {
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
 	window := desktop.OpenWindow(mode)
-	gfx.SetPixelSize(pixelsize)
+	gfx.SetPixelSize(pixelSize)
 
 	window.Run(gameState)
 }
 
 func onMouseMove(x, y int32) {
-	params.X = float64(x) / pixelsize
-	params.Y = float64(y) / pixelsize
+	params.X = float64(x) / pixelSize
+	params.Y = float64(y) / pixelSize
 }
 
 func onKeyDown(k keys.Key) {

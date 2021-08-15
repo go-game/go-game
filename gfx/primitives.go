@@ -22,7 +22,7 @@ type LineMode struct {
 
 func renderPolygon(filled bool, mode *LineMode, coords ...float64) error {
 	if len(coords)%2 != 0 {
-		return fmt.Errorf("Can only render an even number of x, y coords")
+		return fmt.Errorf("can only render an even number of x, y coords")
 	}
 
 	gl.Disable(gl.TEXTURE_2D)

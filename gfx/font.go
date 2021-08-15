@@ -26,7 +26,7 @@ type Font struct {
 	Italic        bool
 	Underline     bool
 	Strikethrough bool
-	Antialiased   bool
+	AntiAliased   bool
 	sdlFont       *ttf.Font
 	sdlColor      sdl.Color
 }
@@ -56,7 +56,7 @@ func (f *Font) Render(text string) (*Image, error) {
 	var sdlSurface *sdl.Surface
 	var err error
 
-	if f.Antialiased {
+	if f.AntiAliased {
 		sdlSurface, err = f.sdlFont.RenderUTF8Blended(text, fontColor)
 	} else {
 		sdlSurface, err = f.sdlFont.RenderUTF8Solid(text, fontColor)

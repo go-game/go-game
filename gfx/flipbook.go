@@ -6,14 +6,14 @@ import "time"
 // The param page is the page number of the new page.
 type OnFlip func(page int)
 
-// Page represents one part of a Flipbook animation. May have nil as renderer for empty pages.
+// Page represents one part of a FlipBook animation. May have nil as renderer for empty pages.
 type Page struct {
 	Duration time.Duration
 	Renderer renderer
 }
 
-// Flipbook represents a timed sequence of renderers.
-type Flipbook struct {
+// FlipBook represents a timed sequence of renderers.
+type FlipBook struct {
 	pages     []*Page
 	looping   bool
 	elapsed   time.Duration
@@ -21,9 +21,9 @@ type Flipbook struct {
 	callbacks []OnFlip
 }
 
-// NewFlipbook returns a pointer to a new Flipbook.
-func NewFlipbook(l bool, pages ...*Page) *Flipbook {
-	return &Flipbook{
+// NewFlipBook returns a pointer to a new FlipBook.
+func NewFlipBook(l bool, pages ...*Page) *FlipBook {
+	return &FlipBook{
 		pages:     pages,
 		looping:   l,
 		elapsed:   0,
@@ -33,7 +33,7 @@ func NewFlipbook(l bool, pages ...*Page) *Flipbook {
 }
 
 // Update updates increases the elapsed time and sets the current renderer for rendering.
-func (fb *Flipbook) Update(delta time.Duration) {
+func (fb *FlipBook) Update(delta time.Duration) {
 	if fb.Finished() {
 		return
 	}
@@ -53,30 +53,30 @@ func (fb *Flipbook) Update(delta time.Duration) {
 	}
 }
 
-// Finished indicates if the flipbook is at the end
-func (fb *Flipbook) Finished() bool {
+// Finished indicates if the FlipBook is at the end
+func (fb *FlipBook) Finished() bool {
 	if fb.looping {
 		return false
 	}
 	return fb.current >= len(fb.pages)
 }
 
-// Reset resets the Flipbook to the firt frame
-func (fb *Flipbook) Reset() {
+// Reset resets the FlipBook to the first frame
+func (fb *FlipBook) Reset() {
 	fb.current = 0
 }
 
 // AddPageListener adds a callback that will be called when the page is changed.
-func (fb *Flipbook) AddPageListener(of OnFlip) {
+func (fb *FlipBook) AddPageListener(of OnFlip) {
 	fb.callbacks = append(fb.callbacks, of)
 }
 
-// ClearPageListeners removes all callback funcs.
-func (fb *Flipbook) ClearPageListeners() {
+// ClearPageListeners removes all callback functions.
+func (fb *FlipBook) ClearPageListeners() {
 	fb.callbacks = []OnFlip{}
 }
 
-func (fb *Flipbook) currentPage() *Page {
+func (fb *FlipBook) currentPage() *Page {
 	i := fb.current
 	if len(fb.pages)-1 < i {
 		i = len(fb.pages) - 1
@@ -84,7 +84,7 @@ func (fb *Flipbook) currentPage() *Page {
 	return fb.pages[i]
 }
 
-func (fb *Flipbook) render(p *Params) {
+func (fb *FlipBook) render(p *Params) {
 	if fb.currentPage().Renderer != nil {
 		fb.currentPage().Renderer.render(p)
 	}
