@@ -9,7 +9,7 @@ type OnFlip func(page int)
 // Page represents one part of a Flipbook animation. May have nil as renderer for empty pages.
 type Page struct {
 	Duration time.Duration
-	Renderer Renderer
+	Renderer renderer
 }
 
 // Flipbook represents a timed sequence of renderers.

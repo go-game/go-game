@@ -42,7 +42,7 @@ func CanvasAvailable() bool {
 }
 
 // Render uses a renderer to put pixels onto the canvas.
-func (c *Canvas) Render(r Renderer, p *Params) {
+func (c *Canvas) Render(r renderer, p *Params) {
 	gl.MatrixMode(gl.PROJECTION)
 	gl.LoadIdentity()
 	gl.Ortho(0, float64(c.width), 0, -float64(c.height), -1, 1)

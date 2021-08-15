@@ -22,8 +22,7 @@ var currentCamera *Camera
 
 var defaultFilterMode = NearestFilter
 
-// Renderer implements render to put pixels on the screen.
-type Renderer interface {
+type renderer interface {
 	render(*Params)
 }
 
@@ -49,7 +48,7 @@ func SetCamera(c *Camera) {
 }
 
 // Render uses a renderer to put pixels onto the screen directly.
-func Render(r Renderer, p *Params) {
+func Render(r renderer, p *Params) {
 	currentCamera.Render(r, p)
 }
 
