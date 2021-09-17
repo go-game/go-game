@@ -30,6 +30,8 @@ func (s *Sound) Delete() {
 	s.c.Free()
 }
 
-func (s *Sound) setVolume(v float64) {
+// SetVolume sets the volume between 0.0 (silent) and 1.0 (full volume).
+// Any outside this range will be capped.
+func (s *Sound) SetVolume(v float64) {
 	s.c.Volume(int(v * mix.MAX_VOLUME))
 }

@@ -2,13 +2,17 @@ package controller
 
 import (
 	"github.com/veandco/go-sdl2/sdl"
+	"log"
 )
 
 // All contains all available controllers.
 var All = map[sdl.JoystickID]*Controller{}
 
 func init() {
-	sdl.Init(sdl.INIT_GAMECONTROLLER | sdl.INIT_HAPTIC)
+	err := sdl.Init(sdl.INIT_GAMECONTROLLER | sdl.INIT_HAPTIC)
+	if err != nil {
+		log.Fatal(err)
+	}
 	sdl.GameControllerEventState(sdl.ENABLE)
 }
 
@@ -101,8 +105,9 @@ func (c *Controller) ClearListener() {
 }
 
 // Rumble lets the controller vibrate for a given time and strength.
-func (c *Controller) Rumble(strength float32, duration uint32) {
-	if c.haptic != nil {
-		c.haptic.RumblePlay(strength, duration)
+func (c *Controller) Rumble(strength float32, duration uint32) error {
+	if c.haptic == nil {
+		return nil
 	}
+	return c.haptic.RumblePlay(strength, duration)
 }

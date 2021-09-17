@@ -6,9 +6,7 @@ import (
 	"github.com/go-gl/gl/v2.1/gl"
 )
 
-var currentName uint32
-
-// Canvas is a offscreen area which can be rendered to and rendered on to the screen.
+// Canvas is an offscreen area which can be rendered to and rendered on to the screen.
 type Canvas struct {
 	tex           *texture
 	frameBufferID uint32

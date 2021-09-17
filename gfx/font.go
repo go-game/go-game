@@ -28,7 +28,6 @@ type Font struct {
 	Strikethrough bool
 	AntiAliased   bool
 	sdlFont       *ttf.Font
-	sdlColor      sdl.Color
 }
 
 // Size returns the width and height for the given text.

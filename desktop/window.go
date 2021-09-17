@@ -2,6 +2,7 @@ package desktop
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/go-game/go-game/controller"
@@ -155,7 +156,9 @@ func Exit() {
 
 	mix.CloseAudio()
 	sdl.GLDeleteContext(window.glContext)
-	window.sdlWindow.Destroy()
+	if err := window.sdlWindow.Destroy(); err != nil {
+		log.Fatal(err)
+	}
 	sdl.Quit()
 	running = false
 }

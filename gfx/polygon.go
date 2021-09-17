@@ -11,5 +11,5 @@ type Polygon struct {
 
 func (p *Polygon) render(params *Params) {
 	gl.Color4d(params.R, params.G, params.B, params.A)
-	renderPolygon(p.Filled, p.Mode, p.Points...)
+	_ = renderPolygon(p.Filled, p.Mode, p.Points...)
 }

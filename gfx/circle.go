@@ -12,7 +12,7 @@ import (
 // The given mode is optional. If no mode is given a default LineMode with width 1 is used.
 func NewCircle(r float64, segments int, filled bool, mode ...*LineMode) (*Circle, error) {
 	if segments < 3 {
-		return nil, fmt.Errorf("A circle needs at least 3 segments, got %d", segments)
+		return nil, fmt.Errorf("a circle needs at least 3 segments, got %d", segments)
 	}
 	if len(mode) > 1 {
 		return nil, fmt.Errorf("NewCircle can be called with zero or one LineMode")
@@ -55,5 +55,5 @@ func (c *Circle) setSegments(s int) {
 
 func (c *Circle) render(p *Params) {
 	gl.Color4d(p.R, p.G, p.B, p.A)
-	renderPolygon(c.Filled, c.Mode, c.coords...)
+	_ = renderPolygon(c.Filled, c.Mode, c.coords...)
 }
