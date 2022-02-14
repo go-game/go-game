@@ -1,6 +1,8 @@
 package gfx
 
-import "time"
+import (
+	"time"
+)
 
 // OnFlip is a callback that gets triggered when a page is changed.
 // The param page is the page number of the new page.

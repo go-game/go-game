@@ -1,6 +1,8 @@
 package audio
 
-import "github.com/veandco/go-sdl2/mix"
+import (
+	"github.com/veandco/go-sdl2/mix"
+)
 
 // Sound represents a loaded sound file that can be played back.
 type Sound struct {

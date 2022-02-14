@@ -1,8 +1,9 @@
 package controller
 
 import (
-	"github.com/veandco/go-sdl2/sdl"
 	"log"
+
+	"github.com/veandco/go-sdl2/sdl"
 )
 
 // All contains all available controllers.

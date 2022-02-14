@@ -1,6 +1,8 @@
 package keys
 
-import "github.com/veandco/go-sdl2/sdl"
+import (
+	"github.com/veandco/go-sdl2/sdl"
+)
 
 // Key is a specific key.
 type Key int

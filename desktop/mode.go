@@ -1,6 +1,8 @@
 package desktop
 
-import "github.com/veandco/go-sdl2/sdl"
+import (
+	"github.com/veandco/go-sdl2/sdl"
+)
 
 // Mode represents the resolution of a window and whether it is fullscreen.
 type Mode struct {

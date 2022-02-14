@@ -1,10 +1,10 @@
+//go:build example
 // +build example
 
 package main
 
 import (
 	"fmt"
-	"math"
 
 	"github.com/go-game/go-game/controller"
 	"github.com/go-game/go-game/desktop"

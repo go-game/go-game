@@ -1,10 +1,9 @@
 package gfx
 
 import (
-	_ "image/png" // needed to load png files
-
 	"image"
 	"image/draw"
+	_ "image/png" // needed to load png files
 	"os"
 )
 

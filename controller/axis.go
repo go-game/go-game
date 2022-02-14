@@ -1,6 +1,8 @@
 package controller
 
-import "github.com/veandco/go-sdl2/sdl"
+import (
+	"github.com/veandco/go-sdl2/sdl"
+)
 
 // Axis is a controller's axis.
 type Axis int

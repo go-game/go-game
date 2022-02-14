@@ -5,13 +5,14 @@ import (
 	"log"
 	"time"
 
+	"github.com/veandco/go-sdl2/mix"
+	"github.com/veandco/go-sdl2/sdl"
+
 	"github.com/go-game/go-game/controller"
 	"github.com/go-game/go-game/game"
 	"github.com/go-game/go-game/gfx"
 	"github.com/go-game/go-game/keys"
 	"github.com/go-game/go-game/mouse"
-	"github.com/veandco/go-sdl2/mix"
-	"github.com/veandco/go-sdl2/sdl"
 )
 
 var window *Window

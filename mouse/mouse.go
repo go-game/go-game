@@ -1,6 +1,8 @@
 package mouse
 
-import "github.com/veandco/go-sdl2/sdl"
+import (
+	"github.com/veandco/go-sdl2/sdl"
+)
 
 // Button is a specific button of the mouse.
 type Button int
