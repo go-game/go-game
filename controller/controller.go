@@ -70,7 +70,7 @@ func DispatchButtonEvent(id sdl.JoystickID, b uint8, state uint8) {
 	}
 }
 
-// DispatchAxisEvent triggers a axis event. This func should not be called manually.
+// DispatchAxisEvent triggers an axis event. This func should not be called manually.
 func DispatchAxisEvent(id sdl.JoystickID, a uint8, value int16) {
 	ctrl := All[id]
 	if ctrl.listener != nil && ctrl.listener.OnAxisMoved != nil {
