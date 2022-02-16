@@ -22,23 +22,38 @@ const (
 )
 
 var images map[string]*gfx.Image
-var buttonsPressed = [14]bool{}
+var buttonsPressed = [15]bool{}
 
 var controllerConnected bool
 var leftStickX float64
 var leftStickY float64
 var rightStickX float64
 var rightStickY float64
+var leftTrigger float64
+var rightTrigger float64
 
 func onInit() {
 	images = map[string]*gfx.Image{
-		"bg":          gfx.NewImage("./assets/controller/background.png"),
-		"left_stick":  gfx.NewImage("./assets/controller/left_stick.png"),
-		"right_stick": gfx.NewImage("./assets/controller/right_stick.png"),
-		"button_0":    gfx.NewImage("./assets/controller/button_0.png"),
-		"button_1":    gfx.NewImage("./assets/controller/button_1.png"),
-		"button_2":    gfx.NewImage("./assets/controller/button_2.png"),
-		"button_3":    gfx.NewImage("./assets/controller/button_3.png"),
+		"bg":            gfx.NewImage("./assets/controller/background.png"),
+		"left_stick":    gfx.NewImage("./assets/controller/left_stick.png"),
+		"right_stick":   gfx.NewImage("./assets/controller/right_stick.png"),
+		"button_0":      gfx.NewImage("./assets/controller/button_0.png"),
+		"button_1":      gfx.NewImage("./assets/controller/button_1.png"),
+		"button_2":      gfx.NewImage("./assets/controller/button_2.png"),
+		"button_3":      gfx.NewImage("./assets/controller/button_3.png"),
+		"button_4":      gfx.NewImage("./assets/controller/button_4.png"),
+		"button_5":      gfx.NewImage("./assets/controller/button_5.png"),
+		"button_6":      gfx.NewImage("./assets/controller/button_6.png"),
+		"button_7":      gfx.NewImage("./assets/controller/button_7.png"),
+		"button_8":      gfx.NewImage("./assets/controller/button_8.png"),
+		"button_9":      gfx.NewImage("./assets/controller/button_9.png"),
+		"button_10":     gfx.NewImage("./assets/controller/button_10.png"),
+		"button_11":     gfx.NewImage("./assets/controller/button_11.png"),
+		"button_12":     gfx.NewImage("./assets/controller/button_12.png"),
+		"button_13":     gfx.NewImage("./assets/controller/button_13.png"),
+		"button_14":     gfx.NewImage("./assets/controller/button_14.png"),
+		"left_trigger":  gfx.NewImage("./assets/controller/left_trigger.png"),
+		"right_trigger": gfx.NewImage("./assets/controller/right_trigger.png"),
 	}
 
 	gfx.SetClearColor(0.8, 0.8, 0.9)
@@ -73,18 +88,36 @@ func onRender() {
 	p.X = padding + leftStickX*stickMax
 	p.Y = padding + leftStickY*stickMax
 	gfx.Render(images["left_stick"], p)
+	if buttonsPressed[7] {
+		gfx.Render(images["button_7"], p)
+	}
 
 	p.X = padding + rightStickX*stickMax
 	p.Y = padding + rightStickY*stickMax
 	gfx.Render(images["right_stick"], p)
+	if buttonsPressed[8] {
+		gfx.Render(images["button_8"], p)
+	}
 
 	p.X = padding
 	p.Y = padding
-	for i := 0; i < 4; i++ {
+	for i := 0; i < 15; i++ {
+		if i == 7 || i == 8 {
+			continue
+		}
 		if buttonsPressed[i] {
 			name := fmt.Sprintf("button_%d", i)
 			gfx.Render(images[name], p)
 		}
+	}
+
+	if leftTrigger > 0 {
+		p.A = leftTrigger
+		gfx.Render(images["left_trigger"], p)
+	}
+	if rightTrigger > 0 {
+		p.A = rightTrigger
+		gfx.Render(images["right_trigger"], p)
 	}
 }
 
@@ -107,6 +140,10 @@ func onControllerAdded(c *controller.Controller) {
 				rightStickX = value
 			case 3:
 				rightStickY = value
+			case 4:
+				leftTrigger = value
+			case 5:
+				rightTrigger = value
 			}
 			fmt.Printf("Axis #%d of controller #%d has been moved by %f\n", a, c.ID, value)
 		},
