@@ -35,8 +35,32 @@ type device struct {
 	buttonsPressed [15]bool
 }
 
-var images map[string]*gfx.Image
-var devices [4]device
+var (
+	images     map[string]*gfx.Image
+	imageNames = []string{
+		"background",
+		"left_stick",
+		"right_stick",
+		"left_trigger",
+		"right_trigger",
+		"button_0",
+		"button_1",
+		"button_2",
+		"button_3",
+		"button_4",
+		"button_5",
+		"button_6",
+		"button_7",
+		"button_8",
+		"button_9",
+		"button_10",
+		"button_11",
+		"button_12",
+		"button_13",
+		"button_14",
+	}
+	devices [4]device
+)
 
 func main() {
 	mode := &desktop.Mode{
@@ -57,27 +81,10 @@ func main() {
 }
 
 func onInit() {
-	images = map[string]*gfx.Image{
-		"bg":            gfx.NewImage("./assets/controller/background.png"),
-		"left_stick":    gfx.NewImage("./assets/controller/left_stick.png"),
-		"right_stick":   gfx.NewImage("./assets/controller/right_stick.png"),
-		"button_0":      gfx.NewImage("./assets/controller/button_0.png"),
-		"button_1":      gfx.NewImage("./assets/controller/button_1.png"),
-		"button_2":      gfx.NewImage("./assets/controller/button_2.png"),
-		"button_3":      gfx.NewImage("./assets/controller/button_3.png"),
-		"button_4":      gfx.NewImage("./assets/controller/button_4.png"),
-		"button_5":      gfx.NewImage("./assets/controller/button_5.png"),
-		"button_6":      gfx.NewImage("./assets/controller/button_6.png"),
-		"button_7":      gfx.NewImage("./assets/controller/button_7.png"),
-		"button_8":      gfx.NewImage("./assets/controller/button_8.png"),
-		"button_9":      gfx.NewImage("./assets/controller/button_9.png"),
-		"button_10":     gfx.NewImage("./assets/controller/button_10.png"),
-		"button_11":     gfx.NewImage("./assets/controller/button_11.png"),
-		"button_12":     gfx.NewImage("./assets/controller/button_12.png"),
-		"button_13":     gfx.NewImage("./assets/controller/button_13.png"),
-		"button_14":     gfx.NewImage("./assets/controller/button_14.png"),
-		"left_trigger":  gfx.NewImage("./assets/controller/left_trigger.png"),
-		"right_trigger": gfx.NewImage("./assets/controller/right_trigger.png"),
+	images = map[string]*gfx.Image{}
+	for _, name := range imageNames {
+		fn := fmt.Sprintf("./assets/controller/%s.png", name)
+		images[name] = gfx.NewImage(fn)
 	}
 
 	gfx.SetClearColor(0.8, 0.8, 0.9)
@@ -106,7 +113,7 @@ func onRender() {
 			p.A = 0.5
 		}
 
-		gfx.Render(images["bg"], p)
+		gfx.Render(images["background"], p)
 
 		p.X = d.x + d.leftStickX*stickMax
 		p.Y = d.y + d.leftStickY*stickMax
