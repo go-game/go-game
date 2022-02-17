@@ -1,3 +1,4 @@
+//go:build example
 // +build example
 
 package main
@@ -14,9 +15,10 @@ var params *gfx.Params
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 1000, Fullscreen: false}
-	window := desktop.OpenWindow(mode)
-	gfx.SetPixelSize(4)
-	gfx.SetClearColor(0.5, 0.5, 0.5)
+	window, err := desktop.OpenWindow(mode)
+	if err != nil {
+		panic(err)
+	}
 
 	window.Run(&game.State{
 		OnKeyDown: onKeyDown,
@@ -27,6 +29,8 @@ func main() {
 }
 
 func onInit() {
+	gfx.SetPixelSize(4)
+	gfx.SetClearColor(0.5, 0.5, 0.5)
 	image = gfx.NewImage("assets/grey.png")
 	params = gfx.NewParams()
 }

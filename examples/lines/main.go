@@ -1,3 +1,4 @@
+//go:build example
 // +build example
 
 package main
@@ -17,8 +18,10 @@ var line *gfx.Line
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-	window := desktop.OpenWindow(mode)
-	gfx.SetClearColor(0.2, 0.2, 0.2)
+	window, err := desktop.OpenWindow(mode)
+	if err != nil {
+		panic(err)
+	}
 
 	window.Run(&game.State{
 		OnInit:    onInit,
@@ -28,6 +31,7 @@ func main() {
 }
 
 func onInit() {
+	gfx.SetClearColor(0.2, 0.2, 0.2)
 	line, _ = gfx.NewLine(gfx.NewLineMode(), 0.0, 0.0, 100.0, 150.0)
 }
 

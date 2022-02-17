@@ -1,3 +1,4 @@
+//go:build example
 // +build example
 
 package main
@@ -20,7 +21,10 @@ func main() {
 	}
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-	window := desktop.OpenWindow(mode)
+	window, err := desktop.OpenWindow(mode)
+	if err != nil {
+		panic(err)
+	}
 	gfx.SetPixelSize(4)
 
 	window.Run(gameState)

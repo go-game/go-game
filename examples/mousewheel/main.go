@@ -1,3 +1,4 @@
+//go:build example
 // +build example
 
 package main
@@ -21,11 +22,13 @@ var params *gfx.Params
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-	window := desktop.OpenWindow(mode)
-	gfx.SetPixelSize(4)
+	window, err := desktop.OpenWindow(mode)
+	if err != nil {
+		panic(err)
+	}
 
 	window.Run(&game.State{
-		OnInit: onInit,
+		OnInit:       onInit,
 		OnRender:     onRender,
 		OnKeyDown:    onKeyDown,
 		OnMouseWheel: onMouseWheel,
@@ -33,6 +36,7 @@ func main() {
 }
 
 func onInit() {
+	gfx.SetPixelSize(4)
 	rect = &gfx.Rectangle{X1: 0, Y1: 0, X2: WIDTH, Y2: 0, Mode: gfx.NewLineMode()}
 	params = gfx.NewParams()
 	params.X = X

@@ -1,3 +1,4 @@
+//go:build example
 // +build example
 
 package main
@@ -14,7 +15,10 @@ var polygon = &gfx.Polygon{Points: []float64{0, 0, 90, 10, 240, 15, 220, 290, 30
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-	window := desktop.OpenWindow(mode)
+	window, err := desktop.OpenWindow(mode)
+	if err != nil {
+		panic(err)
+	}
 
 	window.Run(&game.State{
 		OnRender:  onRender,

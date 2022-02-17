@@ -68,7 +68,10 @@ func main() {
 		Height:     (height + padding*2) * pixelSize * 2,
 		Fullscreen: false,
 	}
-	window := desktop.OpenWindow(mode)
+	window, err := desktop.OpenWindow(mode)
+	if err != nil {
+		panic(err)
+	}
 
 	window.Run(&game.State{
 		OnInit:              onInit,
