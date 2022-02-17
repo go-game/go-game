@@ -159,11 +159,12 @@ func onKeyDown(k keys.Key) {
 }
 
 func onControllerAdded(c *controller.Controller) {
-	fmt.Printf("controller #%d connected\n", c.ID)
-
 	if c.ID >= len(devices) {
 		return
 	}
+
+	fmt.Printf("controller #%d connected\n", c.ID)
+
 	d := &devices[c.ID]
 	d.connected = true
 	l := &controller.Listener{
@@ -197,5 +198,10 @@ func onControllerAdded(c *controller.Controller) {
 }
 
 func onControllerRemoved(c *controller.Controller) {
+	if c.ID >= len(devices) {
+		return
+	}
+
 	fmt.Printf("Controller #%d has been removed\n", c.ID)
+	devices[c.ID].connected = false
 }
