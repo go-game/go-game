@@ -38,6 +38,24 @@ type device struct {
 var images map[string]*gfx.Image
 var devices [4]device
 
+func main() {
+	mode := &desktop.Mode{
+		Width:      (width + padding*2) * pixelSize * 2,
+		Height:     (height + padding*2) * pixelSize * 2,
+		Fullscreen: false,
+	}
+	window := desktop.OpenWindow(mode)
+
+	window.Run(&game.State{
+		OnInit:              onInit,
+		OnCleanup:           cleanup,
+		OnRender:            onRender,
+		OnKeyDown:           onKeyDown,
+		OnControllerAdded:   onControllerAdded,
+		OnControllerRemoved: onControllerRemoved,
+	})
+}
+
 func onInit() {
 	images = map[string]*gfx.Image{
 		"bg":            gfx.NewImage("./assets/controller/background.png"),
@@ -71,21 +89,10 @@ func onInit() {
 	devices[3] = device{x: padding*2 + float64(width), y: padding*2 + float64(height)}
 }
 
-func main() {
-	mode := &desktop.Mode{
-		Width:      (width + padding*2) * pixelSize * 2,
-		Height:     (height + padding*2) * pixelSize * 2,
-		Fullscreen: false,
+func cleanup() {
+	for _, i := range images {
+		i.Delete()
 	}
-	window := desktop.OpenWindow(mode)
-
-	window.Run(&game.State{
-		OnInit:              onInit,
-		OnRender:            onRender,
-		OnKeyDown:           onKeyDown,
-		OnControllerAdded:   onControllerAdded,
-		OnControllerRemoved: onControllerRemoved,
-	})
 }
 
 func onRender() {
