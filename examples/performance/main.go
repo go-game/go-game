@@ -50,7 +50,10 @@ func main() {
 }
 
 func onInit() {
-	image = gfx.NewImage("assets/heart.png")
+	var err error
+	if image, err = gfx.NewImage("assets/heart.png"); err != nil {
+		panic(err)
+	}
 }
 
 func onCleanup() {

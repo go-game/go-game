@@ -47,12 +47,19 @@ func onInit() {
 	gfx.SetClearColor(0.2, 0.2, 0.2)
 	gfx.SetPixelSize(4)
 
+	var err error
 	pages = [8]*gfx.Image{}
 	for i := 0; i < len(pages); i++ {
-		pages[i] = gfx.NewImage(fmt.Sprintf("assets/pointer/%d.png", i))
+		if pages[i], err = gfx.NewImage(fmt.Sprintf("assets/pointer/%d.png", i)); err != nil {
+			panic(err)
+		}
 	}
-	tick = gfx.NewImage("assets/tick.png")
-	tock = gfx.NewImage("assets/tock.png")
+	if tick, err = gfx.NewImage("assets/tick.png"); err != nil {
+		panic(err)
+	}
+	if tock, err = gfx.NewImage("assets/tock.png"); err != nil {
+		panic(err)
+	}
 	tickTock = tick
 	pTickTock = gfx.NewParams()
 	pTickTock.X = 130

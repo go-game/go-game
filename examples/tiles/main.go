@@ -31,8 +31,13 @@ func main() {
 }
 
 func onInit() {
-	tile1 = gfx.NewImage("assets/tile1.png")
-	tile2 = gfx.NewImage("assets/tile2.png")
+	var err error
+	if tile1, err = gfx.NewImage("assets/tile1.png"); err != nil {
+		panic(err)
+	}
+	if tile2, err = gfx.NewImage("assets/tile2.png"); err != nil {
+		panic(err)
+	}
 }
 
 func onRender() {

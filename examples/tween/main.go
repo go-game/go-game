@@ -37,7 +37,10 @@ func main() {
 
 func onInit() {
 	gfx.SetPixelSize(4)
-	image = gfx.NewImage("assets/heart.png")
+	var err error
+	if image, err = gfx.NewImage("assets/heart.png"); err != nil {
+		panic(err)
+	}
 	r1 := gfx.NewParams()
 	r1.X = 50
 	r1.Y = -16

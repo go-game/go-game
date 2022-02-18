@@ -31,7 +31,10 @@ func main() {
 func onInit() {
 	gfx.SetPixelSize(4)
 	gfx.SetClearColor(0.5, 0.5, 0.5)
-	image = gfx.NewImage("assets/grey.png")
+	var err error
+	if image, err = gfx.NewImage("assets/grey.png"); err != nil {
+		panic(err)
+	}
 	params = gfx.NewParams()
 }
 

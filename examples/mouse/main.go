@@ -51,7 +51,10 @@ func onRender() {
 
 func onInit() {
 	gfx.SetPixelSize(pixelSize)
-	image = gfx.NewImage("assets/heart.png")
+	var err error
+	if image, err = gfx.NewImage("assets/heart.png"); err != nil {
+		panic(err)
+	}
 }
 
 func cleanupGame() {
