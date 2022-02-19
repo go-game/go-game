@@ -44,19 +44,19 @@ type Window struct {
 }
 
 // OpenWindow creates a new window on the main monitor.
-func OpenWindow(m *Mode) *Window {
+func OpenWindow(m *Mode) (*Window, error) {
 	options := sdl.WINDOW_OPENGL
 	if m.Fullscreen {
 		options |= sdl.WINDOW_FULLSCREEN
 	}
 	sdlWindow, err := sdl.CreateWindow("", sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED, m.Width, m.Height, uint32(options))
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	context, err := sdlWindow.GLCreateContext()
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 	err = sdl.GLSetSwapInterval(1)
 	if err != nil {
@@ -72,7 +72,7 @@ func OpenWindow(m *Mode) *Window {
 	gfx.Height = m.Height
 	gfx.Fullscreen = m.Fullscreen
 
-	return window
+	return window, nil
 }
 
 // Run starts the main game loop for the given game state by invoking all defined callbacks in the given game state.

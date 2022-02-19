@@ -1,6 +1,7 @@
 package gfx
 
 import (
+	"fmt"
 	"image"
 	"image/draw"
 	_ "image/png" // needed to load png files
@@ -36,20 +37,20 @@ func (i *Image) render(p *Params) {
 }
 
 // NewImage creates a new Image from the given file name. File must be a png.
-func NewImage(file string) *Image {
+func NewImage(file string) (*Image, error) {
 	imgFile, err := os.Open(file)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 	img, _, err := image.Decode(imgFile)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	rgba := image.NewRGBA(img.Bounds())
 
 	if rgba.Stride != rgba.Rect.Size().X*4 {
-		panic("unsupported stride")
+		return nil, fmt.Errorf("unsupported stride")
 	}
 	draw.Draw(rgba, rgba.Bounds(), img, image.Point{}, draw.Src)
 
@@ -57,5 +58,5 @@ func NewImage(file string) *Image {
 	height := rgba.Rect.Size().Y
 	tex := newTexture(width, height, rgba.Pix)
 
-	return &Image{tex: tex, width: width, height: height, filterMode: defaultFilterMode}
+	return &Image{tex: tex, width: width, height: height, filterMode: defaultFilterMode}, nil
 }

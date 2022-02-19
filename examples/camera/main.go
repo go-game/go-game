@@ -1,3 +1,4 @@
+//go:build example
 // +build example
 
 package main
@@ -44,15 +45,26 @@ func main() {
 	}
 
 	mode := &desktop.Mode{Width: 2 * width, Height: height, Fullscreen: false}
-	window := desktop.OpenWindow(mode)
+	window, err := desktop.OpenWindow(mode)
+	if err != nil {
+		panic(err)
+	}
 
 	window.Run(state)
 }
 
 func onInit() {
-	tile1 = gfx.NewImage("./assets/tile1.png")
-	tile2 = gfx.NewImage("./assets/tile2.png")
-	ball = gfx.NewImage("./assets/ball.png")
+	var err error
+
+	if tile1, err = gfx.NewImage("./assets/tile1.png"); err != nil {
+		panic(err)
+	}
+	if tile2, err = gfx.NewImage("./assets/tile2.png"); err != nil {
+		panic(err)
+	}
+	if ball, err = gfx.NewImage("./assets/ball.png"); err != nil {
+		panic(err)
+	}
 
 	camera1 = gfx.NewCamera(width, height, 0, 0, 2)
 	camera2 = gfx.NewCamera(width, height, width, 0, 1)

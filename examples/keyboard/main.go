@@ -1,3 +1,4 @@
+//go:build example
 // +build example
 
 package main
@@ -28,8 +29,10 @@ func main() {
 	}
 
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-	window := desktop.OpenWindow(mode)
-	gfx.SetPixelSize(4)
+	window, err := desktop.OpenWindow(mode)
+	if err != nil {
+		panic(err)
+	}
 
 	window.Run(gameState)
 }
@@ -80,7 +83,11 @@ func onRender() {
 }
 
 func onInit() {
-	image = gfx.NewImage("assets/heart.png")
+	gfx.SetPixelSize(4)
+	var err error
+	if image, err = gfx.NewImage("assets/heart.png"); err != nil {
+		panic(err)
+	}
 }
 
 func onCleanup() {

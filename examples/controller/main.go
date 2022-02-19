@@ -68,7 +68,10 @@ func main() {
 		Height:     (height + padding*2) * pixelSize * 2,
 		Fullscreen: false,
 	}
-	window := desktop.OpenWindow(mode)
+	window, err := desktop.OpenWindow(mode)
+	if err != nil {
+		panic(err)
+	}
 
 	window.Run(&game.State{
 		OnInit:              onInit,
@@ -81,10 +84,13 @@ func main() {
 }
 
 func onInit() {
+	var err error
 	images = map[string]*gfx.Image{}
 	for _, name := range imageNames {
 		fn := fmt.Sprintf("./assets/controller/%s.png", name)
-		images[name] = gfx.NewImage(fn)
+		if images[name], err = gfx.NewImage(fn); err != nil {
+			panic(err)
+		}
 	}
 
 	gfx.SetClearColor(0.8, 0.8, 0.9)

@@ -1,3 +1,4 @@
+//go:build example
 // +build example
 
 package main
@@ -33,7 +34,10 @@ var elapsed time.Duration
 
 func main() {
 	mode := &desktop.Mode{Width: WIDTH, Height: HEIGHT, Fullscreen: false}
-	window := desktop.OpenWindow(mode)
+	window, err := desktop.OpenWindow(mode)
+	if err != nil {
+		panic(err)
+	}
 
 	window.Run(&game.State{
 		OnInit:    onInit,
@@ -46,7 +50,10 @@ func main() {
 }
 
 func onInit() {
-	image = gfx.NewImage("assets/heart.png")
+	var err error
+	if image, err = gfx.NewImage("assets/heart.png"); err != nil {
+		panic(err)
+	}
 }
 
 func onCleanup() {

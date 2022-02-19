@@ -1,3 +1,4 @@
+//go:build example
 // +build example
 
 package main
@@ -14,7 +15,10 @@ var rect = &gfx.Rectangle{Mode: gfx.NewLineMode()}
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-	window := desktop.OpenWindow(mode)
+	window, err := desktop.OpenWindow(mode)
+	if err != nil {
+		panic(err)
+	}
 
 	window.Run(&game.State{
 		OnRender:  onRender,

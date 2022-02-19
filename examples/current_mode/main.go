@@ -1,3 +1,4 @@
+//go:build example
 // +build example
 
 package main
@@ -16,7 +17,10 @@ func main() {
 	fmt.Println("Switching to fullscreen in 3 seconds for 1 second")
 	time.Sleep(3 * time.Second)
 	m := &desktop.Mode{Width: 1280, Height: 960, Fullscreen: true}
-	desktop.OpenWindow(m)
+	_, err := desktop.OpenWindow(m)
+	if err != nil {
+		panic(err)
+	}
 
 	mode = desktop.CurrentMode()
 	printMode(mode)

@@ -1,3 +1,4 @@
+//go:build example
 // +build example
 
 package main
@@ -21,9 +22,10 @@ var circleParams *gfx.Params
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
-	window := desktop.OpenWindow(mode)
-
-	gfx.SetPixelSize(4)
+	window, err := desktop.OpenWindow(mode)
+	if err != nil {
+		panic(err)
+	}
 
 	window.Run(&game.State{
 		OnInit:    onInit,
@@ -34,13 +36,17 @@ func main() {
 }
 
 func onInit() {
+	gfx.SetPixelSize(4)
 	gfx.SetClearColor(0.2, 0.2, 0.2)
-	heart = gfx.NewImage("assets/heart.png")
-	grey = gfx.NewImage("assets/grey.png")
 
 	var err error
-	canvas, err = gfx.NewCanvas(64, 64)
-	if err != nil {
+	if heart, err = gfx.NewImage("assets/heart.png"); err != nil {
+		panic(err)
+	}
+	if grey, err = gfx.NewImage("assets/grey.png"); err != nil {
+		panic(err)
+	}
+	if canvas, err = gfx.NewCanvas(64, 64); err != nil {
 		panic(err)
 	}
 
