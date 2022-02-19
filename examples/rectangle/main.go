@@ -10,7 +10,6 @@ import (
 	"github.com/go-game/go-game/keys"
 )
 
-var params = gfx.NewParams()
 var rect = &gfx.Rectangle{Mode: gfx.NewLineMode()}
 
 func main() {
@@ -35,7 +34,7 @@ func onRender() {
 		rect.Filled = (i%2 == 0)
 		rect.X1 = 10.0 + float64(i)*100.0
 		rect.X2 = 100.0 + float64(i)*100.0
-		gfx.Render(rect, params)
+		gfx.RenderXY(rect, 0, 0)
 	}
 
 	rect.Y1 = 110.0
@@ -44,16 +43,16 @@ func onRender() {
 		rect.Filled = (i%4 == 0)
 		rect.X1 = 10.0 + float64(i)*100.0
 		rect.X2 = 200.0 + float64(i)*100.0
-		gfx.Render(rect, params)
+		gfx.RenderXY(rect, 0, 0)
 	}
 
 	rect.Y1 = 310.0
 	rect.Y2 = 700.0
 	for i := 0; i < 12.0; i += 4 {
-		rect.Filled = (i%8 == 0)
+		rect.Filled = i%8 == 0
 		rect.X1 = 10.0 + float64(i)*100.0
 		rect.X2 = 400.0 + float64(i)*100.0
-		gfx.Render(rect, params)
+		gfx.RenderXY(rect, 0, 0)
 	}
 }
 
