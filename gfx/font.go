@@ -6,8 +6,7 @@ import (
 )
 
 func init() {
-	err := ttf.Init()
-	if err != nil {
+	if err := ttf.Init(); err != nil {
 		panic(err)
 	}
 }
