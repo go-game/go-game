@@ -11,14 +11,15 @@ import (
 )
 
 const (
-	Y     = 100
-	X     = 100
-	WIDTH = 20
+	x     = 100
+	y     = 100
+	width = 20
 )
 
-var height int32
-var rect *gfx.Rectangle
-var params *gfx.Params
+var (
+	height int32
+	rect   *gfx.Rectangle
+)
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
@@ -37,20 +38,17 @@ func main() {
 
 func onInit() {
 	gfx.SetPixelSize(4)
-	rect = &gfx.Rectangle{X1: 0, Y1: 0, X2: WIDTH, Y2: 0, Mode: gfx.NewLineMode()}
-	params = gfx.NewParams()
-	params.X = X
-	params.Y = Y
+	rect = &gfx.Rectangle{X1: 0, Y1: 0, X2: width, Y2: 0, Mode: gfx.NewLineMode()}
 }
 
-func onMouseWheel(x, y int32) {
+func onMouseWheel(_, y int32) {
 	height += y * 2
 	rect.Y2 = float64(height)
 }
 
 func onRender() {
 	gfx.Clear()
-	gfx.Render(rect, params)
+	gfx.RenderXY(rect, x, y)
 }
 
 func onKeyDown(k keys.Key) {
