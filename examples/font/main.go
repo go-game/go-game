@@ -12,7 +12,7 @@ import (
 
 var font *gfx.Font
 var image *gfx.Image
-var p *gfx.Params
+var x, y float64 = 10, 10
 
 func main() {
 	gameState := &game.State{
@@ -33,7 +33,7 @@ func main() {
 
 func onRender() {
 	gfx.Clear()
-	gfx.Render(image, p)
+	gfx.RenderXY(image, x, y)
 }
 
 func onInit() {
@@ -48,10 +48,6 @@ func onInit() {
 	if err != nil {
 		panic(err)
 	}
-
-	p = gfx.NewParams()
-	p.X = 10
-	p.Y = 10
 }
 
 func onKeyDown(k keys.Key) {
