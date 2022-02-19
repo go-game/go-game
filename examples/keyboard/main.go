@@ -12,11 +12,13 @@ import (
 	"github.com/go-game/go-game/keys"
 )
 
-var image *gfx.Image
-var vX, vY float64 = 0, 0
-var params = gfx.NewParams()
-
 const speed float64 = 100
+
+var (
+	image  *gfx.Image
+	x, y   float64
+	vX, vY float64 = 0, 0
+)
 
 func main() {
 	gameState := &game.State{
@@ -72,14 +74,14 @@ func onKeyDown(k keys.Key) {
 }
 
 func onUpdate(delta time.Duration) {
-	var seconds = (float64(delta) / 1000000000)
-	params.X += vX * seconds
-	params.Y += vY * seconds
+	var seconds = float64(delta) / 1000000000
+	x += vX * seconds
+	y += vY * seconds
 }
 
 func onRender() {
 	gfx.Clear()
-	gfx.Render(image, params)
+	gfx.RenderXY(image, x, y)
 }
 
 func onInit() {
