@@ -10,10 +10,12 @@ import (
 	"github.com/go-game/go-game/keys"
 )
 
-var image *gfx.Image
-var params = gfx.NewParams()
-
 const pixelSize = 4
+
+var (
+	image *gfx.Image
+	x, y  float64
+)
 
 func main() {
 	gameState := &game.State{
@@ -33,9 +35,9 @@ func main() {
 	window.Run(gameState)
 }
 
-func onMouseMove(x, y int32) {
-	params.X = float64(x) / pixelSize
-	params.Y = float64(y) / pixelSize
+func onMouseMove(mx, my int32) {
+	x = float64(mx) / pixelSize
+	y = float64(my) / pixelSize
 }
 
 func onKeyDown(k keys.Key) {
@@ -46,7 +48,7 @@ func onKeyDown(k keys.Key) {
 
 func onRender() {
 	gfx.Clear()
-	gfx.Render(image, params)
+	gfx.RenderXY(image, x, y)
 }
 
 func onInit() {
