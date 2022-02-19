@@ -22,8 +22,18 @@ func NewCamera(w, h, x, y, ps int32) *Camera {
 	return &c
 }
 
-func (c *Camera) RenderXY(r renderer) {
-	//c.Re
+func (c *Camera) RenderXY(r renderer, x, y float64) {
+	c.RenderXYScaleRotColor(r, x, y, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+}
+
+func (c *Camera) RenderXYScaleRotColor(rend renderer, x, y, sx, sy, s, rx, ry, angle, r, g, b, a float64) {
+	if activeCamera != c {
+		activeCamera = c
+		c.setGLViewPort()
+	}
+	transform(x, y, sx, sy, s, rx, ry, angle)
+	gl.Color4d(r, g, b, a)
+	rend.render()
 }
 
 // Render renders the given Renderer with the given Params.

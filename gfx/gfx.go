@@ -54,6 +54,11 @@ func Render(r renderer, p *Params) {
 	currentCamera.Render(r, p)
 }
 
+// RenderXY renders the given renderer at the position x, y.
+func RenderXY(r renderer, x, y float64) {
+	currentCamera.RenderXY(r, x, y)
+}
+
 // Clear clears the whole drawing area.
 func Clear() {
 	gl.ClearColor(clearR, clearG, clearB, 0)
