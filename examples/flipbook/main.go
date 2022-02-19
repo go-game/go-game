@@ -15,13 +15,13 @@ import (
 
 var (
 	flipBook *gfx.FlipBook
-	params   *gfx.Params
+	x, y     float64 = 100, 100
 	pages    [8]*gfx.Image
 
-	tick      *gfx.Image
-	tock      *gfx.Image
-	tickTock  *gfx.Image
-	pTickTock *gfx.Params
+	tick     *gfx.Image
+	tock     *gfx.Image
+	tickTock *gfx.Image
+	ttX, ttY float64 = 130, 100
 
 	callback   gfx.OnFlip
 	showSounds bool
@@ -61,9 +61,6 @@ func onInit() {
 		panic(err)
 	}
 	tickTock = tick
-	pTickTock = gfx.NewParams()
-	pTickTock.X = 130
-	pTickTock.Y = 100
 
 	d := time.Second / 2
 	flipBook = gfx.NewFlipBook(
@@ -84,10 +81,6 @@ func onInit() {
 			tickTock = tick
 		}
 	}
-
-	params = gfx.NewParams()
-	params.X = 100
-	params.Y = 100
 }
 
 func onCleanup() {
@@ -98,9 +91,9 @@ func onCleanup() {
 
 func render() {
 	gfx.Clear()
-	gfx.Render(flipBook, params)
+	gfx.RenderXY(flipBook, x, y)
 	if showSounds {
-		gfx.Render(tickTock, pTickTock)
+		gfx.RenderXY(tickTock, ttX, ttY)
 	}
 }
 
