@@ -31,9 +31,9 @@ func (i *Image) Height() int {
 	return i.height
 }
 
-func (i *Image) render(p *Params) {
+func (i *Image) render() {
 	i.tex.activate(i.filterMode)
-	i.tex.render(p)
+	i.tex.render()
 }
 
 // NewImage creates a new Image from the given file name. File must be a png.

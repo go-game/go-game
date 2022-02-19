@@ -86,8 +86,8 @@ func (fb *FlipBook) currentPage() *Page {
 	return fb.pages[i]
 }
 
-func (fb *FlipBook) render(p *Params) {
+func (fb *FlipBook) render() {
 	if fb.currentPage().Renderer != nil {
-		fb.currentPage().Renderer.render(p)
+		fb.currentPage().Renderer.render()
 	}
 }

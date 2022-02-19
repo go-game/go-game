@@ -3,8 +3,6 @@ package gfx
 import (
 	"fmt"
 	"math"
-
-	"github.com/go-gl/gl/v2.1/gl"
 )
 
 // NewCircle returns a pointer to a new Circle.
@@ -53,7 +51,6 @@ func (c *Circle) setSegments(s int) {
 	}
 }
 
-func (c *Circle) render(p *Params) {
-	gl.Color4d(p.R, p.G, p.B, p.A)
+func (c *Circle) render() {
 	_ = renderPolygon(c.Filled, c.Mode, c.coords...)
 }

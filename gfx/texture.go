@@ -39,22 +39,18 @@ func (t *texture) activate(mode FilterMode) {
 	}
 }
 
-func (t *texture) render(p *Params) {
+func (t *texture) render() {
 	gl.Begin(gl.QUADS)
 
-	gl.Color4d(p.R, p.G, p.B, p.A)
 	gl.TexCoord2f(0, 0)
 	gl.Vertex3d(0, 0, 0)
 
-	gl.Color4d(p.R, p.G, p.B, p.A)
 	gl.TexCoord2f(0, 1)
 	gl.Vertex3d(0, -t.height, 0)
 
-	gl.Color4d(p.R, p.G, p.B, p.A)
 	gl.TexCoord2f(1, 1)
 	gl.Vertex3d(t.width, -t.height, 0)
 
-	gl.Color4d(p.R, p.G, p.B, p.A)
 	gl.TexCoord2f(1, 0)
 	gl.Vertex3d(t.width, 0, 0)
 

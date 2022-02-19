@@ -49,7 +49,7 @@ func (c *Canvas) Render(r renderer, p *Params) {
 	gl.MatrixMode(gl.MODELVIEW)
 
 	transform(p.X, p.Y, p.Scale.X, p.Scale.Y, p.Scale.Factor, p.Rot.X, p.Rot.Y, p.Rot.Angle)
-	r.render(p)
+	r.render()
 
 	gl.BindFramebuffer(gl.FRAMEBUFFER, 0)
 }
@@ -69,7 +69,7 @@ func (c *Canvas) Clear() {
 	gl.Clear(gl.COLOR_BUFFER_BIT)
 }
 
-func (c *Canvas) render(p *Params) {
+func (c *Canvas) render() {
 	c.tex.activate(c.filterMode)
-	c.tex.render(p)
+	c.tex.render()
 }

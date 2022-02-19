@@ -33,7 +33,8 @@ func (c *Camera) Render(r renderer, p *Params) {
 		c.setGLViewPort()
 	}
 	transform(p.X, p.Y, p.Scale.X, p.Scale.Y, p.Scale.Factor, p.Rot.X, p.Rot.Y, p.Rot.Angle)
-	r.render(p)
+	gl.Color4d(p.R, p.G, p.B, p.A)
+	r.render()
 }
 
 // SetPixelSize scales all graphics by the given factor.

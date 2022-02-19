@@ -2,8 +2,6 @@ package gfx
 
 import (
 	"fmt"
-
-	"github.com/go-gl/gl/v2.1/gl"
 )
 
 // NewRectangle returns a pointer ro a new rectangle for the given coordinates.
@@ -34,10 +32,6 @@ type Rectangle struct {
 	Mode   *LineMode
 }
 
-func (r *Rectangle) render(p *Params) {
-	gl.Color4d(p.R, p.G, p.B, p.A)
-	gl.Color4d(p.R, p.G, p.B, p.A)
-	gl.Color4d(p.R, p.G, p.B, p.A)
-	gl.Color4d(p.R, p.G, p.B, p.A)
+func (r *Rectangle) render() {
 	_ = renderPolygon(r.Filled, r.Mode, r.X1, r.Y1, r.X1, r.Y2, r.X2, r.Y2, r.X2, r.Y1)
 }

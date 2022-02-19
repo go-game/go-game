@@ -12,8 +12,7 @@ type Line struct {
 	Mode   *LineMode
 }
 
-func (l *Line) render(p *Params) {
-	gl.Color4d(p.R, p.G, p.B, p.A)
+func (l *Line) render() {
 	renderPoints(gl.LINES, l.Mode, l.Points...)
 }
 

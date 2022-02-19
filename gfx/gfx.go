@@ -25,7 +25,7 @@ var currentCamera *Camera
 var defaultFilterMode = NearestFilter
 
 type renderer interface {
-	render(*Params)
+	render()
 }
 
 // SetDefaultFilterMode sets the filter mode which will be used by default when
