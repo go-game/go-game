@@ -10,8 +10,6 @@ import (
 	"github.com/go-game/go-game/keys"
 )
 
-var params = gfx.NewParams()
-
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 800, Fullscreen: false}
 	window, err := desktop.OpenWindow(mode)
@@ -31,17 +29,17 @@ func onRender() {
 	for i := 0; i < 12; i++ {
 		circle, _ := gfx.NewCircle(40, (i+2)*2, false)
 
-		params.X = 100 * float64(i+1)
-		params.Y = 100
-		gfx.Render(circle, params)
+		x := 100.0 * float64(i+1)
+		y := 100.0
+		gfx.RenderXY(circle, x, y)
 	}
 
 	for i := 0; i < 6; i++ {
 		circle, _ := gfx.NewCircle(80, (i+2)*5, false)
 
-		params.X = 200 * (float64(i) + 0.5)
-		params.Y = 300
-		gfx.Render(circle, params)
+		x := 200.0 * (float64(i) + 0.5)
+		y := 300.0
+		gfx.RenderXY(circle, x, y)
 	}
 
 	for i := 0; i < 6; i++ {
@@ -49,9 +47,9 @@ func onRender() {
 		circle.Mode.Width = 2
 		circle.Mode.Smooth = true
 
-		params.X = 200 * (float64(i) + 0.5)
-		params.Y = 550
-		gfx.Render(circle, params)
+		x := 200.0 * (float64(i) + 0.5)
+		y := 550.0
+		gfx.RenderXY(circle, x, y)
 	}
 }
 
