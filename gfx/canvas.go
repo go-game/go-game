@@ -48,7 +48,7 @@ func (c *Canvas) Render(r renderer, p *Params) {
 	gl.Viewport(0, 0, c.width, c.height)
 	gl.MatrixMode(gl.MODELVIEW)
 
-	transform(p)
+	transform(p.X, p.Y, p.Scale.X, p.Scale.Y, p.Scale.Factor, p.Rot.X, p.Rot.Y, p.Rot.Angle)
 	r.render(p)
 
 	gl.BindFramebuffer(gl.FRAMEBUFFER, 0)

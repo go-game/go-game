@@ -22,13 +22,17 @@ func NewCamera(w, h, x, y, ps int32) *Camera {
 	return &c
 }
 
+func (c *Camera) RenderXY(r renderer) {
+	//c.Re
+}
+
 // Render renders the given Renderer with the given Params.
 func (c *Camera) Render(r renderer, p *Params) {
 	if activeCamera != c {
 		activeCamera = c
 		c.setGLViewPort()
 	}
-	transform(p)
+	transform(p.X, p.Y, p.Scale.X, p.Scale.Y, p.Scale.Factor, p.Rot.X, p.Rot.Y, p.Rot.Angle)
 	r.render(p)
 }
 

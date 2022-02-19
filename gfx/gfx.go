@@ -67,19 +67,19 @@ func SetClearColor(r, g, b float64) {
 	clearB = float32(b)
 }
 
-func transform(p *Params) {
+func transform(x, y, scaleX, scaleY, scaleFactor, rotX, rotY, angle float64) {
 	gl.LoadIdentity()
 
-	gl.Translated(p.X, -p.Y, 0)
+	gl.Translated(x, -y, 0)
 	if activeCamera != nil {
 		gl.Translated(activeCamera.posX, activeCamera.posY, 0)
 	}
 
-	gl.Translated(p.Scale.X, -p.Scale.Y, 0)
-	gl.Scaled(p.Scale.Factor, p.Scale.Factor, 1)
-	gl.Translated(-p.Scale.X, p.Scale.Y, 0)
+	gl.Translated(scaleX, -scaleY, 0)
+	gl.Scaled(scaleFactor, scaleFactor, 1)
+	gl.Translated(-scaleX, scaleY, 0)
 
-	gl.Translated(p.Rot.X, -p.Rot.Y, 0)
-	gl.Rotated(-p.Rot.Angle, 0, 0, 1)
-	gl.Translated(-p.Rot.X, p.Rot.Y, 0)
+	gl.Translated(rotX, -rotY, 0)
+	gl.Rotated(-angle, 0, 0, 1)
+	gl.Translated(-rotX, rotY, 0)
 }
