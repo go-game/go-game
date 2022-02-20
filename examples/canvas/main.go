@@ -74,17 +74,9 @@ func onCleanup() {
 func onRender() {
 	gfx.Clear()
 
-	imageParams.X = 200
-	imageParams.Y = 92
-	gfx.Render(grey, imageParams)
-
-	canvasParams.X = 100
-	canvasParams.Y = 100
-	gfx.Render(canvas, canvasParams)
-
-	canvasParams.X = 200
-	canvasParams.Y = 100
-	gfx.Render(canvas, canvasParams)
+	gfx.RenderXY(grey, 200, 92)
+	gfx.RenderXY(canvas, 100, 100)
+	gfx.RenderXY(canvas, 200, 100)
 }
 
 func onKeyDown(k keys.Key) {
