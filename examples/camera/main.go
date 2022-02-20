@@ -12,27 +12,29 @@ import (
 	"github.com/go-game/go-game/keys"
 )
 
-const width = 640
-const height = 640
+const (
+	width  = 640
+	height = 640
 
-const tileSize = 64
+	tileSize = 64
 
-var tile1 *gfx.Image
-var tile2 *gfx.Image
+	v = 100.0 / float64(time.Second)
+)
 
-var ball *gfx.Image
-var ballParams *gfx.Params
+var (
+	tile1 *gfx.Image
+	tile2 *gfx.Image
 
-const v = 100.0 / float64(time.Second)
+	ball         *gfx.Image
+	ballX, ballY float64
+	vX           = 0.0
+	vY           = 0.0
 
-var vX = 0.0
-var vY = 0.0
-
-var camera1 *gfx.Camera
-var camera2 *gfx.Camera
-
-var vcX = 0.0
-var vcY = 0.0
+	camera1 *gfx.Camera
+	camera2 *gfx.Camera
+	vcX     = 0.0
+	vcY     = 0.0
+)
 
 func main() {
 	state := &game.State{
@@ -68,9 +70,6 @@ func onInit() {
 
 	camera1 = gfx.NewCamera(width, height, 0, 0, 2)
 	camera2 = gfx.NewCamera(width, height, width, 0, 1)
-
-	ballParams = gfx.NewParams()
-
 }
 
 func onRender() {
@@ -80,8 +79,8 @@ func onRender() {
 }
 
 func onUpdate(delta time.Duration) {
-	ballParams.X += vX * float64(delta)
-	ballParams.Y += vY * float64(delta)
+	ballX += vX * float64(delta)
+	ballY += vY * float64(delta)
 
 	camera1.Move(vcX*float64(delta), vcY*float64(delta))
 }
@@ -145,18 +144,12 @@ func onCleanup() {
 }
 
 func renderCamera(c *gfx.Camera, f int) {
-	p1 := gfx.NewParams()
-	p2 := gfx.NewParams()
 	for x := 0; x < 6*f; x++ {
-		p1.X = float64(x * tileSize)
-		p2.X = float64(x*tileSize - tileSize/2)
 		for y := -1; y < 10*f; y++ {
-			p1.Y = float64(y * tileSize / 2)
-			p2.Y = float64(y*tileSize/2 - tileSize/4)
-			c.Render(tile1, p1)
-			c.Render(tile2, p2)
+			c.RenderXY(tile1, float64(x*tileSize), float64(y*tileSize/2))
+			c.RenderXY(tile2, float64(x*tileSize-tileSize/2), float64(y*tileSize/2-tileSize/4))
 		}
 	}
 
-	c.Render(ball, ballParams)
+	c.RenderXY(ball, ballX, ballY)
 }
