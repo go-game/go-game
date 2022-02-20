@@ -13,7 +13,6 @@ import (
 const rows = 3
 const cols = 12
 
-var params = gfx.NewParams()
 var line *gfx.Line
 
 func main() {
@@ -39,22 +38,22 @@ func onRender() {
 	gfx.Clear()
 
 	for j := 0; j < rows; j++ {
-		line.Mode.Smooth = (j == 2)
+		line.Mode.Smooth = j == 2
 
 		for i := 0; i < cols; i++ {
-			params.X = float64(i*100) + 20.0
-			params.Y = float64(j*220) + 20.0
+			x := float64(i*100) + 20.0
+			y := float64(j*220) + 20.0
 
 			line.Mode.Width = float32(i+1) * 2
 
-			params.R = 1.0
-			params.G = 1.0
+			r := 1.0
+			g := 1.0
 			if j == 1 {
-				params.R = float64(i) / 11
-				params.G = 1.0 - float64(i)/11
+				r = float64(i) / 11
+				g = 1.0 - float64(i)/11
 			}
 
-			gfx.Render(line, params)
+			gfx.RenderXYColor(line, x, y, r, g, 1, 1)
 		}
 	}
 }
