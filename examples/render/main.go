@@ -11,7 +11,6 @@ import (
 )
 
 var image *gfx.Image
-var params *gfx.Params
 
 func main() {
 	mode := &desktop.Mode{Width: 1280, Height: 1000, Fullscreen: false}
@@ -35,7 +34,6 @@ func onInit() {
 	if image, err = gfx.NewImage("assets/grey.png"); err != nil {
 		panic(err)
 	}
-	params = gfx.NewParams()
 }
 
 func onCleanup() {
@@ -48,77 +46,62 @@ func render() {
 	topLimit := 300.0
 	yOff := 25.0
 
-	params.Y = 0.0
+	y := 0.0
 	for x := 15.0; x < topLimit; x += 30.0 {
-		params.X = x
-		params.A = x / topLimit
-		gfx.Render(image, params)
+		gfx.RenderXYColor(image, x, y, 1, 1, 1, x/topLimit)
 	}
 
-	params.Y += yOff
+	y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
-		params.X = x
-		params.R = x / topLimit
-		gfx.Render(image, params)
+		r := x / topLimit
+		gfx.RenderXYColor(image, x, y, r, 1, 1, 1)
 	}
 
-	params.Y += yOff
+	y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
-		params.X = x
-		params.G = x / topLimit
-		gfx.Render(image, params)
+		g := x / topLimit
+		gfx.RenderXYColor(image, x, y, 1, g, 1, 1)
 	}
 
-	params.Y += yOff
+	y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
-		params.X = x
-		params.B = x / topLimit
-		gfx.Render(image, params)
+		b := x / topLimit
+		gfx.RenderXYColor(image, x, y, 1, 1, b, 1)
 	}
 
-	params.Y += yOff
+	y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
-		params.X = x
-		params.R = x / topLimit
-		params.G = x / topLimit
-		gfx.Render(image, params)
+		r := x / topLimit
+		g := x / topLimit
+		gfx.RenderXYColor(image, x, y, r, g, 1, 1)
 	}
 
-	params.Y += yOff
+	y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
-		params.X = x
-		params.R = x / topLimit
-		params.B = x / topLimit
-		gfx.Render(image, params)
+		r := x / topLimit
+		b := x / topLimit
+		gfx.RenderXYColor(image, x, y, r, 1, b, 1)
 	}
 
-	params.Y += yOff
+	y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
-		params.X = x
-		params.G = x / topLimit
-		params.B = x / topLimit
-		gfx.Render(image, params)
+		g := x / topLimit
+		b := x / topLimit
+		gfx.RenderXYColor(image, x, y, 1, g, b, 1)
 	}
 
-	params.Y += yOff
+	y += yOff
 	for x := 15.0; x < topLimit; x += 30.0 {
-		params.X = x
-		params.Rot = gfx.Rotation{Angle: x * 1.2, X: 8, Y: 8}
-		gfx.Render(image, params)
+		angle := x * 1.2
+		gfx.RenderXYRot(image, x, y, 8, 8, angle)
 	}
-	params.Rot = gfx.Rotation{Angle: 0, X: 8, Y: 8}
 
-	params.Y += yOff
+	y += yOff
 	scale := 1.0
 	for x := 15.0; x < topLimit; x += 30.0 {
-		params.X = x
 		scale += 0.1
-		params.Scale.Factor = scale
-		params.Scale.X = 8
-		params.Scale.Y = 8
-		gfx.Render(image, params)
+		gfx.RenderXYScale(image, x, y, 8, 8, scale)
 	}
-	params.Scale = gfx.Scale{Factor: 1, X: 0, Y: 0}
 }
 
 func onKeyDown(k keys.Key) {
