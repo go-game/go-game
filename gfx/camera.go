@@ -26,6 +26,34 @@ func (c *Camera) RenderXY(r renderer, x, y float64) {
 	c.RenderXYScaleRotColor(r, x, y, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
 }
 
+func (c *Camera) RenderXYScale(rend renderer, x, y, sx, sy, s float64) {
+	if activeCamera != c {
+		activeCamera = c
+		c.setGLViewPort()
+	}
+	transform(x, y, sx, sy, s, 0, 0, 0)
+	rend.render()
+}
+
+func (c *Camera) RenderXYRot(rend renderer, x, y, rx, ry, angle float64) {
+	if activeCamera != c {
+		activeCamera = c
+		c.setGLViewPort()
+	}
+	transform(x, y, 0, 0, 1.0, rx, ry, angle)
+	rend.render()
+}
+
+func (c *Camera) RenderXYColor(rend renderer, x, y, r, g, b, a float64) {
+	if activeCamera != c {
+		activeCamera = c
+		c.setGLViewPort()
+	}
+	transform(x, y, 0, 0, 1, 0, 0, 0)
+	gl.Color4d(r, g, b, a)
+	rend.render()
+}
+
 func (c *Camera) RenderXYScaleRotColor(rend renderer, x, y, sx, sy, s, rx, ry, angle, r, g, b, a float64) {
 	if activeCamera != c {
 		activeCamera = c

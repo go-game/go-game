@@ -59,6 +59,21 @@ func RenderXY(r renderer, x, y float64) {
 	currentCamera.RenderXY(r, x, y)
 }
 
+// RenderXYScale renders the given renderer at the position x, y and the given scale center and amount.
+func RenderXYScale(rend renderer, x, y, sx, sy, s float64) {
+	currentCamera.RenderXYScale(rend, x, y, sx, sy, s)
+}
+
+// RenderXYRot renders the given renderer at the position x, y and the given rotation center and angle clockwise.
+func RenderXYRot(rend renderer, x, y, rx, ry, angle float64) {
+	currentCamera.RenderXYRot(rend, x, y, rx, ry, angle)
+}
+
+// RenderXYColor renders the given renderer at the position x, y and the given color components.
+func RenderXYColor(rend renderer, x, y, r, g, b, a float64) {
+	currentCamera.RenderXYColor(rend, x, y, r, g, b, a)
+}
+
 // Clear clears the whole drawing area.
 func Clear() {
 	gl.ClearColor(clearR, clearG, clearB, 0)

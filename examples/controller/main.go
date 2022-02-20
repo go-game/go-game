@@ -112,48 +112,42 @@ func onRender() {
 	gfx.Clear()
 
 	for _, d := range devices {
-		p := gfx.NewParams()
-		p.X = d.x
-		p.Y = d.y
 		if !d.connected {
-			p.A = 0.5
+			gfx.RenderXYColor(images["background"], d.x, d.y, 1, 1, 1, 0.5)
+			gfx.RenderXYColor(images["left_stick"], d.x, d.y, 1, 1, 1, 0.5)
+			gfx.RenderXYColor(images["right_stick"], d.x, d.y, 1, 1, 1, 0.5)
+			continue
 		}
 
-		gfx.Render(images["background"], p)
+		gfx.RenderXY(images["background"], d.x, d.y)
 
-		p.X = d.x + d.leftStickX*stickMax
-		p.Y = d.y + d.leftStickY*stickMax
-		gfx.Render(images["left_stick"], p)
+		gfx.RenderXY(images["left_stick"], d.x+d.leftStickX*stickMax, d.y+d.leftStickY*stickMax)
 		if d.buttonsPressed[7] {
-			gfx.Render(images["button_7"], p)
+			gfx.RenderXY(images["button_7"], d.x+d.leftStickX*stickMax, d.y+d.leftStickY*stickMax)
 		}
 
-		p.X = d.x + d.rightStickX*stickMax
-		p.Y = d.y + d.rightStickY*stickMax
-		gfx.Render(images["right_stick"], p)
+		gfx.RenderXY(images["right_stick"], d.x+d.rightStickX*stickMax, d.y+d.rightStickY*stickMax)
 		if d.buttonsPressed[8] {
-			gfx.Render(images["button_8"], p)
+			gfx.RenderXY(images["button_8"], d.x+d.rightStickX*stickMax, d.y+d.rightStickY*stickMax)
 		}
 
-		p.X = d.x
-		p.Y = d.y
 		for i := 0; i < 15; i++ {
 			if i == 7 || i == 8 {
 				continue
 			}
 			if d.buttonsPressed[i] {
 				name := fmt.Sprintf("button_%d", i)
-				gfx.Render(images[name], p)
+				gfx.RenderXY(images[name], d.x, d.y)
 			}
 		}
 
 		if d.leftTrigger > 0 {
-			p.A = d.leftTrigger
-			gfx.Render(images["left_trigger"], p)
+			a := d.leftTrigger
+			gfx.RenderXYColor(images["left_trigger"], d.x, d.y, 1, 1, 1, a)
 		}
 		if d.rightTrigger > 0 {
-			p.A = d.rightTrigger
-			gfx.Render(images["right_trigger"], p)
+			a := d.rightTrigger
+			gfx.RenderXYColor(images["right_trigger"], d.x, d.y, 1, 1, 1, a)
 		}
 	}
 }
