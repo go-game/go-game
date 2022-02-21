@@ -1,41 +1,53 @@
-package animation
+package gfx
 
 import (
 	"math"
 	"time"
-
-	"github.com/go-game/go-game/gfx"
 )
 
 // NewTween returns a new Tween for two Params, where start and end are the two Params to be interpolated.
 // offset indicates the duration after which the interpolation starts. looping indicates if the interpolation should go
 // back to the beginning when the end is reached.
-func NewTween(start, end *gfx.Params, duration time.Duration, offset time.Duration, looping bool) *Tween {
+func NewTween(start, end *Params, duration time.Duration, offset time.Duration, looping bool) *Tween {
 	return &Tween{
 		start:    start,
 		end:      end,
 		duration: duration,
 		offset:   offset,
 		looping:  looping,
-		tweened:  &gfx.Params{},
+		tweened:  &Params{},
 		progress: -offset,
 	}
 }
 
 // Tween interpolates two Params over time. Use NewTween() to create a new Tween.
 type Tween struct {
-	start    *gfx.Params
-	end      *gfx.Params
+	start    *Params
+	end      *Params
 	duration time.Duration
 	offset   time.Duration
 	progress time.Duration
 	looping  bool
-	tweened  *gfx.Params
+	tweened  *Params
 }
 
-// GetParams returns the interpolated Params.
-func (t *Tween) GetParams() *gfx.Params {
-	return t.tweened
+// Render renders the given renderer with the current tweened values.
+func (t *Tween) Render(rend renderer) {
+	currentCamera.RenderXYScaleRotColor(
+		rend,
+		t.tweened.X,
+		t.tweened.Y,
+		t.tweened.Scale.X,
+		t.tweened.Scale.Y,
+		t.tweened.Scale.Factor,
+		t.tweened.Rot.X,
+		t.tweened.Rot.Y,
+		t.tweened.Rot.Angle,
+		t.tweened.R,
+		t.tweened.G,
+		t.tweened.B,
+		t.tweened.A,
+	)
 }
 
 // Finished indicates if the animation is at the end.
