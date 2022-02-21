@@ -6,7 +6,7 @@ import (
 	"github.com/go-gl/gl/v2.1/gl"
 )
 
-// Line is a geometric shape that can be rendered with gfx.Render.
+// Line is a geometric shape that can be rendered with a gfx.Render func.
 type Line struct {
 	Points []float64
 	Mode   *LineMode

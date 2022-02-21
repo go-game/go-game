@@ -49,11 +49,6 @@ func SetCamera(c *Camera) {
 	currentCamera = c
 }
 
-// Render uses a renderer to put pixels onto the screen directly.
-func Render(r renderer, p *Params) {
-	currentCamera.Render(r, p)
-}
-
 // RenderXY renders the given renderer at the position x, y.
 func RenderXY(r renderer, x, y float64) {
 	currentCamera.RenderXY(r, x, y)

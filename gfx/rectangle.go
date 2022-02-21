@@ -22,7 +22,7 @@ func NewRectangle(x1, y1, x2, y2 float64, filled bool, mode ...*LineMode) (*Rect
 	return &r, nil
 }
 
-// Rectangle is a geometric shape that can be rendered with gfx.Render.
+// Rectangle is a geometric shape that can be rendered with a gfx.Render func.
 type Rectangle struct {
 	X1     float64
 	Y1     float64

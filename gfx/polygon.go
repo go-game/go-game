@@ -1,6 +1,6 @@
 package gfx
 
-// Polygon is a geometric shape that can be rendered with gfx.Render.
+// Polygon is a geometric shape that can be rendered with a gfx.Render func.
 type Polygon struct {
 	Points []float64
 	Filled bool

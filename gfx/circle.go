@@ -30,7 +30,7 @@ func NewCircle(r float64, segments int, filled bool, mode ...*LineMode) (*Circle
 	return &c, nil
 }
 
-// Circle is a geometric shape that can be rendered with gfx.Render.
+// Circle is a geometric shape that can be rendered with a gfx.Render func.
 type Circle struct {
 	Radius   float64
 	segments int
